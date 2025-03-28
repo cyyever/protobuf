@@ -19,7 +19,7 @@ namespace {
 using testing::Eq;
 
 TEST(RelativePathTest, GetRelativePath) {
-  auto relative = [](absl::string_view from_path, absl::string_view to_path) {
+  auto relative = [](std::string_view from_path, std::string_view to_path) {
     return RelativePath(from_path).Relative(RelativePath(to_path));
   };
   EXPECT_EQ(relative("foo/bar/baz.txt", "foo/bar/file.txt"), "file.txt");

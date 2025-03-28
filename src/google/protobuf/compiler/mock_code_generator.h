@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/code_generator.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/unittest_features.pb.h"
@@ -61,7 +61,7 @@ namespace compiler {
 //     that can later be verified with CheckGeneratedAnnotations.
 class MockCodeGenerator : public CodeGenerator {
  public:
-  explicit MockCodeGenerator(absl::string_view name);
+  explicit MockCodeGenerator(std::string_view name);
   ~MockCodeGenerator() override;
 
   // Expect (via gTest) that a MockCodeGenerator with the given name was called
@@ -71,25 +71,25 @@ class MockCodeGenerator : public CodeGenerator {
   // should have inserted lines into this file.
   // |parsed_file_list| is a comma-separated list of names of the files
   // that are being compiled together in this run.
-  static void ExpectGenerated(absl::string_view name,
-                              absl::string_view parameter,
-                              absl::string_view insertions,
-                              absl::string_view file,
-                              absl::string_view first_message_name,
-                              absl::string_view first_parsed_file_name,
-                              absl::string_view output_directory);
+  static void ExpectGenerated(std::string_view name,
+                              std::string_view parameter,
+                              std::string_view insertions,
+                              std::string_view file,
+                              std::string_view first_message_name,
+                              std::string_view first_parsed_file_name,
+                              std::string_view output_directory);
 
   // Checks that the correct text ranges were annotated by the
   // MockCodeGenerator_Annotate directive.
-  static void CheckGeneratedAnnotations(absl::string_view name,
-                                        absl::string_view file,
-                                        absl::string_view output_directory);
+  static void CheckGeneratedAnnotations(std::string_view name,
+                                        std::string_view file,
+                                        std::string_view output_directory);
 
   // Get the name of the file which would be written by the given generator.
-  static std::string GetOutputFileName(absl::string_view generator_name,
+  static std::string GetOutputFileName(std::string_view generator_name,
                                        const FileDescriptor* file);
-  static std::string GetOutputFileName(absl::string_view generator_name,
-                                       absl::string_view file);
+  static std::string GetOutputFileName(std::string_view generator_name,
+                                       std::string_view file);
 
   // implements CodeGenerator ----------------------------------------
 
@@ -124,15 +124,15 @@ class MockCodeGenerator : public CodeGenerator {
   std::vector<const FieldDescriptor*> feature_extensions_ = {
       GetExtensionReflection(pb::test)};
 
-  static std::string GetOutputFileContent(absl::string_view generator_name,
-                                          absl::string_view parameter,
+  static std::string GetOutputFileContent(std::string_view generator_name,
+                                          std::string_view parameter,
                                           const FileDescriptor* file,
                                           GeneratorContext* context);
-  static std::string GetOutputFileContent(absl::string_view generator_name,
-                                          absl::string_view parameter,
-                                          absl::string_view file,
-                                          absl::string_view parsed_file_list,
-                                          absl::string_view first_message_name);
+  static std::string GetOutputFileContent(std::string_view generator_name,
+                                          std::string_view parameter,
+                                          std::string_view file,
+                                          std::string_view parsed_file_list,
+                                          std::string_view first_message_name);
 };
 
 }  // namespace compiler

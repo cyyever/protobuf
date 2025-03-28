@@ -22,7 +22,7 @@
 #endif
 
 #include <gtest/gtest.h>
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/code_generator.h"
 #include "google/protobuf/compiler/command_line_interface.h"
 #include "google/protobuf/testing/file.h"
@@ -43,7 +43,7 @@ class CommandLineInterfaceTester : public testing::Test {
   // Runs the CommandLineInterface with the given command line.  The
   // command is automatically split on spaces, and the string "$tmpdir"
   // is replaced with TestTempDir().
-  void RunProtoc(absl::string_view command);
+  void RunProtoc(std::string_view command);
   void RunProtocWithArgs(std::vector<std::string> args);
 
   // -----------------------------------------------------------------
@@ -72,10 +72,10 @@ class CommandLineInterfaceTester : public testing::Test {
 
   // Creates a temp file within temp_directory_ with the given name.
   // The containing directory is also created if necessary.
-  void CreateTempFile(absl::string_view name, absl::string_view contents);
+  void CreateTempFile(std::string_view name, std::string_view contents);
 
   // Creates a subdirectory within temp_directory_.
-  void CreateTempDir(absl::string_view name);
+  void CreateTempDir(std::string_view name);
 
   // Changes working directory to temp directory.
   void SwitchToTempDirectory() {
@@ -92,28 +92,28 @@ class CommandLineInterfaceTester : public testing::Test {
   // Checks that Run() returned non-zero and the stderr output is exactly
   // the text given.  expected_test may contain references to "$tmpdir",
   // which will be replaced by the temporary directory path.
-  void ExpectErrorText(absl::string_view expected_text);
+  void ExpectErrorText(std::string_view expected_text);
 
   // Checks that Run() returned non-zero and the stderr contains the given
   // substring.
-  void ExpectErrorSubstring(absl::string_view expected_substring);
+  void ExpectErrorSubstring(std::string_view expected_substring);
 
   // Checks that Run() returned zero and the stderr contains the given
   // substring.
-  void ExpectWarningSubstring(absl::string_view expected_substring);
+  void ExpectWarningSubstring(std::string_view expected_substring);
 
   // Checks that the captured stdout is the same as the expected_text.
-  void ExpectCapturedStdout(absl::string_view expected_text);
+  void ExpectCapturedStdout(std::string_view expected_text);
 
   // Checks that Run() returned zero and the stdout contains the given
   // substring.
   void ExpectCapturedStdoutSubstringWithZeroReturnCode(
-      absl::string_view expected_substring);
+      std::string_view expected_substring);
 
   // Checks that Run() returned zero and the stderr contains the given
   // substring.
   void ExpectCapturedStderrSubstringWithZeroReturnCode(
-      absl::string_view expected_substring);
+      std::string_view expected_substring);
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
   // Returns true if ExpectErrorSubstring(expected_substring) would pass, but
@@ -121,7 +121,7 @@ class CommandLineInterfaceTester : public testing::Test {
   bool HasAlternateErrorSubstring(const std::string& expected_substring);
 #endif  // _WIN32 && !__CYGWIN__
 
-  void ExpectFileContent(absl::string_view filename, absl::string_view content);
+  void ExpectFileContent(std::string_view filename, std::string_view content);
 
  private:
   // The object we are testing.

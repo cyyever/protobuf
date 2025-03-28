@@ -12,7 +12,7 @@
 
 #include "absl/base/config.h"
 #include "absl/log/absl_check.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arena.h"
 
 // must be last:
@@ -26,7 +26,7 @@ struct MicroStringTestPeer;
 
 // The MicroString class holds a `char` buffer.
 // The basic usage provides `Set` and `Get` functions that deal with
-// `absl::string_view`.
+// `std::string_view`.
 // It has several layers of optimizations for different sized payloads, as well
 // as some features for unowned payloads.
 //
@@ -72,7 +72,7 @@ class PROTOBUF_EXPORT MicroString {
     // One of LargeRepKind, or the capacity for the owned buffer.
     uint32_t capacity;
 
-    absl::string_view view() const { return {payload, size}; }
+    std::string_view view() const { return {payload, size}; }
     char* owned_head() {
       ABSL_DCHECK_GE(capacity, kOwned);
       return reinterpret_cast<char*>(this + 1);
@@ -168,10 +168,10 @@ class PROTOBUF_EXPORT MicroString {
   }
 
   // Sets the payload to `data`. Always copies the data.
-  void Set(absl::string_view data, Arena* arena) {
+  void Set(std::string_view data, Arena* arena) {
     SetMaybeConstant(*this, data, arena);
   }
-  void Set(absl::string_view data, Arena* arena, size_t inline_capacity) {
+  void Set(std::string_view data, Arena* arena, size_t inline_capacity) {
     SetImpl(data, arena, inline_capacity);
   }
 
@@ -180,7 +180,7 @@ class PROTOBUF_EXPORT MicroString {
   // `std::reference_wrapper<std::string>`).
   template <typename... Args>
   void Set(const std::string& data, Args... args) {
-    Set(absl::string_view(data), args...);
+    Set(std::string_view(data), args...);
   }
   template <typename... Args>
   void Set(std::string&& data, Args... args) {
@@ -188,11 +188,11 @@ class PROTOBUF_EXPORT MicroString {
   }
   template <typename... Args>
   void Set(const char* data, Args... args) {
-    Set(absl::string_view(data), args...);
+    Set(std::string_view(data), args...);
   }
 
   // Sets the payload to `data`. Might copy the data or alias the input buffer.
-  void SetAlias(absl::string_view data, Arena* arena,
+  void SetAlias(std::string_view data, Arena* arena,
                 size_t inline_capacity = kInlineCapacity);
 
   // Set the payload to `unowned`. Will not allocate memory, but might free
@@ -228,9 +228,9 @@ class PROTOBUF_EXPORT MicroString {
 
   size_t SpaceUsedExcludingSelfLong() const;
 
-  absl::string_view Get() const {
+  std::string_view Get() const {
     if (!kHasInlineBuffer && rep_ == nullptr) {
-      return absl::string_view();
+      return std::string_view();
     } else if (is_micro_rep()) {
       return micro_rep()->view();
     } else if (is_inline()) {
@@ -243,7 +243,7 @@ class PROTOBUF_EXPORT MicroString {
   // To be used by constexpr constructors of fields with non-empty default
   // values. It will alias `data` so it must be an immutable input, like a
   // literal string.
-  static constexpr UnownedPayload MakeUnownedPayload(absl::string_view data) {
+  static constexpr UnownedPayload MakeUnownedPayload(std::string_view data) {
     return UnownedPayload{LargeRep{const_cast<char*>(data.data()),
                                    static_cast<uint32_t>(data.size()),
                                    kUnowned}};
@@ -306,7 +306,7 @@ class PROTOBUF_EXPORT MicroString {
     uint8_t capacity;
     char* data() { return reinterpret_cast<char*>(this + 1); }
     const char* data() const { return reinterpret_cast<const char*>(this + 1); }
-    absl::string_view view() const { return {data(), size}; }
+    std::string_view view() const { return {data(), size}; }
   };
   // Micro-optimization: by using kIsMicroRepTag as 2, the MicroRep `rep_`
   // pointer (with the tag) is already pointing into the data buffer.
@@ -369,7 +369,7 @@ class PROTOBUF_EXPORT MicroString {
     ABSL_DCHECK(is_inline());
     return reinterpret_cast<const char*>(&rep_) + 1;
   }
-  absl::string_view inline_view() const {
+  std::string_view inline_view() const {
     return {inline_head(), inline_size()};
   }
 
@@ -410,7 +410,7 @@ class PROTOBUF_EXPORT MicroString {
   void ClearSlow();
 
   template <typename Self>
-  static void SetMaybeConstant(Self& self, absl::string_view data,
+  static void SetMaybeConstant(Self& self, std::string_view data,
                                Arena* arena) {
     const size_t size = data.size();
     if (PROTOBUF_BUILTIN_CONSTANT_P(size <= Self::kInlineCapacity) &&
@@ -434,7 +434,7 @@ class PROTOBUF_EXPORT MicroString {
     }
     self.SetImpl(data, arena, Self::kInlineCapacity);
   }
-  void SetImpl(absl::string_view data, Arena* arena, size_t inline_capacity);
+  void SetImpl(std::string_view data, Arena* arena, size_t inline_capacity);
 
   void DestroySlow();
 
@@ -455,7 +455,7 @@ void MicroString::SetInChunks(size_t size, Arena* arena, F setter,
                               size_t inline_capacity) {
   const auto invoke_setter = [&](char* p) {
     char* start = p;
-    setter([&](absl::string_view chunk) {
+    setter([&](std::string_view chunk) {
       ABSL_DCHECK_LE(p - start + chunk.size(), size);
       memcpy(p, chunk.data(), chunk.size());
       p += chunk.size();
@@ -480,7 +480,7 @@ void MicroString::SetInChunks(size_t size, Arena* arena, F setter,
 
   const auto do_string = [&](StringRep* r) {
     r->str.clear();
-    setter([&](absl::string_view chunk) {
+    setter([&](std::string_view chunk) {
       r->str.append(chunk.data(), chunk.size());
     });
     r->ResetBase();
@@ -557,20 +557,20 @@ class MicroStringExtraImpl : private MicroString {
   void Set(const MicroStringExtraImpl& other, Arena* arena) {
     SetFromOtherImpl(*this, other, arena);
   }
-  void Set(absl::string_view data, Arena* arena) {
+  void Set(std::string_view data, Arena* arena) {
     SetMaybeConstant(*this, data, arena);
   }
   void Set(const std::string& data, Arena* arena) {
-    Set(absl::string_view(data), arena);
+    Set(std::string_view(data), arena);
   }
   void Set(const char* data, Arena* arena) {
-    Set(absl::string_view(data), arena);
+    Set(std::string_view(data), arena);
   }
   void Set(std::string&& str, Arena* arena) {
     MicroString::SetString(std::move(str), arena, kInlineCapacity);
   }
 
-  void SetAlias(absl::string_view data, Arena* arena) {
+  void SetAlias(std::string_view data, Arena* arena) {
     MicroString::SetAlias(data, arena, kInlineCapacity);
   }
 

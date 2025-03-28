@@ -21,7 +21,7 @@
 #include <vector>
 
 #include "absl/container/btree_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/descriptor.h"
 
 // Must be included last.
@@ -51,12 +51,12 @@ class MergedDescriptorDatabase;
 // descriptors when they are needed.
 class PROTOBUF_EXPORT DescriptorDatabase {
  protected:
-  // Alias to enable the migration from const std::string& to absl::string_view
+  // Alias to enable the migration from const std::string& to std::string_view
   // in virtual methods. Controlled by
   // PROTOBUF_FUTURE_STRING_VIEW_DESCRIPTOR_DATABASE to allow a global switch
   // when ready for consistent transition.
 #ifdef PROTOBUF_FUTURE_STRING_VIEW_DESCRIPTOR_DATABASE
-  using StringViewArg = absl::string_view;
+  using StringViewArg = std::string_view;
 #else
   using StringViewArg = const std::string&;
 #endif
@@ -132,10 +132,10 @@ class PROTOBUF_EXPORT DescriptorDatabase {
   bool FindAllMessageNames(std::vector<std::string>* PROTOBUF_NONNULL output);
 
  private:
-  static_assert(std::is_same<StringViewArg, absl::string_view>::value ||
+  static_assert(std::is_same<StringViewArg, std::string_view>::value ||
                     std::is_same<StringViewArg, const std::string&>::value,
                 "StringViewArg must be either "
-                "absl::string_view or const std::string&");
+                "std::string_view or const std::string&");
 };
 
 // A DescriptorDatabase into which you can insert files manually.
@@ -204,7 +204,7 @@ class PROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
     // Helpers to recursively add particular descriptors and all their contents
     // to the index.
     bool AddFile(const FileDescriptorProto& file, Value value);
-    bool AddSymbol(absl::string_view name, Value value);
+    bool AddSymbol(std::string_view name, Value value);
     bool AddNestedExtensions(StringViewArg filename,
                              const DescriptorProto& message_type, Value value);
     bool AddExtension(StringViewArg filename, const FieldDescriptorProto& field,

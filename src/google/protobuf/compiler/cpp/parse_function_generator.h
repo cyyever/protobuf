@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/span.h"
 #include "google/protobuf/compiler/cpp/helpers.h"
 #include "google/protobuf/compiler/cpp/options.h"
@@ -35,7 +35,7 @@ class ParseFunctionGenerator {
       absl::Span<const int> has_bit_indices,
       absl::Span<const int> inlined_string_indices, const Options& options,
       MessageSCCAnalyzer* scc_analyzer,
-      const absl::flat_hash_map<absl::string_view, std::string>& vars,
+      const absl::flat_hash_map<std::string_view, std::string>& vars,
       int index_in_file_messages);
 
   // Emits class-level data member declarations to `printer`:
@@ -58,7 +58,7 @@ class ParseFunctionGenerator {
   const Descriptor* descriptor_;
   MessageSCCAnalyzer* scc_analyzer_;
   const Options& options_;
-  absl::flat_hash_map<absl::string_view, std::string> variables_;
+  absl::flat_hash_map<std::string_view, std::string> variables_;
   std::unique_ptr<internal::TailCallTableInfo> tc_table_info_;
   std::vector<int> inlined_string_indices_;
   const std::vector<const FieldDescriptor*> ordered_fields_;

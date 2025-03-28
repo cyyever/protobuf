@@ -28,16 +28,16 @@ struct OneofGeneratorInfo {
 // Set some common variables used in variable FieldGenerators.
 void SetCommonFieldVariables(
     const FieldDescriptor* descriptor, const FieldGeneratorInfo* info,
-    absl::flat_hash_map<absl::string_view, std::string>* variables);
+    absl::flat_hash_map<std::string_view, std::string>* variables);
 
 // Set some common oneof variables used in OneofFieldGenerators.
 void SetCommonOneofVariables(
     const FieldDescriptor* descriptor, const OneofGeneratorInfo* info,
-    absl::flat_hash_map<absl::string_view, std::string>* variables);
+    absl::flat_hash_map<std::string_view, std::string>* variables);
 
 // Print useful comments before a field's accessors.
 void PrintExtraFieldInfo(
-    const absl::flat_hash_map<absl::string_view, std::string>& variables,
+    const absl::flat_hash_map<std::string_view, std::string>& variables,
     io::Printer* printer);
 
 // Returns the name by which the generated Java getters and setters should be

@@ -14,7 +14,7 @@
 #include <utility>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "json/json.h"
 #include "conformance_test.h"
 #include "google/protobuf/descriptor.h"
@@ -34,7 +34,7 @@ class BinaryAndJsonConformanceSuite : public ConformanceTestSuite {
   bool ParseResponse(const conformance::ConformanceResponse& response,
                      const ConformanceRequestSetting& setting,
                      Message* test_message) override;
-  void SetTypeUrl(absl::string_view type_url) {
+  void SetTypeUrl(std::string_view type_url) {
     type_url_ = std::string(type_url);
   }
 

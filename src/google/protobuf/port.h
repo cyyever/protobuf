@@ -26,7 +26,7 @@
 #include "absl/base/config.h"
 #include "absl/base/prefetch.h"
 #include "absl/meta/type_traits.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/optional.h"
 
 #if defined(ABSL_HAVE_ADDRESS_SANITIZER)
@@ -204,7 +204,7 @@ inline ToRef DownCast(From& f) {
 
 // Looks up the name of `T` via RTTI, if RTTI is available.
 template <typename T>
-inline absl::optional<absl::string_view> RttiTypeName() {
+inline absl::optional<std::string_view> RttiTypeName() {
 #if PROTOBUF_RTTI
   return typeid(T).name();
 #else
@@ -476,13 +476,13 @@ constexpr bool IsOss() { return true; }
 // }
 class PROTOBUF_EXPORT RealDebugCounter {
  public:
-  explicit RealDebugCounter(absl::string_view name) { Register(name); }
+  explicit RealDebugCounter(std::string_view name) { Register(name); }
   // Lossy increment.
   void Inc() { counter_.store(value() + 1, std::memory_order_relaxed); }
   size_t value() const { return counter_.load(std::memory_order_relaxed); }
 
  private:
-  void Register(absl::string_view name);
+  void Register(std::string_view name);
   std::atomic<size_t> counter_{};
 };
 

@@ -12,7 +12,7 @@
 
 #include <gtest/gtest.h>
 #include "absl/strings/str_cat.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/strings/strip.h"
 #include "google/protobuf/io/zero_copy_stream.h"
 #include "google/protobuf/io/zero_copy_stream_impl_lite.h"
@@ -28,7 +28,7 @@ inline std::string TestSourceDir() {
   return google::protobuf::TestSourceDir();
 }
 
-inline std::string GetTestDataPath(absl::string_view path) {
+inline std::string GetTestDataPath(std::string_view path) {
   return absl::StrCat(TestSourceDir(), "/", path);
 }
 

@@ -10,12 +10,12 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace google::protobuf::hpb_generator {
 
 // Resolves proto field name conflict with C++ reserved keywords.
-std::string ResolveKeywordConflict(absl::string_view name);
+std::string ResolveKeywordConflict(std::string_view name);
 
 }  // namespace protobuf
 }  // namespace google::hpb_generator

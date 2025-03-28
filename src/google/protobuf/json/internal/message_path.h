@@ -12,7 +12,7 @@
 #include <vector>
 
 #include "absl/cleanup/cleanup.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/descriptor.h"
 
 namespace google {
@@ -22,7 +22,7 @@ namespace json_internal {
 // errors.
 class MessagePath {
  public:
-  explicit MessagePath(absl::string_view message_root)
+  explicit MessagePath(std::string_view message_root)
       : components_(
             {Component{FieldDescriptor::TYPE_MESSAGE, message_root, "", -1}}) {}
 
@@ -30,8 +30,8 @@ class MessagePath {
   // a message or enum.
   //
   // Returns an RAII object that will pop the field component on scope exit.
-  auto Push(absl::string_view field_name, FieldDescriptor::Type type,
-            absl::string_view type_name = "") {
+  auto Push(std::string_view field_name, FieldDescriptor::Type type,
+            std::string_view type_name = "") {
     // -1 makes it so the first call to NextRepeated makes the index 0.
     components_.push_back(Component{type, type_name, field_name, -1});
     return absl::MakeCleanup([this] { components_.pop_back(); });
@@ -49,7 +49,7 @@ class MessagePath {
  private:
   struct Component {
     FieldDescriptor::Type type;
-    absl::string_view type_name, field_name;
+    std::string_view type_name, field_name;
     int32_t repeated_index;
   };
   std::vector<Component> components_;

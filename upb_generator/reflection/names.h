@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 // Must be last.
 #include "upb/port/def.inc"
@@ -21,8 +21,8 @@ namespace upb::generator {
 //   const upb_MessageDef* <GetMessage>(upb_DefPool *s);
 //   extern const _upb_DefPool_Init <File>;
 
-UPBC_API std::string ReflectionGetMessageSymbol(absl::string_view full_name);
-UPBC_API std::string ReflectionFileSymbol(absl::string_view filename);
+UPBC_API std::string ReflectionGetMessageSymbol(std::string_view full_name);
+UPBC_API std::string ReflectionFileSymbol(std::string_view filename);
 
 }  // namespace upb::generator
 

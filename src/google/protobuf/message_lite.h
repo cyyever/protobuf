@@ -33,7 +33,7 @@
 #include "absl/log/absl_check.h"
 #include "absl/numeric/bits.h"
 #include "absl/strings/cord.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arena.h"
 #include "google/protobuf/explicitly_constructed.h"
 #include "google/protobuf/internal_visibility.h"
@@ -453,7 +453,7 @@ struct ClassDataLite {
 // does not grow with the number of descriptor methods. This avoids extra
 // costs in MessageLite.
 struct PROTOBUF_EXPORT DescriptorMethods {
-  absl::string_view (*get_type_name)(const ClassData* data);
+  std::string_view (*get_type_name)(const ClassData* data);
   std::string (*initialization_error_string)(const MessageLite&);
   const internal::TcParseTableBase* (*get_tc_table)(const MessageLite&);
   size_t (*space_used_long)(const MessageLite&);
@@ -534,7 +534,7 @@ class PROTOBUF_EXPORT MessageLite {
   // Basic Operations ------------------------------------------------
 
   // Get the name of this message type, e.g. "foo.bar.BazProto".
-  absl::string_view GetTypeName() const;
+  std::string_view GetTypeName() const;
 
   // Construct a new instance of the same type.  Ownership is passed to the
   // caller.
@@ -654,12 +654,12 @@ class PROTOBUF_EXPORT MessageLite {
   // MessageLite::SerializeToString(). If you'd like to convert a human-readable
   // string into a protocol buffer object, see
   // google::protobuf::TextFormat::ParseFromString().
-  ABSL_ATTRIBUTE_REINITIALIZES bool ParseFromString(absl::string_view data);
+  ABSL_ATTRIBUTE_REINITIALIZES bool ParseFromString(std::string_view data);
   ABSL_ATTRIBUTE_REINITIALIZES bool ParseFromString(const absl::Cord& data);
   // Like ParseFromString(), but accepts messages that are missing
   // required fields.
   ABSL_ATTRIBUTE_REINITIALIZES bool ParsePartialFromString(
-      absl::string_view data);
+      std::string_view data);
   ABSL_ATTRIBUTE_REINITIALIZES bool ParsePartialFromString(
       const absl::Cord& data);
   // Parse a protocol buffer contained in an array of bytes.
@@ -691,12 +691,12 @@ class PROTOBUF_EXPORT MessageLite {
   bool MergePartialFromCodedStream(io::CodedInputStream* input);
 
   // Merge a protocol buffer contained in a string.
-  bool MergeFromString(absl::string_view data);
+  bool MergeFromString(std::string_view data);
   bool MergeFromString(const absl::Cord& data);
 
   // Like MergeFromString(), but accepts messages that are missing required
   // fields.
-  bool MergePartialFromString(absl::string_view data);
+  bool MergePartialFromString(std::string_view data);
   bool MergePartialFromString(const absl::Cord& data);
 
 
@@ -1106,7 +1106,7 @@ class TypeId {
 
   // Name of the message type.
   // Equivalent to `.GetTypeName()` on the message.
-  absl::string_view name() const;
+  std::string_view name() const;
 
   friend constexpr bool operator==(TypeId a, TypeId b) {
     return a.data_ == b.data_;
@@ -1148,15 +1148,15 @@ namespace internal {
 inline auto GetClassData(const MessageLite& msg) { return msg.GetClassData(); }
 
 template <bool alias>
-bool MergeFromImpl(absl::string_view input, MessageLite* msg,
+bool MergeFromImpl(std::string_view input, MessageLite* msg,
                    const internal::TcParseTableBase* tc_table,
                    MessageLite::ParseFlags parse_flags);
 extern template PROTOBUF_EXPORT_TEMPLATE_DECLARE bool MergeFromImpl<false>(
-    absl::string_view input, MessageLite* msg,
+    std::string_view input, MessageLite* msg,
     const internal::TcParseTableBase* tc_table,
     MessageLite::ParseFlags parse_flags);
 extern template PROTOBUF_EXPORT_TEMPLATE_DECLARE bool MergeFromImpl<true>(
-    absl::string_view input, MessageLite* msg,
+    std::string_view input, MessageLite* msg,
     const internal::TcParseTableBase* tc_table,
     MessageLite::ParseFlags parse_flags);
 

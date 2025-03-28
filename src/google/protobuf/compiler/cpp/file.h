@@ -21,7 +21,7 @@
 #include "absl/container/flat_hash_set.h"
 #include "absl/functional/any_invocable.h"
 #include "absl/log/absl_check.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/cpp/enum.h"
 #include "google/protobuf/compiler/cpp/extension.h"
 #include "google/protobuf/compiler/cpp/helpers.h"
@@ -50,10 +50,10 @@ class PROTOC_EXPORT FileGenerator {
 
   // info_path, if non-empty, should be the path (relative to printer's
   // output) to the metadata file describing this proto header.
-  void GenerateProtoHeader(io::Printer* p, absl::string_view info_path);
+  void GenerateProtoHeader(io::Printer* p, std::string_view info_path);
   // info_path, if non-empty, should be the path (relative to printer's
   // output) to the metadata file describing this PB header.
-  void GeneratePBHeader(io::Printer* p, absl::string_view info_path);
+  void GeneratePBHeader(io::Printer* p, std::string_view info_path);
   void GenerateSource(io::Printer* p);
 
   // The following member functions are used when the lite_implicit_weak_fields
@@ -93,16 +93,16 @@ class PROTOC_EXPORT FileGenerator {
   class ForwardDeclarations;
   struct CrossFileReferences;
 
-  void IncludeFile(absl::string_view google3_name, io::Printer* p) {
+  void IncludeFile(std::string_view google3_name, io::Printer* p) {
     DoIncludeFile(google3_name, false, p);
   }
-  void IncludeFileAndExport(absl::string_view google3_name, io::Printer* p) {
+  void IncludeFileAndExport(std::string_view google3_name, io::Printer* p) {
     DoIncludeFile(google3_name, true, p);
   }
-  void DoIncludeFile(absl::string_view google3_name, bool do_export,
+  void DoIncludeFile(std::string_view google3_name, bool do_export,
                      io::Printer* p);
 
-  std::string CreateHeaderInclude(absl::string_view basename,
+  std::string CreateHeaderInclude(std::string_view basename,
                                   const FileDescriptor* file);
   void GetCrossFileReferencesForField(const FieldDescriptor* field,
                                       CrossFileReferences* refs);
@@ -131,7 +131,7 @@ class PROTOC_EXPORT FileGenerator {
 
   // Generate a pragma to pull in metadata using the given info_path (if
   // non-empty). info_path should be relative to printer's output.
-  void GenerateMetadataPragma(io::Printer* p, absl::string_view info_path);
+  void GenerateMetadataPragma(io::Printer* p, std::string_view info_path);
 
   // Generates a couple of different pieces before definitions:
   void GenerateGlobalStateFunctionDeclarations(io::Printer* p);
@@ -188,7 +188,7 @@ class PROTOC_EXPORT FileGenerator {
   // This member is unused and should be deleted once all old-style variable
   // maps are gone.
   // TODO
-  absl::flat_hash_map<absl::string_view, std::string> variables_;
+  absl::flat_hash_map<std::string_view, std::string> variables_;
 
   // Contains the post-order walk of all the messages (and nested messages)
   // defined in this file. If you need a pre-order walk just reverse iterate.

@@ -19,7 +19,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace google {
 namespace protobuf {
@@ -314,7 +314,7 @@ bool CheckAndSetString(PyObject* arg, Message* message,
                        const FieldDescriptor* descriptor,
                        const Reflection* reflection, bool append, int index);
 PyObject* ToStringObject(const FieldDescriptor* descriptor,
-                         absl::string_view value);
+                         std::string_view value);
 
 // Check if the passed field descriptor belongs to the given message.
 // If not, return false and set a Python exception (a KeyError)

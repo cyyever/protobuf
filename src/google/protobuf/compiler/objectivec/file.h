@@ -16,7 +16,7 @@
 
 #include "absl/container/flat_hash_map.h"
 #include "absl/container/flat_hash_set.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/objectivec/enum.h"
 #include "google/protobuf/compiler/objectivec/extension.h"
 #include "google/protobuf/compiler/objectivec/message.h"
@@ -64,7 +64,7 @@ class FileGenerator {
   FileGenerator(const FileGenerator&) = delete;
   FileGenerator& operator=(const FileGenerator&) = delete;
 
-  void GenerateHeader(io::Printer* p, absl::string_view info_path) const;
+  void GenerateHeader(io::Printer* p, std::string_view info_path) const;
   void GenerateSource(io::Printer* p) const;
 
   size_t NumEnums() const { return enum_generators_.size(); }

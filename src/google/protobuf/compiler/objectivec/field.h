@@ -15,7 +15,7 @@
 #include "absl/container/btree_set.h"
 #include "absl/container/flat_hash_set.h"
 #include "absl/strings/match.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/objectivec/helpers.h"
 #include "google/protobuf/compiler/objectivec/options.h"
 #include "google/protobuf/descriptor.h"
@@ -70,7 +70,7 @@ class FieldGenerator {
   virtual void SetExtraRuntimeHasBitsBase(int index_base);
   void SetOneofIndexBase(int index_base);
 
-  std::string variable(absl::string_view key) const {
+  std::string variable(std::string_view key) const {
     return variables_.Value(key);
   }
 

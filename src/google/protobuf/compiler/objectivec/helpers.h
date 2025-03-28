@@ -18,7 +18,7 @@
 #include "absl/container/flat_hash_map.h"
 #include "absl/log/absl_log.h"
 #include "absl/strings/str_cat.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/objectivec/options.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor.pb.h"
@@ -30,7 +30,7 @@ namespace compiler {
 namespace objectivec {
 
 // Escape C++ trigraphs by escaping question marks to "\?".
-std::string EscapeTrigraphs(absl::string_view to_escape);
+std::string EscapeTrigraphs(std::string_view to_escape);
 
 // Returns true if the extension field is a custom option.
 // https://protobuf.dev/programming-guides/proto2/#customoptions
@@ -94,11 +94,11 @@ std::string BuildFlagsString(FlagType type,
 
 // Returns a symbol that can be used in C code to refer to an Objective-C
 // class without initializing the class.
-std::string ObjCClass(absl::string_view class_name);
+std::string ObjCClass(std::string_view class_name);
 
 // Declares an Objective-C class without initializing the class so that it can
 // be referred to by ObjCClass.
-std::string ObjCClassDeclaration(absl::string_view class_name);
+std::string ObjCClassDeclaration(std::string_view class_name);
 
 // Flag to control the behavior of `EmitCommentsString`.
 enum CommentStringFlags : unsigned int {
@@ -174,7 +174,7 @@ class SubstitutionMap {
 
   auto Install(io::Printer* printer) const { return printer->WithVars(subs_); }
 
-  std::string Value(absl::string_view key) const {
+  std::string Value(std::string_view key) const {
     if (auto it = subs_map_.find(key); it != subs_map_.end()) {
       return std::string(subs_.at(it->second).value());
     }

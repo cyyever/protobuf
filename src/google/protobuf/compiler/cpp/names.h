@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 // Must be included last.
 #include "google/protobuf/port_def.inc"
@@ -78,7 +78,7 @@ PROTOC_EXPORT std::string QualifiedOneofCaseConstantName(
 PROTOC_EXPORT std::string EnumValueName(const EnumValueDescriptor* enum_value);
 
 // Strips ".proto" or ".protodevel" from the end of a filename.
-PROTOC_EXPORT std::string StripProto(absl::string_view filename);
+PROTOC_EXPORT std::string StripProto(std::string_view filename);
 
 }  // namespace cpp
 }  // namespace compiler

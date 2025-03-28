@@ -21,7 +21,7 @@
 #include <vector>
 
 #include "absl/status/statusor.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/code_generator_lite.h"  // IWYU pragma: export
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor.pb.h"
@@ -233,7 +233,7 @@ class PROTOC_EXPORT GeneratorContext {
 typedef GeneratorContext OutputDirectory;
 
 // Returns true if the proto path can skip edition check.
-PROTOC_EXPORT bool CanSkipEditionCheck(absl::string_view filename);
+PROTOC_EXPORT bool CanSkipEditionCheck(std::string_view filename);
 
 }  // namespace compiler
 }  // namespace protobuf

@@ -18,7 +18,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/generated_enum_util.h"
 #include "google/protobuf/port.h"
 
@@ -50,12 +50,12 @@ namespace internal {
 // an enum name of the given type, returning true and filling in value on
 // success, or returning false and leaving value unchanged on failure.
 PROTOBUF_EXPORT bool ParseNamedEnum(
-    const EnumDescriptor* PROTOBUF_NONNULL descriptor, absl::string_view name,
+    const EnumDescriptor* PROTOBUF_NONNULL descriptor, std::string_view name,
     int* PROTOBUF_NONNULL value);
 
 template <typename EnumType>
 bool ParseNamedEnum(const EnumDescriptor* PROTOBUF_NONNULL descriptor,
-                    absl::string_view name, EnumType* PROTOBUF_NONNULL value) {
+                    std::string_view name, EnumType* PROTOBUF_NONNULL value) {
   int tmp;
   if (!ParseNamedEnum(descriptor, name, &tmp)) return false;
   *value = static_cast<EnumType>(tmp);

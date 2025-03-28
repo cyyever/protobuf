@@ -22,7 +22,7 @@
 #include "absl/log/absl_check.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/str_split.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/optional.h"
 #include "absl/types/span.h"
 #include "google/protobuf/compiler/code_generator.h"
@@ -44,10 +44,10 @@ namespace compiler {
 namespace cpp {
 enum class ArenaDtorNeeds { kNone = 0, kOnDemand = 1, kRequired = 2 };
 
-inline absl::string_view ProtobufNamespace(const Options& opts) {
+inline std::string_view ProtobufNamespace(const Options& opts) {
   // This won't be transformed by copybara, since copybara looks for google::protobuf::.
-  constexpr absl::string_view kGoogle3Ns = "proto2";
-  constexpr absl::string_view kOssNs = "google::protobuf";
+  constexpr std::string_view kGoogle3Ns = "proto2";
+  constexpr std::string_view kOssNs = "google::protobuf";
 
   return opts.opensource_runtime ? kOssNs : kGoogle3Ns;
 }
@@ -67,22 +67,22 @@ inline std::string DeprecatedAttribute(const Options&,
 extern const char kThickSeparator[];
 extern const char kThinSeparator[];
 
-absl::flat_hash_map<absl::string_view, std::string> MessageVars(
+absl::flat_hash_map<std::string_view, std::string> MessageVars(
     const Descriptor* desc);
 
 // Variables to access message data from the message scope.
 void SetCommonMessageDataVariables(
     const Descriptor* descriptor,
-    absl::flat_hash_map<absl::string_view, std::string>* variables);
+    absl::flat_hash_map<std::string_view, std::string>* variables);
 
-absl::flat_hash_map<absl::string_view, std::string> UnknownFieldsVars(
+absl::flat_hash_map<std::string_view, std::string> UnknownFieldsVars(
     const Descriptor* desc, const Options& opts);
 
 void SetUnknownFieldsVariable(
     const Descriptor* descriptor, const Options& options,
-    absl::flat_hash_map<absl::string_view, std::string>* variables);
+    absl::flat_hash_map<std::string_view, std::string>* variables);
 
-bool GetBootstrapBasename(const Options& options, absl::string_view basename,
+bool GetBootstrapBasename(const Options& options, std::string_view basename,
                           std::string* bootstrap_basename);
 bool MaybeBootstrap(const Options& options, GeneratorContext* generator_context,
                     bool bootstrap_flag, std::string* basename);
@@ -203,11 +203,11 @@ enum class NameKind {
   kFunction,
   kValue,
 };
-std::string ResolveKnownNameCollisions(absl::string_view name,
+std::string ResolveKnownNameCollisions(std::string_view name,
                                        NameContext name_context,
                                        NameKind name_kind);
 // Adds an underscore if necessary to prevent conflicting with a keyword.
-std::string ResolveKeyword(absl::string_view name);
+std::string ResolveKeyword(std::string_view name);
 
 // Get the (unqualified) name that should be used for this field in C++ code.
 // The name is coerced to lower-case to emulate proto1 behavior.  People
@@ -265,25 +265,25 @@ std::string DefaultValue(const Options& options, const FieldDescriptor* field);
 std::string DefaultValue(const FieldDescriptor* field);
 
 // Convert a file name into a valid identifier.
-std::string FilenameIdentifier(absl::string_view filename);
+std::string FilenameIdentifier(std::string_view filename);
 
 // For each .proto file generates a unique name. To prevent collisions of
 // symbols in the global namespace
-std::string UniqueName(absl::string_view name, absl::string_view filename,
+std::string UniqueName(std::string_view name, std::string_view filename,
                        const Options& options);
-inline std::string UniqueName(absl::string_view name, const FileDescriptor* d,
+inline std::string UniqueName(std::string_view name, const FileDescriptor* d,
                               const Options& options) {
   return UniqueName(name, d->name(), options);
 }
-inline std::string UniqueName(absl::string_view name, const Descriptor* d,
+inline std::string UniqueName(std::string_view name, const Descriptor* d,
                               const Options& options) {
   return UniqueName(name, d->file(), options);
 }
-inline std::string UniqueName(absl::string_view name, const EnumDescriptor* d,
+inline std::string UniqueName(std::string_view name, const EnumDescriptor* d,
                               const Options& options) {
   return UniqueName(name, d->file(), options);
 }
-inline std::string UniqueName(absl::string_view name,
+inline std::string UniqueName(std::string_view name,
                               const ServiceDescriptor* d,
                               const Options& options) {
   return UniqueName(name, d->file(), options);
@@ -296,36 +296,36 @@ inline Options InternalRuntimeOptions() {
   options.opensource_runtime = false;
   return options;
 }
-inline std::string UniqueName(absl::string_view name,
-                              absl::string_view filename) {
+inline std::string UniqueName(std::string_view name,
+                              std::string_view filename) {
   return UniqueName(name, filename, InternalRuntimeOptions());
 }
-inline std::string UniqueName(absl::string_view name, const FileDescriptor* d) {
+inline std::string UniqueName(std::string_view name, const FileDescriptor* d) {
   return UniqueName(name, d->name(), InternalRuntimeOptions());
 }
-inline std::string UniqueName(absl::string_view name, const Descriptor* d) {
+inline std::string UniqueName(std::string_view name, const Descriptor* d) {
   return UniqueName(name, d->file(), InternalRuntimeOptions());
 }
-inline std::string UniqueName(absl::string_view name, const EnumDescriptor* d) {
+inline std::string UniqueName(std::string_view name, const EnumDescriptor* d) {
   return UniqueName(name, d->file(), InternalRuntimeOptions());
 }
-inline std::string UniqueName(absl::string_view name,
+inline std::string UniqueName(std::string_view name,
                               const ServiceDescriptor* d) {
   return UniqueName(name, d->file(), InternalRuntimeOptions());
 }
 
 // Return the qualified C++ name for a file level symbol.
 std::string QualifiedFileLevelSymbol(const FileDescriptor* file,
-                                     absl::string_view name,
+                                     std::string_view name,
                                      const Options& options);
 
 // Escape C++ trigraphs by escaping question marks to \?
-std::string EscapeTrigraphs(absl::string_view to_escape);
+std::string EscapeTrigraphs(std::string_view to_escape);
 
 // Escaped function name to eliminate naming conflict.
 std::string SafeFunctionName(const Descriptor* descriptor,
                              const FieldDescriptor* field,
-                             absl::string_view prefix);
+                             std::string_view prefix);
 
 // Returns the optimize mode for <file>, respecting <options.enforce_lite>.
 FileOptions_OptimizeMode GetOptimizeFor(const FileDescriptor* file,
@@ -549,7 +549,7 @@ inline bool IsMapEntryMessage(const Descriptor* descriptor) {
 // Returns true if the field's CPPTYPE is string or message.
 bool IsStringOrMessage(const FieldDescriptor* field);
 
-std::string UnderscoresToCamelCase(absl::string_view input,
+std::string UnderscoresToCamelCase(std::string_view input,
                                    bool cap_next_letter);
 
 inline bool IsCrossFileMessage(const FieldDescriptor* field) {
@@ -824,7 +824,7 @@ std::string StrongReferenceToType(const Descriptor* desc,
 // weak descriptors. The prefix determines the kind of object and the section it
 // will be merged into afterwards.
 // See `UsingImplicitWeakDescriptor` above.
-std::string WeakDescriptorDataSection(absl::string_view prefix,
+std::string WeakDescriptorDataSection(std::string_view prefix,
                                       const Descriptor* descriptor,
                                       int index_in_file_messages,
                                       const Options& options);
@@ -933,11 +933,11 @@ class PROTOC_EXPORT Formatter {
  public:
   explicit Formatter(io::Printer* printer) : printer_(printer) {}
   Formatter(io::Printer* printer,
-            const absl::flat_hash_map<absl::string_view, std::string>& vars)
+            const absl::flat_hash_map<std::string_view, std::string>& vars)
       : printer_(printer), vars_(vars) {}
 
   template <typename T>
-  void Set(absl::string_view key, const T& value) {
+  void Set(std::string_view key, const T& value) {
     vars_[key] = ToString(value);
   }
 
@@ -971,10 +971,10 @@ class PROTOC_EXPORT Formatter {
 
  private:
   io::Printer* printer_;
-  absl::flat_hash_map<absl::string_view, std::string> vars_;
+  absl::flat_hash_map<std::string_view, std::string> vars_;
 
   // Convenience overloads to accept different types as arguments.
-  static std::string ToString(absl::string_view s) { return std::string(s); }
+  static std::string ToString(std::string_view s) { return std::string(s); }
   template <typename I, typename = typename std::enable_if<
                             std::is_integral<I>::value>::type>
   static std::string ToString(I x) {
@@ -1053,7 +1053,7 @@ std::string FieldComment(const T* field, const Options& options) {
   debug_options.elide_group_body = true;
   debug_options.elide_oneof_body = true;
 
-  for (absl::string_view chunk :
+  for (std::string_view chunk :
        absl::StrSplit(field->DebugStringWithOptions(debug_options), '\n')) {
     return std::string(chunk);
   }
@@ -1080,12 +1080,12 @@ class PROTOC_EXPORT NamespaceOpener {
       : NamespaceOpener(format.printer(), loc) {}
 
   NamespaceOpener(
-      absl::string_view name, const Formatter& format,
+      std::string_view name, const Formatter& format,
       io::Printer::SourceLocation loc = io::Printer::SourceLocation::current())
       : NamespaceOpener(name, format.printer(), loc) {}
 
   NamespaceOpener(
-      absl::string_view name, io::Printer* p,
+      std::string_view name, io::Printer* p,
       io::Printer::SourceLocation loc = io::Printer::SourceLocation::current())
       : NamespaceOpener(p, loc) {
     ChangeTo(name, loc);
@@ -1094,7 +1094,7 @@ class PROTOC_EXPORT NamespaceOpener {
   ~NamespaceOpener() { ChangeTo("", loc_); }
 
   void ChangeTo(
-      absl::string_view name,
+      std::string_view name,
       io::Printer::SourceLocation loc = io::Printer::SourceLocation::current());
 
  private:
@@ -1105,22 +1105,22 @@ class PROTOC_EXPORT NamespaceOpener {
 
 void GenerateUtf8CheckCodeForString(const FieldDescriptor* field,
                                     const Options& options, bool for_parse,
-                                    absl::string_view parameters,
+                                    std::string_view parameters,
                                     const Formatter& format);
 
 void GenerateUtf8CheckCodeForCord(const FieldDescriptor* field,
                                   const Options& options, bool for_parse,
-                                  absl::string_view parameters,
+                                  std::string_view parameters,
                                   const Formatter& format);
 
 void GenerateUtf8CheckCodeForString(io::Printer* p,
                                     const FieldDescriptor* field,
                                     const Options& options, bool for_parse,
-                                    absl::string_view parameters);
+                                    std::string_view parameters);
 
 void GenerateUtf8CheckCodeForCord(io::Printer* p, const FieldDescriptor* field,
                                   const Options& options, bool for_parse,
-                                  absl::string_view parameters);
+                                  std::string_view parameters);
 
 inline bool ShouldGenerateExternSpecializations(const Options& options) {
   // For OSS we omit the specializations to reduce codegen size.
@@ -1166,7 +1166,7 @@ struct OneOfRangeImpl {
 inline OneOfRangeImpl OneOfRange(const Descriptor* desc) { return {desc}; }
 
 // Strips ".proto" or ".protodevel" from the end of a filename.
-PROTOC_EXPORT std::string StripProto(absl::string_view filename);
+PROTOC_EXPORT std::string StripProto(std::string_view filename);
 
 bool HasMessageFieldOrExtension(const Descriptor* desc);
 
@@ -1176,7 +1176,7 @@ bool HasMessageFieldOrExtension(const Descriptor* desc);
 // Each substitution will be named `absl::StrCat(prefix, "name")`, and will
 // be annotated with `field`.
 std::vector<io::Printer::Sub> AnnotatedAccessors(
-    const FieldDescriptor* field, absl::Span<const absl::string_view> prefixes,
+    const FieldDescriptor* field, absl::Span<const std::string_view> prefixes,
     absl::optional<google::protobuf::io::AnnotationCollector::Semantic> semantic =
         absl::nullopt);
 

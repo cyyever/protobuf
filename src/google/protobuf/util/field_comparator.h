@@ -16,7 +16,7 @@
 
 #include "google/protobuf/stubs/common.h"
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/port.h"
 
 // Must be included last.
@@ -193,7 +193,7 @@ class PROTOBUF_EXPORT SimpleFieldComparator : public FieldComparator {
   }
 
   bool CompareString(const FieldDescriptor& /* unused */,
-                     absl::string_view value_1, absl::string_view value_2) {
+                     std::string_view value_1, std::string_view value_2) {
     return value_1 == value_2;
   }
 

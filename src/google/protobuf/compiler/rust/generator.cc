@@ -20,7 +20,7 @@
 #include "absl/status/statusor.h"
 #include "absl/strings/match.h"
 #include "absl/strings/str_cat.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/strings/strip.h"
 #include "absl/types/span.h"
 #include "google/protobuf/compiler/code_generator.h"

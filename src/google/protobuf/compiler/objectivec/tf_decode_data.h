@@ -14,7 +14,7 @@
 #include <utility>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 // Must be included last
 #include "google/protobuf/port_def.inc"
@@ -37,13 +37,13 @@ class PROTOC_EXPORT TextFormatDecodeData {
   TextFormatDecodeData(const TextFormatDecodeData&) = delete;
   TextFormatDecodeData& operator=(const TextFormatDecodeData&) = delete;
 
-  void AddString(int32_t key, absl::string_view input_for_decode,
-                 absl::string_view desired_output);
+  void AddString(int32_t key, std::string_view input_for_decode,
+                 std::string_view desired_output);
   size_t num_entries() const { return entries_.size(); }
   std::string Data() const;
 
-  static std::string DecodeDataForString(absl::string_view input_for_decode,
-                                         absl::string_view desired_output);
+  static std::string DecodeDataForString(std::string_view input_for_decode,
+                                         std::string_view desired_output);
 
  private:
   typedef std::pair<int32_t, std::string> DataEntry;

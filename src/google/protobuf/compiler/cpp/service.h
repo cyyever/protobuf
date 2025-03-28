@@ -15,7 +15,7 @@
 #include <string>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/cpp/options.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/io/printer.h"
@@ -29,7 +29,7 @@ class ServiceGenerator {
   // See generator.cc for the meaning of dllexport_decl.
   ServiceGenerator(
       const ServiceDescriptor* descriptor,
-      const absl::flat_hash_map<absl::string_view, std::string>& vars,
+      const absl::flat_hash_map<std::string_view, std::string>& vars,
       const Options& options)
       : descriptor_(descriptor), options_(&options), vars_(vars) {
     vars_["classname"] = std::string(descriptor_->name());
@@ -77,7 +77,7 @@ class ServiceGenerator {
 
   const ServiceDescriptor* descriptor_;
   const Options* options_;
-  absl::flat_hash_map<absl::string_view, std::string> vars_;
+  absl::flat_hash_map<std::string_view, std::string> vars_;
 
   int index_in_metadata_;
 

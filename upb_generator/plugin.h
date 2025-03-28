@@ -21,7 +21,7 @@
 #endif
 
 #include "absl/container/flat_hash_set.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/code_generator_lite.h"
 #include "google/protobuf/descriptor.h"
 #include "upb/mem/arena.h"
@@ -36,7 +36,7 @@ namespace upb {
 namespace generator {
 
 inline std::vector<std::pair<std::string, std::string>> ParseGeneratorParameter(
-    const absl::string_view text) {
+    const std::string_view text) {
   std::vector<std::pair<std::string, std::string>> ret;
   google::protobuf::compiler::ParseGeneratorParameter(text, &ret);
   return ret;

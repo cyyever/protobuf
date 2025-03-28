@@ -12,7 +12,7 @@
 #include <vector>
 
 #include "google/protobuf/descriptor.pb.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/code_generator.h"
 #include "google/protobuf/descriptor.h"
 
@@ -39,7 +39,7 @@ std::vector<const protobuf::FieldDescriptor*> SortedExtensions(
 std::vector<const protobuf::FieldDescriptor*> FieldNumberOrder(
     const protobuf::Descriptor* message);
 
-std::string ToCamelCase(absl::string_view input, bool lower_first);
+std::string ToCamelCase(std::string_view input, bool lower_first);
 
 std::string DefaultValue(const FieldDescriptor* field);
 

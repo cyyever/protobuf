@@ -14,7 +14,7 @@
 #include "absl/algorithm/container.h"
 #include "absl/log/absl_check.h"
 #include "absl/strings/match.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace google {
 namespace protobuf {
@@ -24,11 +24,11 @@ namespace rust {
 // Relative path using '/' as a separator.
 class RelativePath final {
  public:
-  explicit RelativePath(absl::string_view path) : path_(path) {
+  explicit RelativePath(std::string_view path) : path_(path) {
     ABSL_CHECK(!absl::StartsWith(path, "/"))
         << "only relative paths are supported";
     // `..` and `.` not supported, since there's no use case for that right now.
-    for (absl::string_view segment : Segments()) {
+    for (std::string_view segment : Segments()) {
       ABSL_CHECK(segment != "..") << "`..` segments are not supported";
       ABSL_CHECK(segment != ".") << "`.` segments are not supported";
     }
@@ -39,11 +39,11 @@ class RelativePath final {
   //
   // Supports both files and directories.
   std::string Relative(const RelativePath& dest) const;
-  std::vector<absl::string_view> Segments() const;
+  std::vector<std::string_view> Segments() const;
   bool IsDirectory() const;
 
  private:
-  absl::string_view path_;
+  std::string_view path_;
 };
 
 }  // namespace rust

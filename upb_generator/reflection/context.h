@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/span.h"
 #include "google/protobuf/io/printer.h"
 #include "google/protobuf/io/zero_copy_stream.h"
@@ -32,13 +32,13 @@ class Context {
   // A few convenience wrappers so that users can write `ctx.Emit()` instead of
   // `ctx.printer().Emit()`.
   void Emit(absl::Span<const google::protobuf::io::Printer::Sub> vars,
-            absl::string_view format,
+            std::string_view format,
             google::protobuf::io::Printer::SourceLocation loc =
                 google::protobuf::io::Printer::SourceLocation::current()) {
     printer_.Emit(vars, format, loc);
   }
 
-  void Emit(absl::string_view format,
+  void Emit(std::string_view format,
             google::protobuf::io::Printer::SourceLocation loc =
                 google::protobuf::io::Printer::SourceLocation::current()) {
     printer_.Emit(format, loc);

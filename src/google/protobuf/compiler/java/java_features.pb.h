@@ -43,7 +43,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -111,7 +111,7 @@ inline const std::string& JavaFeatures_NestInFileClassFeature_NestInFileClass_Na
       static_cast<int>(value));
 }
 inline bool JavaFeatures_NestInFileClassFeature_NestInFileClass_Parse(
-    absl::string_view name, JavaFeatures_NestInFileClassFeature_NestInFileClass* PROTOBUF_NONNULL value) {
+    std::string_view name, JavaFeatures_NestInFileClassFeature_NestInFileClass* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<JavaFeatures_NestInFileClassFeature_NestInFileClass>(JavaFeatures_NestInFileClassFeature_NestInFileClass_descriptor(), name,
                                            value);
 }
@@ -144,7 +144,7 @@ inline const std::string& JavaFeatures_Utf8Validation_Name(JavaFeatures_Utf8Vali
       static_cast<int>(value));
 }
 inline bool JavaFeatures_Utf8Validation_Parse(
-    absl::string_view name, JavaFeatures_Utf8Validation* PROTOBUF_NONNULL value) {
+    std::string_view name, JavaFeatures_Utf8Validation* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<JavaFeatures_Utf8Validation>(JavaFeatures_Utf8Validation_descriptor(), name,
                                            value);
 }
@@ -244,8 +244,8 @@ class PROTOC_EXPORT JavaFeatures_NestInFileClassFeature final : public ::google:
   }
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "pb.JavaFeatures.NestInFileClassFeature"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "pb.JavaFeatures.NestInFileClassFeature"; }
 
  protected:
   explicit JavaFeatures_NestInFileClassFeature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -285,7 +285,7 @@ class PROTOC_EXPORT JavaFeatures_NestInFileClassFeature final : public ::google:
     return JavaFeatures_NestInFileClassFeature_NestInFileClass_Name(value);
   }
   static inline bool NestInFileClass_Parse(
-      absl::string_view name, NestInFileClass* PROTOBUF_NONNULL value) {
+      std::string_view name, NestInFileClass* PROTOBUF_NONNULL value) {
     return JavaFeatures_NestInFileClassFeature_NestInFileClass_Parse(name, value);
   }
 
@@ -440,8 +440,8 @@ class PROTOC_EXPORT JavaFeatures final : public ::google::protobuf::Message
   void InternalSwap(JavaFeatures* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "pb.JavaFeatures"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "pb.JavaFeatures"; }
 
  protected:
   explicit JavaFeatures(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -481,7 +481,7 @@ class PROTOC_EXPORT JavaFeatures final : public ::google::protobuf::Message
     return JavaFeatures_Utf8Validation_Name(value);
   }
   static inline bool Utf8Validation_Parse(
-      absl::string_view name, Utf8Validation* PROTOBUF_NONNULL value) {
+      std::string_view name, Utf8Validation* PROTOBUF_NONNULL value) {
     return JavaFeatures_Utf8Validation_Parse(name, value);
   }
 

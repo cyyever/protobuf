@@ -17,7 +17,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/java/options.h"
 #include "google/protobuf/descriptor.h"
 
@@ -101,7 +101,7 @@ PROTOC_EXPORT std::string CapitalizedOneofName(const OneofDescriptor* oneof);
 // Returns:
 //   Converts a name to camel-case. If cap_first_letter is true, capitalize the
 //   first letter.
-PROTOC_EXPORT std::string UnderscoresToCamelCase(absl::string_view input,
+PROTOC_EXPORT std::string UnderscoresToCamelCase(std::string_view input,
                                                  bool cap_next_letter);
 // Requires:
 //   field != NULL

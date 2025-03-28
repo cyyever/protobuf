@@ -15,7 +15,7 @@
 #include <string>
 
 #include "google/protobuf/compiler/code_generator.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/csharp/names.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor.pb.h"
@@ -63,11 +63,11 @@ int GetFixedSize(FieldDescriptor::Type type);
 
 // Note that we wouldn't normally want to export this (we're not expecting
 // it to be used outside libprotoc itself) but this exposes it for testing.
-std::string PROTOC_EXPORT GetEnumValueName(absl::string_view enum_name,
-                                           absl::string_view enum_value_name);
+std::string PROTOC_EXPORT GetEnumValueName(std::string_view enum_name,
+                                           std::string_view enum_value_name);
 
 // TODO: perhaps we could move this to strutil
-std::string StringToBase64(absl::string_view input);
+std::string StringToBase64(std::string_view input);
 
 std::string FileDescriptorToBase64(const FileDescriptor* descriptor);
 
@@ -98,7 +98,7 @@ inline bool IsDescriptorOptionMessage(const Descriptor* descriptor) {
   if (!IsDescriptorProto(descriptor->file())) {
     return false;
   }
-  const absl::string_view name = descriptor->name();
+  const std::string_view name = descriptor->name();
   return name == "FileOptions" ||
       name == "MessageOptions" ||
       name == "FieldOptions" ||

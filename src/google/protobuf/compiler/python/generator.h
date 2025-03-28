@@ -16,7 +16,7 @@
 #include <string>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/synchronization/mutex.h"
 #include "google/protobuf/compiler/code_generator.h"
 #include "google/protobuf/descriptor.pb.h"
@@ -80,7 +80,7 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
   }
 
  private:
-  GeneratorOptions ParseParameter(absl::string_view parameter,
+  GeneratorOptions ParseParameter(std::string_view parameter,
                                   std::string* error) const;
   void PrintImports() const;
   template <typename DescriptorT>
@@ -97,7 +97,7 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
                             const FieldDescriptorProto& proto) const;
   void PrintFieldDescriptorsInDescriptor(
       const Descriptor& message_descriptor, const DescriptorProto& proto,
-      bool is_extension, absl::string_view list_variable_name) const;
+      bool is_extension, std::string_view list_variable_name) const;
   void PrintFieldsInDescriptor(const Descriptor& message_descriptor,
                                const DescriptorProto& proto) const;
   void PrintExtensionsInDescriptor(const Descriptor& message_descriptor,
@@ -110,11 +110,11 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
 
   void PrintMessages() const;
   void PrintMessage(const Descriptor& message_descriptor,
-                    absl::string_view prefix,
+                    std::string_view prefix,
                     std::vector<std::string>* to_register,
                     bool is_nested) const;
   void PrintNestedMessages(const Descriptor& containing_descriptor,
-                           absl::string_view prefix,
+                           std::string_view prefix,
                            std::vector<std::string>* to_register) const;
 
   void FixForeignFieldsInDescriptors() const;
@@ -123,14 +123,14 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
       const Descriptor* containing_descriptor) const;
   void FixForeignFieldsInField(const Descriptor* containing_type,
                                const FieldDescriptor& field,
-                               absl::string_view python_dict_name) const;
+                               std::string_view python_dict_name) const;
   void AddMessageToFileDescriptor(const Descriptor& descriptor) const;
   void AddEnumToFileDescriptor(const EnumDescriptor& descriptor) const;
   void AddExtensionToFileDescriptor(const FieldDescriptor& descriptor) const;
   void AddServiceToFileDescriptor(const ServiceDescriptor& descriptor) const;
   std::string FieldReferencingExpression(
       const Descriptor* containing_type, const FieldDescriptor& field,
-      absl::string_view python_dict_name) const;
+      std::string_view python_dict_name) const;
   template <typename DescriptorT>
   void FixContainingTypeInDescriptor(
       const DescriptorT& descriptor,
@@ -157,12 +157,12 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
 
   template <typename DescriptorProtoT>
   void PrintSerializedPbInterval(const DescriptorProtoT& descriptor_proto,
-                                 absl::string_view name) const;
+                                 std::string_view name) const;
 
   template <typename DescriptorT>
   bool PrintDescriptorOptionsFixingCode(
       const DescriptorT& descriptor, const typename DescriptorT::Proto& proto,
-      absl::string_view descriptor_str) const;
+      std::string_view descriptor_str) const;
 
   void FixAllDescriptorOptions() const;
   void FixOptionsForField(const FieldDescriptor& field,
@@ -180,7 +180,7 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
   void SetMessagePbInterval(const DescriptorProto& message_proto,
                             const Descriptor& descriptor) const;
 
-  void CopyPublicDependenciesAliases(absl::string_view copy_from,
+  void CopyPublicDependenciesAliases(std::string_view copy_from,
                                      const FileDescriptor* file) const;
 
   // Very coarse-grained lock to ensure that Generate() is reentrant.

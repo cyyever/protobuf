@@ -48,7 +48,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -120,7 +120,7 @@ inline const std::string& CodeGeneratorResponse_Feature_Name(CodeGeneratorRespon
       static_cast<int>(value));
 }
 inline bool CodeGeneratorResponse_Feature_Parse(
-    absl::string_view name, CodeGeneratorResponse_Feature* PROTOBUF_NONNULL value) {
+    std::string_view name, CodeGeneratorResponse_Feature* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<CodeGeneratorResponse_Feature>(CodeGeneratorResponse_Feature_descriptor(), name,
                                            value);
 }
@@ -248,8 +248,8 @@ class PROTOC_EXPORT Version final : public ::google::protobuf::Message
   void InternalSwap(Version* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.compiler.Version"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.compiler.Version"; }
 
  protected:
   explicit Version(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -484,8 +484,8 @@ class PROTOC_EXPORT CodeGeneratorResponse_File final : public ::google::protobuf
   void InternalSwap(CodeGeneratorResponse_File* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.compiler.CodeGeneratorResponse.File"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.compiler.CodeGeneratorResponse.File"; }
 
  protected:
   explicit CodeGeneratorResponse_File(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -734,8 +734,8 @@ class PROTOC_EXPORT CodeGeneratorResponse final : public ::google::protobuf::Mes
   void InternalSwap(CodeGeneratorResponse* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.compiler.CodeGeneratorResponse"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.compiler.CodeGeneratorResponse"; }
 
  protected:
   explicit CodeGeneratorResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -775,7 +775,7 @@ class PROTOC_EXPORT CodeGeneratorResponse final : public ::google::protobuf::Mes
     return CodeGeneratorResponse_Feature_Name(value);
   }
   static inline bool Feature_Parse(
-      absl::string_view name, Feature* PROTOBUF_NONNULL value) {
+      std::string_view name, Feature* PROTOBUF_NONNULL value) {
     return CodeGeneratorResponse_Feature_Parse(name, value);
   }
 
@@ -1016,8 +1016,8 @@ class PROTOC_EXPORT CodeGeneratorRequest final : public ::google::protobuf::Mess
   void InternalSwap(CodeGeneratorRequest* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.compiler.CodeGeneratorRequest"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.compiler.CodeGeneratorRequest"; }
 
  protected:
   explicit CodeGeneratorRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

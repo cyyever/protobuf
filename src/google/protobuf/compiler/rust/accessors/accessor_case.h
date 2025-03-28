@@ -8,7 +8,7 @@
 #ifndef GOOGLE_PROTOBUF_COMPILER_RUST_ACCESSORS_ACCESSOR_CASE_H__
 #define GOOGLE_PROTOBUF_COMPILER_RUST_ACCESSORS_ACCESSOR_CASE_H__
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace google {
 namespace protobuf {
@@ -26,14 +26,14 @@ enum class AccessorCase {
 };
 
 // Returns the `self` receiver type for a subfield view accessor.
-absl::string_view ViewReceiver(AccessorCase accessor_case);
+std::string_view ViewReceiver(AccessorCase accessor_case);
 
 // Returns the lifetime of a subfield view accessor.
 // Views are Copy, and so the full `'msg` lifetime can be used.
 // Any `&self` or `&mut self` accessors need to use the lifetime of that
 // borrow, which is referenced via `'_`.
 // See b/314989133 for _mut accessors.
-absl::string_view ViewLifetime(AccessorCase accessor_case);
+std::string_view ViewLifetime(AccessorCase accessor_case);
 
 }  // namespace rust
 }  // namespace compiler

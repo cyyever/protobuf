@@ -23,7 +23,7 @@
 #include "absl/container/flat_hash_set.h"
 #include "absl/status/status.h"
 #include "absl/strings/str_format.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/io/zero_copy_stream.h"
 #include "google/protobuf/io/zero_copy_stream_impl_lite.h"
@@ -200,7 +200,7 @@ struct ParseProto2Descriptor : Proto2Descriptor {
     }
   }
 
-  static void SetString(Field f, Msg& msg, absl::string_view x) {
+  static void SetString(Field f, Msg& msg, std::string_view x) {
     RecordAsSeen(f, msg);
     if (f->is_repeated()) {
       msg.msg_->GetReflection()->AddString(msg.msg_, f, std::string(x));
@@ -283,7 +283,7 @@ struct ParseProto3Type : Proto3Type {
           RETURN_IF_ERROR(body(desc, new_msg));
 
           new_msg.stream_.Trim();  // Should probably be called "Flush()".
-          absl::string_view written(
+          std::string_view written(
               out.data(), static_cast<size_t>(new_msg.stream_.ByteCount()));
           SetString(f, msg, written);
           return absl::OkStatus();
@@ -335,7 +335,7 @@ struct ParseProto3Type : Proto3Type {
     msg.stream_.WriteRaw(&b, 1);
   }
 
-  static void SetString(Field f, Msg& msg, absl::string_view x) {
+  static void SetString(Field f, Msg& msg, std::string_view x) {
     RecordAsSeen(f, msg);
     msg.stream_.WriteTag(f->proto().number() << 3 |
                          WireFormatLite::WIRETYPE_LENGTH_DELIMITED);

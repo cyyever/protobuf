@@ -14,7 +14,7 @@
 #include <iterator>
 #include <type_traits>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/hpb/backend/upb/interop.h"
 #include "google/protobuf/hpb/internal/template_help.h"
 #include "google/protobuf/hpb/repeated_field_iterator.h"
@@ -27,7 +27,7 @@
 namespace hpb {
 namespace internal {
 
-// Shared implementation of repeated fields for absl::string_view and
+// Shared implementation of repeated fields for std::string_view and
 // message types for mutable and immutable variants.
 //
 // Immutable (const accessor), constructs this class with a nullptr upb_Array*
@@ -76,8 +76,8 @@ template <class T>
 class RepeatedFieldProxy
     : public std::conditional_t<std::is_const_v<T>, RepeatedFieldProxyBase<T>,
                                 RepeatedFieldProxyMutableBase<T>> {
-  static_assert(!std::is_same_v<T, absl::string_view>, "");
-  static_assert(!std::is_same_v<T, const absl::string_view>, "");
+  static_assert(!std::is_same_v<T, std::string_view>, "");
+  static_assert(!std::is_same_v<T, const std::string_view>, "");
   static_assert(!std::is_arithmetic_v<T>, "");
   static constexpr bool kIsConst = std::is_const_v<T>;
 
@@ -155,8 +155,8 @@ template <class T>
 class RepeatedFieldStringProxy
     : public std::conditional_t<std::is_const_v<T>, RepeatedFieldProxyBase<T>,
                                 RepeatedFieldProxyMutableBase<T>> {
-  static_assert(std::is_same_v<T, absl::string_view> ||
-                    std::is_same_v<T, const absl::string_view>,
+  static_assert(std::is_same_v<T, std::string_view> ||
+                    std::is_same_v<T, const std::string_view>,
                 "");
   static constexpr bool kIsConst = std::is_const_v<T>;
 
@@ -269,7 +269,7 @@ class RepeatedFieldScalarProxy
 
 template <typename T>
 class RepeatedField {
-  static constexpr bool kIsString = std::is_same_v<T, absl::string_view>;
+  static constexpr bool kIsString = std::is_same_v<T, std::string_view>;
   static constexpr bool kIsScalar = std::is_arithmetic_v<T>;
 
  public:
@@ -285,10 +285,10 @@ class RepeatedField {
   // We would like to reference T::CProxy. Validate forwarding header design.
   using ValueProxy = std::conditional_t<
       kIsScalar, T,
-      std::conditional_t<kIsString, absl::string_view, ::hpb::Ptr<T>>>;
+      std::conditional_t<kIsString, std::string_view, ::hpb::Ptr<T>>>;
   using ValueCProxy = std::conditional_t<
       kIsScalar, const T,
-      std::conditional_t<kIsString, absl::string_view, ::hpb::Ptr<const T>>>;
+      std::conditional_t<kIsString, std::string_view, ::hpb::Ptr<const T>>>;
   using Access = std::conditional_t<
       kIsScalar, internal::RepeatedFieldScalarProxy<T>,
       std::conditional_t<kIsString, internal::RepeatedFieldStringProxy<T>,

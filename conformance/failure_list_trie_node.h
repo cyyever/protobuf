@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "absl/status/status.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/optional.h"
 
 namespace google {
@@ -42,24 +42,24 @@ namespace protobuf {
 class FailureListTrieNode {
  public:
   FailureListTrieNode() : data_("") {}
-  explicit FailureListTrieNode(absl::string_view data)
+  explicit FailureListTrieNode(std::string_view data)
       : data_(data), is_test_name_(false) {}
 
   // Will attempt to insert a test name into the trie returning
   // absl::StatusCode::kAlreadyExists if the test name already exists or
   // absl::StatusCode::kInvalidArgument if the test name contains invalid
   // wildcards; otherwise, insertion is successful.
-  absl::Status Insert(absl::string_view test_name);
+  absl::Status Insert(std::string_view test_name);
 
   // Returns what it matched to if it matched anything, otherwise returns
   // absl::nullopt
-  absl::optional<std::string> WalkDownMatch(absl::string_view test_name);
+  absl::optional<std::string> WalkDownMatch(std::string_view test_name);
 
  private:
-  absl::string_view data_;
+  std::string_view data_;
   std::vector<std::unique_ptr<FailureListTrieNode>> children_;
   bool is_test_name_;
-  void InsertImpl(absl::string_view test_name);
+  void InsertImpl(std::string_view test_name);
 };
 }  // namespace protobuf
 }  // namespace google

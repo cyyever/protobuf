@@ -17,7 +17,7 @@
 #include "absl/status/status.h"
 #include "absl/status/statusor.h"
 #include "absl/strings/str_format.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/io/zero_copy_stream.h"
 #include "google/protobuf/stubs/status_macros.h"
 
@@ -66,7 +66,7 @@ class MaybeOwnedString {
       : data_(StreamOwned{stream, start, len}), token_(token) {}
 
   // Returns the string as a view, regardless of whether it is owned or not.
-  absl::string_view AsView() const {
+  std::string_view AsView() const {
     if (auto* unowned = absl::get_if<StreamOwned>(&data_)) {
       return unowned->AsView();
     }
@@ -74,7 +74,7 @@ class MaybeOwnedString {
     return absl::get<std::string>(data_);
   }
 
-  operator absl::string_view() const { return AsView(); }  // NOLINT
+  operator std::string_view() const { return AsView(); }  // NOLINT
 
   // Returns a reference to an owned string; if the wrapped string is not
   // owned, this function will perform a copy and make it owned.
@@ -100,7 +100,7 @@ class MaybeOwnedString {
   struct StreamOwned {
     ZeroCopyBufferedStream* stream;
     size_t start, len;
-    absl::string_view AsView() const;
+    std::string_view AsView() const;
   };
   absl::variant<std::string, StreamOwned> data_;
   BufferingGuard token_;
@@ -186,12 +186,12 @@ class ZeroCopyBufferedStream {
   //
   // The returned view is unstable: calling any function may invalidate it,
   // because there will not be a `BufferingGuard` to guard it.
-  absl::string_view RawBuffer(size_t start,
-                              size_t len = absl::string_view::npos) const;
+  std::string_view RawBuffer(size_t start,
+                              size_t len = std::string_view::npos) const;
 
   // Returns a view of RawBuffer, unread bytes; this will not be the entirety
   // of the underlying stream.
-  absl::string_view Unread() const { return RawBuffer(cursor_); }
+  std::string_view Unread() const { return RawBuffer(cursor_); }
 
   bool IsBuffering() const { return using_buf_; }
 
@@ -243,7 +243,7 @@ class ZeroCopyBufferedStream {
   // - If `outstanding_buffer_borrows_ == 0`, we can trash `buf_` and go back to
   //   using `last_chunk_` directly. See `DownRefBuffer()`.
   io::ZeroCopyInputStream* stream_;
-  absl::string_view last_chunk_;
+  std::string_view last_chunk_;
   std::vector<char> buf_;
   bool using_buf_ = false;
   size_t cursor_ = 0;
@@ -270,7 +270,7 @@ inline BufferingGuard::~BufferingGuard() {
   }
 }
 
-inline absl::string_view MaybeOwnedString::StreamOwned::AsView() const {
+inline std::string_view MaybeOwnedString::StreamOwned::AsView() const {
   return stream->RawBuffer(start, len);
 }
 
@@ -297,13 +297,13 @@ absl::StatusOr<MaybeOwnedString> ZeroCopyBufferedStream::TakeWhile(Pred p) {
   return MaybeOwnedString(this, start, cursor_ - start, guard);
 }
 
-inline absl::string_view ZeroCopyBufferedStream::RawBuffer(size_t start,
+inline std::string_view ZeroCopyBufferedStream::RawBuffer(size_t start,
                                                            size_t len) const {
-  absl::string_view view = last_chunk_;
+  std::string_view view = last_chunk_;
   if (using_buf_) {
     ABSL_DCHECK_LE(buffer_start_, start);
     start -= buffer_start_;
-    view = absl::string_view(buf_.data(), buf_.size());
+    view = std::string_view(buf_.data(), buf_.size());
   }
 #if 0
     // This print statement is especially useful for trouble-shooting low-level
@@ -314,7 +314,7 @@ inline absl::string_view ZeroCopyBufferedStream::RawBuffer(size_t start,
                                     buffer_start_, cursor_, this);
 #endif
   ABSL_DCHECK_LE(start, view.size());
-  if (len == absl::string_view::npos) {
+  if (len == std::string_view::npos) {
     return view.substr(start);
   }
 

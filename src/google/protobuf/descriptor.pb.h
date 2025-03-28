@@ -42,7 +42,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -330,7 +330,7 @@ inline const std::string& ExtensionRangeOptions_VerificationState_Name(Extension
       static_cast<int>(value));
 }
 inline bool ExtensionRangeOptions_VerificationState_Parse(
-    absl::string_view name, ExtensionRangeOptions_VerificationState* PROTOBUF_NONNULL value) {
+    std::string_view name, ExtensionRangeOptions_VerificationState* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<ExtensionRangeOptions_VerificationState>(ExtensionRangeOptions_VerificationState_descriptor(), name,
                                            value);
 }
@@ -378,7 +378,7 @@ inline const std::string& FieldDescriptorProto_Type_Name(FieldDescriptorProto_Ty
       static_cast<int>(value));
 }
 inline bool FieldDescriptorProto_Type_Parse(
-    absl::string_view name, FieldDescriptorProto_Type* PROTOBUF_NONNULL value) {
+    std::string_view name, FieldDescriptorProto_Type* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FieldDescriptorProto_Type>(FieldDescriptorProto_Type_descriptor(), name,
                                            value);
 }
@@ -411,7 +411,7 @@ inline const std::string& FieldDescriptorProto_Label_Name(FieldDescriptorProto_L
       static_cast<int>(value));
 }
 inline bool FieldDescriptorProto_Label_Parse(
-    absl::string_view name, FieldDescriptorProto_Label* PROTOBUF_NONNULL value) {
+    std::string_view name, FieldDescriptorProto_Label* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FieldDescriptorProto_Label>(FieldDescriptorProto_Label_descriptor(), name,
                                            value);
 }
@@ -444,7 +444,7 @@ inline const std::string& FileOptions_OptimizeMode_Name(FileOptions_OptimizeMode
       static_cast<int>(value));
 }
 inline bool FileOptions_OptimizeMode_Parse(
-    absl::string_view name, FileOptions_OptimizeMode* PROTOBUF_NONNULL value) {
+    std::string_view name, FileOptions_OptimizeMode* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FileOptions_OptimizeMode>(FileOptions_OptimizeMode_descriptor(), name,
                                            value);
 }
@@ -477,7 +477,7 @@ inline const std::string& FieldOptions_CType_Name(FieldOptions_CType value) {
       static_cast<int>(value));
 }
 inline bool FieldOptions_CType_Parse(
-    absl::string_view name, FieldOptions_CType* PROTOBUF_NONNULL value) {
+    std::string_view name, FieldOptions_CType* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_CType>(FieldOptions_CType_descriptor(), name,
                                            value);
 }
@@ -510,7 +510,7 @@ inline const std::string& FieldOptions_JSType_Name(FieldOptions_JSType value) {
       static_cast<int>(value));
 }
 inline bool FieldOptions_JSType_Parse(
-    absl::string_view name, FieldOptions_JSType* PROTOBUF_NONNULL value) {
+    std::string_view name, FieldOptions_JSType* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_JSType>(FieldOptions_JSType_descriptor(), name,
                                            value);
 }
@@ -543,7 +543,7 @@ inline const std::string& FieldOptions_OptionRetention_Name(FieldOptions_OptionR
       static_cast<int>(value));
 }
 inline bool FieldOptions_OptionRetention_Parse(
-    absl::string_view name, FieldOptions_OptionRetention* PROTOBUF_NONNULL value) {
+    std::string_view name, FieldOptions_OptionRetention* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_OptionRetention>(FieldOptions_OptionRetention_descriptor(), name,
                                            value);
 }
@@ -583,7 +583,7 @@ inline const std::string& FieldOptions_OptionTargetType_Name(FieldOptions_Option
       static_cast<int>(value));
 }
 inline bool FieldOptions_OptionTargetType_Parse(
-    absl::string_view name, FieldOptions_OptionTargetType* PROTOBUF_NONNULL value) {
+    std::string_view name, FieldOptions_OptionTargetType* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_OptionTargetType>(FieldOptions_OptionTargetType_descriptor(), name,
                                            value);
 }
@@ -616,7 +616,7 @@ inline const std::string& MethodOptions_IdempotencyLevel_Name(MethodOptions_Idem
       static_cast<int>(value));
 }
 inline bool MethodOptions_IdempotencyLevel_Parse(
-    absl::string_view name, MethodOptions_IdempotencyLevel* PROTOBUF_NONNULL value) {
+    std::string_view name, MethodOptions_IdempotencyLevel* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<MethodOptions_IdempotencyLevel>(MethodOptions_IdempotencyLevel_descriptor(), name,
                                            value);
 }
@@ -651,7 +651,7 @@ inline const std::string& FeatureSet_VisibilityFeature_DefaultSymbolVisibility_N
       static_cast<int>(value));
 }
 inline bool FeatureSet_VisibilityFeature_DefaultSymbolVisibility_Parse(
-    absl::string_view name, FeatureSet_VisibilityFeature_DefaultSymbolVisibility* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_VisibilityFeature_DefaultSymbolVisibility* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_VisibilityFeature_DefaultSymbolVisibility>(FeatureSet_VisibilityFeature_DefaultSymbolVisibility_descriptor(), name,
                                            value);
 }
@@ -685,7 +685,7 @@ inline const std::string& FeatureSet_FieldPresence_Name(FeatureSet_FieldPresence
       static_cast<int>(value));
 }
 inline bool FeatureSet_FieldPresence_Parse(
-    absl::string_view name, FeatureSet_FieldPresence* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_FieldPresence* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_FieldPresence>(FeatureSet_FieldPresence_descriptor(), name,
                                            value);
 }
@@ -718,7 +718,7 @@ inline const std::string& FeatureSet_EnumType_Name(FeatureSet_EnumType value) {
       static_cast<int>(value));
 }
 inline bool FeatureSet_EnumType_Parse(
-    absl::string_view name, FeatureSet_EnumType* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_EnumType* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_EnumType>(FeatureSet_EnumType_descriptor(), name,
                                            value);
 }
@@ -751,7 +751,7 @@ inline const std::string& FeatureSet_RepeatedFieldEncoding_Name(FeatureSet_Repea
       static_cast<int>(value));
 }
 inline bool FeatureSet_RepeatedFieldEncoding_Parse(
-    absl::string_view name, FeatureSet_RepeatedFieldEncoding* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_RepeatedFieldEncoding* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_RepeatedFieldEncoding>(FeatureSet_RepeatedFieldEncoding_descriptor(), name,
                                            value);
 }
@@ -784,7 +784,7 @@ inline const std::string& FeatureSet_Utf8Validation_Name(FeatureSet_Utf8Validati
       static_cast<int>(value));
 }
 inline bool FeatureSet_Utf8Validation_Parse(
-    absl::string_view name, FeatureSet_Utf8Validation* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_Utf8Validation* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_Utf8Validation>(FeatureSet_Utf8Validation_descriptor(), name,
                                            value);
 }
@@ -817,7 +817,7 @@ inline const std::string& FeatureSet_MessageEncoding_Name(FeatureSet_MessageEnco
       static_cast<int>(value));
 }
 inline bool FeatureSet_MessageEncoding_Parse(
-    absl::string_view name, FeatureSet_MessageEncoding* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_MessageEncoding* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_MessageEncoding>(FeatureSet_MessageEncoding_descriptor(), name,
                                            value);
 }
@@ -850,7 +850,7 @@ inline const std::string& FeatureSet_JsonFormat_Name(FeatureSet_JsonFormat value
       static_cast<int>(value));
 }
 inline bool FeatureSet_JsonFormat_Parse(
-    absl::string_view name, FeatureSet_JsonFormat* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_JsonFormat* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_JsonFormat>(FeatureSet_JsonFormat_descriptor(), name,
                                            value);
 }
@@ -883,7 +883,7 @@ inline const std::string& FeatureSet_EnforceNamingStyle_Name(FeatureSet_EnforceN
       static_cast<int>(value));
 }
 inline bool FeatureSet_EnforceNamingStyle_Parse(
-    absl::string_view name, FeatureSet_EnforceNamingStyle* PROTOBUF_NONNULL value) {
+    std::string_view name, FeatureSet_EnforceNamingStyle* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<FeatureSet_EnforceNamingStyle>(FeatureSet_EnforceNamingStyle_descriptor(), name,
                                            value);
 }
@@ -916,7 +916,7 @@ inline const std::string& GeneratedCodeInfo_Annotation_Semantic_Name(GeneratedCo
       static_cast<int>(value));
 }
 inline bool GeneratedCodeInfo_Annotation_Semantic_Parse(
-    absl::string_view name, GeneratedCodeInfo_Annotation_Semantic* PROTOBUF_NONNULL value) {
+    std::string_view name, GeneratedCodeInfo_Annotation_Semantic* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<GeneratedCodeInfo_Annotation_Semantic>(GeneratedCodeInfo_Annotation_Semantic_descriptor(), name,
                                            value);
 }
@@ -952,7 +952,7 @@ const std::string& Edition_Name(T value) {
   return ::google::protobuf::internal::NameOfEnum(Edition_descriptor(), value);
 }
 inline bool Edition_Parse(
-    absl::string_view name, Edition* PROTOBUF_NONNULL value) {
+    std::string_view name, Edition* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<Edition>(Edition_descriptor(), name,
                                            value);
 }
@@ -985,7 +985,7 @@ inline const std::string& SymbolVisibility_Name(SymbolVisibility value) {
       static_cast<int>(value));
 }
 inline bool SymbolVisibility_Parse(
-    absl::string_view name, SymbolVisibility* PROTOBUF_NONNULL value) {
+    std::string_view name, SymbolVisibility* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<SymbolVisibility>(SymbolVisibility_descriptor(), name,
                                            value);
 }
@@ -1118,8 +1118,8 @@ class PROTOBUF_EXPORT UninterpretedOption_NamePart final : public ::google::prot
   void InternalSwap(UninterpretedOption_NamePart* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.UninterpretedOption.NamePart"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.UninterpretedOption.NamePart"; }
 
  protected:
   explicit UninterpretedOption_NamePart(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1328,8 +1328,8 @@ class PROTOBUF_EXPORT SourceCodeInfo_Location final : public ::google::protobuf:
   void InternalSwap(SourceCodeInfo_Location* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.SourceCodeInfo.Location"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.SourceCodeInfo.Location"; }
 
  protected:
   explicit SourceCodeInfo_Location(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1609,8 +1609,8 @@ class PROTOBUF_EXPORT GeneratedCodeInfo_Annotation final : public ::google::prot
   void InternalSwap(GeneratedCodeInfo_Annotation* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.GeneratedCodeInfo.Annotation"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.GeneratedCodeInfo.Annotation"; }
 
  protected:
   explicit GeneratedCodeInfo_Annotation(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1649,7 +1649,7 @@ class PROTOBUF_EXPORT GeneratedCodeInfo_Annotation final : public ::google::prot
     return GeneratedCodeInfo_Annotation_Semantic_Name(value);
   }
   static inline bool Semantic_Parse(
-      absl::string_view name, Semantic* PROTOBUF_NONNULL value) {
+      std::string_view name, Semantic* PROTOBUF_NONNULL value) {
     return GeneratedCodeInfo_Annotation_Semantic_Parse(name, value);
   }
 
@@ -1887,8 +1887,8 @@ class PROTOBUF_EXPORT FieldOptions_FeatureSupport final : public ::google::proto
   void InternalSwap(FieldOptions_FeatureSupport* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FieldOptions.FeatureSupport"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FieldOptions.FeatureSupport"; }
 
  protected:
   explicit FieldOptions_FeatureSupport(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -2123,8 +2123,8 @@ class PROTOBUF_EXPORT FieldOptions_EditionDefault final : public ::google::proto
   void InternalSwap(FieldOptions_EditionDefault* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FieldOptions.EditionDefault"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FieldOptions.EditionDefault"; }
 
  protected:
   explicit FieldOptions_EditionDefault(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -2305,8 +2305,8 @@ class PROTOBUF_EXPORT FeatureSet_VisibilityFeature final : public ::google::prot
   }
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FeatureSet.VisibilityFeature"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FeatureSet.VisibilityFeature"; }
 
  protected:
   explicit FeatureSet_VisibilityFeature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -2347,7 +2347,7 @@ class PROTOBUF_EXPORT FeatureSet_VisibilityFeature final : public ::google::prot
     return FeatureSet_VisibilityFeature_DefaultSymbolVisibility_Name(value);
   }
   static inline bool DefaultSymbolVisibility_Parse(
-      absl::string_view name, DefaultSymbolVisibility* PROTOBUF_NONNULL value) {
+      std::string_view name, DefaultSymbolVisibility* PROTOBUF_NONNULL value) {
     return FeatureSet_VisibilityFeature_DefaultSymbolVisibility_Parse(name, value);
   }
 
@@ -2507,8 +2507,8 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
   void InternalSwap(FeatureSet* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FeatureSet"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FeatureSet"; }
 
  protected:
   explicit FeatureSet(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -2549,7 +2549,7 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
     return FeatureSet_FieldPresence_Name(value);
   }
   static inline bool FieldPresence_Parse(
-      absl::string_view name, FieldPresence* PROTOBUF_NONNULL value) {
+      std::string_view name, FieldPresence* PROTOBUF_NONNULL value) {
     return FeatureSet_FieldPresence_Parse(name, value);
   }
   using EnumType = FeatureSet_EnumType;
@@ -2570,7 +2570,7 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
     return FeatureSet_EnumType_Name(value);
   }
   static inline bool EnumType_Parse(
-      absl::string_view name, EnumType* PROTOBUF_NONNULL value) {
+      std::string_view name, EnumType* PROTOBUF_NONNULL value) {
     return FeatureSet_EnumType_Parse(name, value);
   }
   using RepeatedFieldEncoding = FeatureSet_RepeatedFieldEncoding;
@@ -2591,7 +2591,7 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
     return FeatureSet_RepeatedFieldEncoding_Name(value);
   }
   static inline bool RepeatedFieldEncoding_Parse(
-      absl::string_view name, RepeatedFieldEncoding* PROTOBUF_NONNULL value) {
+      std::string_view name, RepeatedFieldEncoding* PROTOBUF_NONNULL value) {
     return FeatureSet_RepeatedFieldEncoding_Parse(name, value);
   }
   using Utf8Validation = FeatureSet_Utf8Validation;
@@ -2612,7 +2612,7 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
     return FeatureSet_Utf8Validation_Name(value);
   }
   static inline bool Utf8Validation_Parse(
-      absl::string_view name, Utf8Validation* PROTOBUF_NONNULL value) {
+      std::string_view name, Utf8Validation* PROTOBUF_NONNULL value) {
     return FeatureSet_Utf8Validation_Parse(name, value);
   }
   using MessageEncoding = FeatureSet_MessageEncoding;
@@ -2633,7 +2633,7 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
     return FeatureSet_MessageEncoding_Name(value);
   }
   static inline bool MessageEncoding_Parse(
-      absl::string_view name, MessageEncoding* PROTOBUF_NONNULL value) {
+      std::string_view name, MessageEncoding* PROTOBUF_NONNULL value) {
     return FeatureSet_MessageEncoding_Parse(name, value);
   }
   using JsonFormat = FeatureSet_JsonFormat;
@@ -2654,7 +2654,7 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
     return FeatureSet_JsonFormat_Name(value);
   }
   static inline bool JsonFormat_Parse(
-      absl::string_view name, JsonFormat* PROTOBUF_NONNULL value) {
+      std::string_view name, JsonFormat* PROTOBUF_NONNULL value) {
     return FeatureSet_JsonFormat_Parse(name, value);
   }
   using EnforceNamingStyle = FeatureSet_EnforceNamingStyle;
@@ -2675,7 +2675,7 @@ class PROTOBUF_EXPORT FeatureSet final : public ::google::protobuf::Message
     return FeatureSet_EnforceNamingStyle_Name(value);
   }
   static inline bool EnforceNamingStyle_Parse(
-      absl::string_view name, EnforceNamingStyle* PROTOBUF_NONNULL value) {
+      std::string_view name, EnforceNamingStyle* PROTOBUF_NONNULL value) {
     return FeatureSet_EnforceNamingStyle_Parse(name, value);
   }
 
@@ -3117,8 +3117,8 @@ class PROTOBUF_EXPORT ExtensionRangeOptions_Declaration final : public ::google:
   void InternalSwap(ExtensionRangeOptions_Declaration* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.ExtensionRangeOptions.Declaration"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.ExtensionRangeOptions.Declaration"; }
 
  protected:
   explicit ExtensionRangeOptions_Declaration(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -3371,8 +3371,8 @@ class PROTOBUF_EXPORT EnumDescriptorProto_EnumReservedRange final : public ::goo
   void InternalSwap(EnumDescriptorProto_EnumReservedRange* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.EnumDescriptorProto.EnumReservedRange"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.EnumDescriptorProto.EnumReservedRange"; }
 
  protected:
   explicit EnumDescriptorProto_EnumReservedRange(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -3576,8 +3576,8 @@ class PROTOBUF_EXPORT DescriptorProto_ReservedRange final : public ::google::pro
   void InternalSwap(DescriptorProto_ReservedRange* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.DescriptorProto.ReservedRange"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.DescriptorProto.ReservedRange"; }
 
  protected:
   explicit DescriptorProto_ReservedRange(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -3786,8 +3786,8 @@ class PROTOBUF_EXPORT UninterpretedOption final : public ::google::protobuf::Mes
   void InternalSwap(UninterpretedOption* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.UninterpretedOption"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.UninterpretedOption"; }
 
  protected:
   explicit UninterpretedOption(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -4083,8 +4083,8 @@ class PROTOBUF_EXPORT SourceCodeInfo final : public ::google::protobuf::Message
   void InternalSwap(SourceCodeInfo* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.SourceCodeInfo"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.SourceCodeInfo"; }
 
  protected:
   explicit SourceCodeInfo(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -4459,8 +4459,8 @@ class PROTOBUF_EXPORT GeneratedCodeInfo final : public ::google::protobuf::Messa
   void InternalSwap(GeneratedCodeInfo* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.GeneratedCodeInfo"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.GeneratedCodeInfo"; }
 
  protected:
   explicit GeneratedCodeInfo(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -4662,8 +4662,8 @@ class PROTOBUF_EXPORT FeatureSetDefaults_FeatureSetEditionDefault final : public
   void InternalSwap(FeatureSetDefaults_FeatureSetEditionDefault* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault"; }
 
  protected:
   explicit FeatureSetDefaults_FeatureSetEditionDefault(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -4893,8 +4893,8 @@ class PROTOBUF_EXPORT ServiceOptions final : public ::google::protobuf::Message
   void InternalSwap(ServiceOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.ServiceOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.ServiceOptions"; }
 
  protected:
   explicit ServiceOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -5304,8 +5304,8 @@ class PROTOBUF_EXPORT OneofOptions final : public ::google::protobuf::Message
   void InternalSwap(OneofOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.OneofOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.OneofOptions"; }
 
  protected:
   explicit OneofOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -5702,8 +5702,8 @@ class PROTOBUF_EXPORT MethodOptions final : public ::google::protobuf::Message
   void InternalSwap(MethodOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.MethodOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.MethodOptions"; }
 
  protected:
   explicit MethodOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -5742,7 +5742,7 @@ class PROTOBUF_EXPORT MethodOptions final : public ::google::protobuf::Message
     return MethodOptions_IdempotencyLevel_Name(value);
   }
   static inline bool IdempotencyLevel_Parse(
-      absl::string_view name, IdempotencyLevel* PROTOBUF_NONNULL value) {
+      std::string_view name, IdempotencyLevel* PROTOBUF_NONNULL value) {
     return MethodOptions_IdempotencyLevel_Parse(name, value);
   }
 
@@ -6147,8 +6147,8 @@ class PROTOBUF_EXPORT MessageOptions final : public ::google::protobuf::Message
   void InternalSwap(MessageOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.MessageOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.MessageOptions"; }
 
  protected:
   explicit MessageOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -6610,8 +6610,8 @@ class PROTOBUF_EXPORT FileOptions final : public ::google::protobuf::Message
   void InternalSwap(FileOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FileOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FileOptions"; }
 
  protected:
   explicit FileOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -6650,7 +6650,7 @@ class PROTOBUF_EXPORT FileOptions final : public ::google::protobuf::Message
     return FileOptions_OptimizeMode_Name(value);
   }
   static inline bool OptimizeMode_Parse(
-      absl::string_view name, OptimizeMode* PROTOBUF_NONNULL value) {
+      std::string_view name, OptimizeMode* PROTOBUF_NONNULL value) {
     return FileOptions_OptimizeMode_Parse(name, value);
   }
 
@@ -7326,8 +7326,8 @@ class PROTOBUF_EXPORT FieldOptions final : public ::google::protobuf::Message
   void InternalSwap(FieldOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FieldOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FieldOptions"; }
 
  protected:
   explicit FieldOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -7368,7 +7368,7 @@ class PROTOBUF_EXPORT FieldOptions final : public ::google::protobuf::Message
     return FieldOptions_CType_Name(value);
   }
   static inline bool CType_Parse(
-      absl::string_view name, CType* PROTOBUF_NONNULL value) {
+      std::string_view name, CType* PROTOBUF_NONNULL value) {
     return FieldOptions_CType_Parse(name, value);
   }
   using JSType = FieldOptions_JSType;
@@ -7389,7 +7389,7 @@ class PROTOBUF_EXPORT FieldOptions final : public ::google::protobuf::Message
     return FieldOptions_JSType_Name(value);
   }
   static inline bool JSType_Parse(
-      absl::string_view name, JSType* PROTOBUF_NONNULL value) {
+      std::string_view name, JSType* PROTOBUF_NONNULL value) {
     return FieldOptions_JSType_Parse(name, value);
   }
   using OptionRetention = FieldOptions_OptionRetention;
@@ -7410,7 +7410,7 @@ class PROTOBUF_EXPORT FieldOptions final : public ::google::protobuf::Message
     return FieldOptions_OptionRetention_Name(value);
   }
   static inline bool OptionRetention_Parse(
-      absl::string_view name, OptionRetention* PROTOBUF_NONNULL value) {
+      std::string_view name, OptionRetention* PROTOBUF_NONNULL value) {
     return FieldOptions_OptionRetention_Parse(name, value);
   }
   using OptionTargetType = FieldOptions_OptionTargetType;
@@ -7438,7 +7438,7 @@ class PROTOBUF_EXPORT FieldOptions final : public ::google::protobuf::Message
     return FieldOptions_OptionTargetType_Name(value);
   }
   static inline bool OptionTargetType_Parse(
-      absl::string_view name, OptionTargetType* PROTOBUF_NONNULL value) {
+      std::string_view name, OptionTargetType* PROTOBUF_NONNULL value) {
     return FieldOptions_OptionTargetType_Parse(name, value);
   }
 
@@ -7991,8 +7991,8 @@ class PROTOBUF_EXPORT FeatureSetDefaults final : public ::google::protobuf::Mess
   void InternalSwap(FeatureSetDefaults* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FeatureSetDefaults"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FeatureSetDefaults"; }
 
  protected:
   explicit FeatureSetDefaults(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -8221,8 +8221,8 @@ class PROTOBUF_EXPORT ExtensionRangeOptions final : public ::google::protobuf::M
   void InternalSwap(ExtensionRangeOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.ExtensionRangeOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.ExtensionRangeOptions"; }
 
  protected:
   explicit ExtensionRangeOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -8261,7 +8261,7 @@ class PROTOBUF_EXPORT ExtensionRangeOptions final : public ::google::protobuf::M
     return ExtensionRangeOptions_VerificationState_Name(value);
   }
   static inline bool VerificationState_Parse(
-      absl::string_view name, VerificationState* PROTOBUF_NONNULL value) {
+      std::string_view name, VerificationState* PROTOBUF_NONNULL value) {
     return ExtensionRangeOptions_VerificationState_Parse(name, value);
   }
 
@@ -8672,8 +8672,8 @@ class PROTOBUF_EXPORT EnumValueOptions final : public ::google::protobuf::Messag
   void InternalSwap(EnumValueOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.EnumValueOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.EnumValueOptions"; }
 
  protected:
   explicit EnumValueOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -9113,8 +9113,8 @@ class PROTOBUF_EXPORT EnumOptions final : public ::google::protobuf::Message
   void InternalSwap(EnumOptions* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.EnumOptions"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.EnumOptions"; }
 
  protected:
   explicit EnumOptions(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -9550,8 +9550,8 @@ class PROTOBUF_EXPORT OneofDescriptorProto final : public ::google::protobuf::Me
   void InternalSwap(OneofDescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.OneofDescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.OneofDescriptorProto"; }
 
  protected:
   explicit OneofDescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -9769,8 +9769,8 @@ class PROTOBUF_EXPORT MethodDescriptorProto final : public ::google::protobuf::M
   void InternalSwap(MethodDescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.MethodDescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.MethodDescriptorProto"; }
 
  protected:
   explicit MethodDescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -10050,8 +10050,8 @@ class PROTOBUF_EXPORT FieldDescriptorProto final : public ::google::protobuf::Me
   void InternalSwap(FieldDescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FieldDescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FieldDescriptorProto"; }
 
  protected:
   explicit FieldDescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -10105,7 +10105,7 @@ class PROTOBUF_EXPORT FieldDescriptorProto final : public ::google::protobuf::Me
     return FieldDescriptorProto_Type_Name(value);
   }
   static inline bool Type_Parse(
-      absl::string_view name, Type* PROTOBUF_NONNULL value) {
+      std::string_view name, Type* PROTOBUF_NONNULL value) {
     return FieldDescriptorProto_Type_Parse(name, value);
   }
   using Label = FieldDescriptorProto_Label;
@@ -10126,7 +10126,7 @@ class PROTOBUF_EXPORT FieldDescriptorProto final : public ::google::protobuf::Me
     return FieldDescriptorProto_Label_Name(value);
   }
   static inline bool Label_Parse(
-      absl::string_view name, Label* PROTOBUF_NONNULL value) {
+      std::string_view name, Label* PROTOBUF_NONNULL value) {
     return FieldDescriptorProto_Label_Parse(name, value);
   }
 
@@ -10463,8 +10463,8 @@ class PROTOBUF_EXPORT EnumValueDescriptorProto final : public ::google::protobuf
   void InternalSwap(EnumValueDescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.EnumValueDescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.EnumValueDescriptorProto"; }
 
  protected:
   explicit EnumValueDescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -10695,8 +10695,8 @@ class PROTOBUF_EXPORT DescriptorProto_ExtensionRange final : public ::google::pr
   void InternalSwap(DescriptorProto_ExtensionRange* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.DescriptorProto.ExtensionRange"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.DescriptorProto.ExtensionRange"; }
 
  protected:
   explicit DescriptorProto_ExtensionRange(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -10922,8 +10922,8 @@ class PROTOBUF_EXPORT ServiceDescriptorProto final : public ::google::protobuf::
   void InternalSwap(ServiceDescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.ServiceDescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.ServiceDescriptorProto"; }
 
  protected:
   explicit ServiceDescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -11160,8 +11160,8 @@ class PROTOBUF_EXPORT EnumDescriptorProto final : public ::google::protobuf::Mes
   void InternalSwap(EnumDescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.EnumDescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.EnumDescriptorProto"; }
 
  protected:
   explicit EnumDescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -11455,8 +11455,8 @@ class PROTOBUF_EXPORT DescriptorProto final : public ::google::protobuf::Message
   void InternalSwap(DescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.DescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.DescriptorProto"; }
 
  protected:
   explicit DescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -11846,8 +11846,8 @@ class PROTOBUF_EXPORT FileDescriptorProto final : public ::google::protobuf::Mes
   void InternalSwap(FileDescriptorProto* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FileDescriptorProto"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FileDescriptorProto"; }
 
  protected:
   explicit FileDescriptorProto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -12295,8 +12295,8 @@ class PROTOBUF_EXPORT FileDescriptorSet final : public ::google::protobuf::Messa
   void InternalSwap(FileDescriptorSet* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FileDescriptorSet"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FileDescriptorSet"; }
 
  protected:
   explicit FileDescriptorSet(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

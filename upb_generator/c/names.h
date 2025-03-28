@@ -11,7 +11,7 @@
 #include <string>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace upb {
 namespace generator {
@@ -20,7 +20,7 @@ namespace generator {
 // generators outside of the protobuf repo will ever use the generated C API.
 
 // Maps: foo/bar/baz.proto -> foo/bar/baz.upb.h
-std::string CApiHeaderFilename(absl::string_view proto_filename);
+std::string CApiHeaderFilename(std::string_view proto_filename);
 
 // The foo.upb.h file defines far more symbols than we currently enumerate here.
 // We do the bare minimum by by defining the type name for messages and enums,
@@ -32,11 +32,11 @@ std::string CApiHeaderFilename(absl::string_view proto_filename);
 // Oneofs and extensions have a base name that forms the prefix for associated
 // functions.
 
-std::string CApiMessageType(absl::string_view full_name);
-std::string CApiEnumType(absl::string_view full_name);
-std::string CApiEnumValueSymbol(absl::string_view full_name);
-std::string CApiExtensionIdentBase(absl::string_view full_name);
-std::string CApiOneofIdentBase(absl::string_view full_name);
+std::string CApiMessageType(std::string_view full_name);
+std::string CApiEnumType(std::string_view full_name);
+std::string CApiEnumValueSymbol(std::string_view full_name);
+std::string CApiExtensionIdentBase(std::string_view full_name);
+std::string CApiOneofIdentBase(std::string_view full_name);
 
 // Name mangling for individual fields. NameMangler maps each field name to a
 // mangled name, which tries to avoid collisions with other field accessors.
@@ -64,7 +64,7 @@ class NameMangler {
   explicit NameMangler(
       const absl::flat_hash_map<std::string, FieldClass>& fields);
 
-  std::string ResolveFieldName(absl::string_view name) const {
+  std::string ResolveFieldName(std::string_view name) const {
     auto it = names_.find(name);
     return it == names_.end() ? std::string(name) : it->second;
   }
@@ -110,13 +110,13 @@ absl::flat_hash_map<std::string, FieldClass> GetUpbFields(const T& msg_def) {
   return fields;
 }
 
-ABSL_CONST_INIT const absl::string_view kRepeatedFieldArrayGetterPostfix =
+ABSL_CONST_INIT const std::string_view kRepeatedFieldArrayGetterPostfix =
     "upb_array";
-ABSL_CONST_INIT const absl::string_view
+ABSL_CONST_INIT const std::string_view
     kRepeatedFieldMutableArrayGetterPostfix = "mutable_upb_array";
 
-ABSL_CONST_INIT const absl::string_view kMapGetterPostfix = "upb_map";
-ABSL_CONST_INIT const absl::string_view kMutableMapGetterPostfix =
+ABSL_CONST_INIT const std::string_view kMapGetterPostfix = "upb_map";
+ABSL_CONST_INIT const std::string_view kMutableMapGetterPostfix =
     "mutable_upb_map";
 
 }  // namespace generator

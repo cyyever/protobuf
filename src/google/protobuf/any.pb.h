@@ -40,7 +40,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -134,7 +134,7 @@ class PROTOBUF_EXPORT Any final : public ::google::protobuf::Message
                                    _internal_mutable_value());
   }
   bool PackFrom(const ::google::protobuf::Message& message,
-                ::absl::string_view type_url_prefix) {
+                ::std::string_view type_url_prefix) {
     ABSL_DCHECK_NE(&message, this);
     return ::google::protobuf::internal::InternalPackFrom(message, type_url_prefix,
                                    mutable_type_url(),
@@ -163,7 +163,7 @@ class PROTOBUF_EXPORT Any final : public ::google::protobuf::Message
       class = typename std::enable_if<!std::is_convertible<
           T, const ::google::protobuf::Message&>::value>::type>
   bool PackFrom(const T& message,
-                ::absl::string_view type_url_prefix) {
+                ::std::string_view type_url_prefix) {
     return ::google::protobuf::internal::InternalPackFrom<T>(
         message, type_url_prefix, mutable_type_url(),
         _internal_mutable_value());
@@ -182,7 +182,7 @@ class PROTOBUF_EXPORT Any final : public ::google::protobuf::Message
     return ::google::protobuf::internal::InternalIs<T>(_internal_type_url());
   }
   static bool ParseAnyTypeUrl(
-      ::absl::string_view type_url,
+      ::std::string_view type_url,
       std::string* PROTOBUF_NONNULL full_type_name);
   friend void swap(Any& a, Any& b) { a.Swap(&b); }
   inline void Swap(Any* PROTOBUF_NONNULL other) {
@@ -246,8 +246,8 @@ class PROTOBUF_EXPORT Any final : public ::google::protobuf::Message
   void InternalSwap(Any* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Any"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Any"; }
 
  protected:
   explicit Any(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

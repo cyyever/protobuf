@@ -15,7 +15,7 @@
 #include <utility>
 
 #include "absl/strings/str_format.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/io/strtod.h"
 #include "google/protobuf/io/zero_copy_sink.h"
 #include "google/protobuf/io/zero_copy_stream.h"
@@ -96,7 +96,7 @@ class JsonWriter {
   // Note that Write() is not implemented for 64-bit integers, since they
   // cannot be crisply represented without quotes; use MakeQuoted for that.
 
-  void Write(absl::string_view str) { sink_.Append(str.data(), str.size()); }
+  void Write(std::string_view str) { sink_.Append(str.data(), str.size()); }
 
   void Write(char c) { sink_.Append(&c, 1); }
 
@@ -117,28 +117,28 @@ class JsonWriter {
   void Write(int32_t val) {
     char buf[22];
     int len = absl::SNPrintF(buf, sizeof(buf), "%d", val);
-    absl::string_view view(buf, static_cast<size_t>(len));
+    std::string_view view(buf, static_cast<size_t>(len));
     Write(view);
   }
 
   void Write(uint32_t val) {
     char buf[22];
     int len = absl::SNPrintF(buf, sizeof(buf), "%d", val);
-    absl::string_view view(buf, static_cast<size_t>(len));
+    std::string_view view(buf, static_cast<size_t>(len));
     Write(view);
   }
 
   void Write(int64_t val) {
     char buf[22];
     int len = absl::SNPrintF(buf, sizeof(buf), "%d", val);
-    absl::string_view view(buf, static_cast<size_t>(len));
+    std::string_view view(buf, static_cast<size_t>(len));
     Write(view);
   }
 
   void Write(uint64_t val) {
     char buf[22];
     int len = absl::SNPrintF(buf, sizeof(buf), "%d", val);
-    absl::string_view view(buf, static_cast<size_t>(len));
+    std::string_view view(buf, static_cast<size_t>(len));
     Write(view);
   }
 
@@ -157,7 +157,7 @@ class JsonWriter {
     Each(std::make_tuple(args...), [this](auto x) { this->Write(x); });
   }
 
-  void Whitespace(absl::string_view ws) {
+  void Whitespace(std::string_view ws) {
     if (options_.add_whitespace) {
       Write(ws);
     }
@@ -178,7 +178,7 @@ class JsonWriter {
     Write(",");
   }
 
-  void WriteBase64(absl::string_view str);
+  void WriteBase64(std::string_view str);
 
   // Returns a buffer that can be re-used throughout a writing session as
   // variable-length scratch space.
@@ -190,13 +190,13 @@ class JsonWriter {
     Write(val);
   }
 
-  void WriteQuoted(absl::string_view val) { WriteEscapedUtf8(val); }
+  void WriteQuoted(std::string_view val) { WriteEscapedUtf8(val); }
 
   // Tries to write a non-finite double if necessary; returns false if
   // nothing was written.
   bool MaybeWriteSpecialFp(double val);
 
-  void WriteEscapedUtf8(absl::string_view str);
+  void WriteEscapedUtf8(std::string_view str);
   void WriteUEscape(uint16_t val);
 
   io::zc_sink_internal::ZeroCopyStreamByteSink sink_;

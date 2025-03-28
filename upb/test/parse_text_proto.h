@@ -21,7 +21,7 @@ namespace upb_test {
 // Usage: MyMessage msg = ParseTextProtoOrDie(my_text_proto);
 class ParseTextProtoOrDie {
  public:
-  explicit ParseTextProtoOrDie(absl::string_view text_proto)
+  explicit ParseTextProtoOrDie(std::string_view text_proto)
       : text_proto_(text_proto) {}
 
   template <class T>

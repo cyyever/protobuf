@@ -13,7 +13,7 @@
 #include <string>
 
 #include "absl/status/status.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/message.h"
 #include "google/protobuf/util/type_resolver.h"
 
@@ -75,11 +75,11 @@ inline absl::Status MessageToJsonString(const Message& message,
 //
 // Please note that non-OK statuses are not a stable output of this API and
 // subject to change without notice.
-PROTOBUF_EXPORT absl::Status JsonStringToMessage(absl::string_view input,
+PROTOBUF_EXPORT absl::Status JsonStringToMessage(std::string_view input,
                                                  Message* message,
                                                  const ParseOptions& options);
 
-inline absl::Status JsonStringToMessage(absl::string_view input,
+inline absl::Status JsonStringToMessage(std::string_view input,
                                         Message* message) {
   return JsonStringToMessage(input, message, ParseOptions());
 }
@@ -156,12 +156,12 @@ inline absl::Status JsonToBinaryStream(
 
 PROTOBUF_EXPORT absl::Status JsonToBinaryString(
     google::protobuf::util::TypeResolver* resolver, const std::string& type_url,
-    absl::string_view json_input, std::string* binary_output,
+    std::string_view json_input, std::string* binary_output,
     const ParseOptions& options);
 
 inline absl::Status JsonToBinaryString(google::protobuf::util::TypeResolver* resolver,
                                        const std::string& type_url,
-                                       absl::string_view json_input,
+                                       std::string_view json_input,
                                        std::string* binary_output) {
   return JsonToBinaryString(resolver, type_url, json_input, binary_output,
                             ParseOptions());

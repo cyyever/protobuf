@@ -64,7 +64,7 @@ class DefPoolPair {
     return file64;
   }
 
-  upb::FileDefPtr GetFile(absl::string_view name) const {
+  upb::FileDefPtr GetFile(std::string_view name) const {
     return pool64_.FindFileByName(name.data());
   }
 

@@ -15,7 +15,7 @@
 
 #include "absl/container/btree_map.h"
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/java/context.h"
 #include "google/protobuf/descriptor.h"
 
@@ -84,7 +84,7 @@ class ExtensionGenerator {
   static void InitTemplateVars(
       const FieldDescriptor* descriptor, const std::string& scope,
       bool immutable, ClassNameResolver* name_resolver,
-      absl::flat_hash_map<absl::string_view, std::string>* vars_pointer,
+      absl::flat_hash_map<std::string_view, std::string>* vars_pointer,
       Context* context);
 };
 

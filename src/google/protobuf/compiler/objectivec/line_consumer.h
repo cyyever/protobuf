@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/io/zero_copy_stream.h"
 
 // Must be included last
@@ -29,15 +29,15 @@ class PROTOC_EXPORT LineConsumer {
  public:
   LineConsumer() = default;
   virtual ~LineConsumer() = default;
-  virtual bool ConsumeLine(absl::string_view line, std::string* out_error) = 0;
+  virtual bool ConsumeLine(std::string_view line, std::string* out_error) = 0;
 };
 
-bool PROTOC_EXPORT ParseSimpleFile(absl::string_view path,
+bool PROTOC_EXPORT ParseSimpleFile(std::string_view path,
                                    LineConsumer* line_consumer,
                                    std::string* out_error);
 
 bool PROTOC_EXPORT ParseSimpleStream(io::ZeroCopyInputStream& input_stream,
-                                     absl::string_view stream_name,
+                                     std::string_view stream_name,
                                      LineConsumer* line_consumer,
                                      std::string* out_error);
 

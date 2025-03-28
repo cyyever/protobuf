@@ -29,7 +29,7 @@
 #include <string>
 
 #include "absl/functional/any_invocable.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/io/printer.h"
 
 // Must be included last.
@@ -43,11 +43,11 @@ namespace cpp {
 class PROTOC_EXPORT IfdefGuardPrinter final {
  public:
   explicit IfdefGuardPrinter(google::protobuf::io::Printer* p,
-                             absl::string_view filename);
+                             std::string_view filename);
 
   explicit IfdefGuardPrinter(
-      google::protobuf::io::Printer* p, absl::string_view filename,
-      absl::AnyInvocable<std::string(absl::string_view)> make_ifdef_identifier);
+      google::protobuf::io::Printer* p, std::string_view filename,
+      absl::AnyInvocable<std::string(std::string_view)> make_ifdef_identifier);
 
   ~IfdefGuardPrinter();
 

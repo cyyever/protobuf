@@ -13,16 +13,16 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace upb {
 namespace generator {
 
-bool IsDescriptorProto(absl::string_view filename);
-std::string StripExtension(absl::string_view fname);
-std::string IncludeGuard(absl::string_view filename);
-std::string FileWarning(absl::string_view filename);
-std::string PadPrefix(absl::string_view tag);
+bool IsDescriptorProto(std::string_view filename);
+std::string StripExtension(std::string_view fname);
+std::string IncludeGuard(std::string_view filename);
+std::string FileWarning(std::string_view filename);
+std::string PadPrefix(std::string_view tag);
 
 }  // namespace generator
 }  // namespace upb

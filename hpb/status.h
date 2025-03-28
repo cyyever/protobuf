@@ -21,7 +21,7 @@ namespace hpb {
 // released.
 struct SourceLocation {
   static SourceLocation current() { return {}; }
-  absl::string_view file_name() { return "<unknown>"; }
+  std::string_view file_name() { return "<unknown>"; }
   int line() { return 0; }
 };
 

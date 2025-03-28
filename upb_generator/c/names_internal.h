@@ -10,14 +10,14 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace upb {
 namespace generator {
 
 // Like the public CApiHeaderFilename, but also handles the case where we are
 // generating a bootstrap header.
-std::string CApiHeaderFilename(absl::string_view proto_filename,
+std::string CApiHeaderFilename(std::string_view proto_filename,
                                bool bootstrap);
 
 }  // namespace generator

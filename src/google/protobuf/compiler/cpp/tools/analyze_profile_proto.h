@@ -6,7 +6,7 @@
 
 #include "base/sysinfo.h"
 #include "absl/status/status.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/descriptor.h"
 
 namespace google {
@@ -45,13 +45,13 @@ struct AnalyzeProfileProtoOptions {
 
 // Prints analysis for the given proto profile.
 absl::Status AnalyzeProfileProtoToText(
-    std::ostream& stream, absl::string_view proto_profile,
+    std::ostream& stream, std::string_view proto_profile,
     const AnalyzeProfileProtoOptions& options);
 
 // Prints aggregated analysis for the proto profiles under the given root
 // directory.
 absl::Status AnalyzeAndAggregateProfileProtosToText(
-    std::ostream& stream, absl::string_view root,
+    std::ostream& stream, std::string_view root,
     const AnalyzeProfileProtoOptions& options);
 
 }  // namespace tools

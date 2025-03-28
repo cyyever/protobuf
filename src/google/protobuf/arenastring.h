@@ -15,7 +15,7 @@
 #include <utility>
 
 #include "absl/log/absl_check.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arena.h"
 #include "google/protobuf/explicitly_constructed.h"
 #include "google/protobuf/port.h"
@@ -237,7 +237,7 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
   explicit ArenaStringPtr(Arena* arena)
       : tagged_ptr_(&fixed_address_empty_string) {
     if (DebugHardenForceCopyDefaultString()) {
-      Set(absl::string_view(""), arena);
+      Set(std::string_view(""), arena);
     }
   }
 
@@ -248,7 +248,7 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
   ArenaStringPtr(Arena* arena, const LazyString& default_value)
       : tagged_ptr_(&fixed_address_empty_string) {
     if (DebugHardenForceCopyDefaultString()) {
-      Set(absl::string_view(default_value.get()), arena);
+      Set(std::string_view(default_value.get()), arena);
     }
   }
 
@@ -291,14 +291,14 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
   // instance known to not carry any heap allocated value.
   inline void InitAllocated(std::string* str, Arena* arena);
 
-  void Set(absl::string_view value, Arena* arena);
+  void Set(std::string_view value, Arena* arena);
   void Set(std::string&& value, Arena* arena);
   template <typename... OverloadDisambiguator>
   void Set(const std::string& value, Arena* arena);
   void Set(const char* s, Arena* arena);
   void Set(const char* s, size_t n, Arena* arena);
 
-  void SetBytes(absl::string_view value, Arena* arena);
+  void SetBytes(std::string_view value, Arena* arena);
   void SetBytes(std::string&& value, Arena* arena);
   template <typename... OverloadDisambiguator>
   void SetBytes(const std::string& value, Arena* arena);
@@ -462,14 +462,14 @@ inline void ArenaStringPtr::InitAllocated(std::string* str, Arena* arena) {
 }
 
 inline void ArenaStringPtr::Set(const char* s, Arena* arena) {
-  Set(absl::string_view{s}, arena);
+  Set(std::string_view{s}, arena);
 }
 
 inline void ArenaStringPtr::Set(const char* s, size_t n, Arena* arena) {
-  Set(absl::string_view{s, n}, arena);
+  Set(std::string_view{s, n}, arena);
 }
 
-inline void ArenaStringPtr::SetBytes(absl::string_view value, Arena* arena) {
+inline void ArenaStringPtr::SetBytes(std::string_view value, Arena* arena) {
   Set(value, arena);
 }
 
@@ -491,7 +491,7 @@ inline void ArenaStringPtr::SetBytes(const char* s, Arena* arena) {
 }
 
 inline void ArenaStringPtr::SetBytes(const void* p, size_t n, Arena* arena) {
-  Set(absl::string_view{static_cast<const char*>(p), n}, arena);
+  Set(std::string_view{static_cast<const char*>(p), n}, arena);
 }
 
 PROTOBUF_NDEBUG_INLINE void ArenaStringPtr::InternalSwap(ArenaStringPtr* rhs,

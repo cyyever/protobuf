@@ -12,7 +12,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/port_def.inc"
 
 namespace google {
@@ -21,16 +21,16 @@ namespace compiler {
 namespace php {
 
 // Whether or not a name is reserved.
-PROTOC_EXPORT bool IsReservedName(absl::string_view name);
+PROTOC_EXPORT bool IsReservedName(std::string_view name);
 
 // A prefix to stick in front of reserved names to avoid clashes.
-PROTOC_EXPORT std::string ReservedNamePrefix(absl::string_view classname,
+PROTOC_EXPORT std::string ReservedNamePrefix(std::string_view classname,
                                              const FileDescriptor* file);
 
 // A prefix to stick in front of all class names.
-PROTOC_EXPORT std::string ClassNamePrefix(absl::string_view classname,
+PROTOC_EXPORT std::string ClassNamePrefix(std::string_view classname,
                                           const Descriptor* desc);
-PROTOC_EXPORT std::string ClassNamePrefix(absl::string_view classname,
+PROTOC_EXPORT std::string ClassNamePrefix(std::string_view classname,
                                           const EnumDescriptor* desc);
 
 // To skip reserved keywords in php, some generated classname are prefixed.

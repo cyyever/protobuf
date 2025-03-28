@@ -12,7 +12,7 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/hpb/tests/child_model.upb.proto.h"
 #include "google/protobuf/compiler/hpb/tests/test_extension.upb.proto.h"
 #include "google/protobuf/compiler/hpb/tests/test_model.upb.proto.h"
@@ -132,7 +132,7 @@ TEST(CppGeneratedCode, GetSetExtensionBool) {
 TEST(CppGeneratedCode, GetSetExtensionString) {
   TestModel model;
   EXPECT_EQ(false, hpb::HasExtension(&model, string_ext));
-  absl::string_view val = "Hello World";
+  std::string_view val = "Hello World";
   auto x = hpb::SetExtension(&model, string_ext, val);
   EXPECT_EQ(true, hpb::HasExtension(&model, string_ext));
   EXPECT_THAT(hpb::GetExtension(&model, string_ext), IsOkAndHolds(val));

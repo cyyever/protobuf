@@ -16,7 +16,7 @@
 #include "absl/status/statusor.h"
 #include "absl/strings/match.h"
 #include "absl/strings/str_format.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/io/zero_copy_stream.h"
 #include "google/protobuf/json/internal/message_path.h"
@@ -66,7 +66,7 @@ struct JsonLocation {
   const MessagePath* path = nullptr;
 
   // Creates an absl::InvalidArgumentError with line/column information.
-  absl::Status Invalid(absl::string_view message,
+  absl::Status Invalid(std::string_view message,
                        SourceLocation sl = SourceLocation::current()) const;
 };
 
@@ -103,14 +103,14 @@ class JsonLexer {
   MessagePath& path() { return *path_; }
 
   // Creates an absl::InvalidArgumentError with line/column information.
-  absl::Status Invalid(absl::string_view message,
+  absl::Status Invalid(std::string_view message,
                        SourceLocation sl = SourceLocation::current()) {
     return json_loc_.Invalid(message, sl);
   }
 
   // Expects the next bytes to be parsed (after consuming whitespace) to be
   // exactly `literal`. If they are, consumes them; otherwise returns an error.
-  absl::Status Expect(absl::string_view literal,
+  absl::Status Expect(std::string_view literal,
                       SourceLocation sl = SourceLocation::current()) {
     RETURN_IF_ERROR(SkipToToken());
     auto buffering = stream_.BufferAtLeast(literal.size());
@@ -128,7 +128,7 @@ class JsonLexer {
 
   // Like Expect(), but returns a boolean. This makes it clear that the
   // lookahead is failible.
-  bool Peek(absl::string_view literal) {
+  bool Peek(std::string_view literal) {
     // Suppress the error; this can only fail on EOF in which case we would
     // return false regardless.
     (void)SkipToToken();
@@ -178,7 +178,7 @@ class JsonLexer {
 
   // Walks over an object, calling `f` just after parsing each `:`.
   //
-  // `f` should have type `(absl::string_view) -> absl::Status`.
+  // `f` should have type `(std::string_view) -> absl::Status`.
   template <typename F>
   absl::Status VisitObject(F f);
 

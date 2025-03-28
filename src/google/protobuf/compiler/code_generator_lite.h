@@ -12,7 +12,7 @@
 #include <utility>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 // Must be included last.
 #include "google/protobuf/port_def.inc"
@@ -28,13 +28,13 @@ namespace compiler {
 // parses to the pairs:
 //   ("foo", "bar"), ("baz", ""), ("moo", "corge")
 PROTOC_EXPORT void ParseGeneratorParameter(
-    absl::string_view, std::vector<std::pair<std::string, std::string> >*);
+    std::string_view, std::vector<std::pair<std::string, std::string> >*);
 
 // Strips ".proto" or ".protodevel" from the end of a filename.
-PROTOC_EXPORT std::string StripProto(absl::string_view filename);
+PROTOC_EXPORT std::string StripProto(std::string_view filename);
 
 // Returns true if the proto path corresponds to a known feature file.
-PROTOC_EXPORT bool IsKnownFeatureProto(absl::string_view filename);
+PROTOC_EXPORT bool IsKnownFeatureProto(std::string_view filename);
 
 }  // namespace compiler
 }  // namespace protobuf

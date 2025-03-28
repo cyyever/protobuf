@@ -25,7 +25,7 @@
 #include "absl/strings/str_cat.h"
 #include "absl/strings/str_format.h"
 #include "absl/strings/str_replace.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/variant.h"
 #include "google/protobuf/io/test_zero_copy_stream.h"
 #include "google/protobuf/io/zero_copy_stream.h"
@@ -184,7 +184,7 @@ testing::Matcher<const Value&> ValueIs(M inner) {
 }
 
 // Executes `test` once for each three-segment split of `json`.
-void Do(absl::string_view json,
+void Do(std::string_view json,
         std::function<void(io::ZeroCopyInputStream*)> test,
         bool verify_all_consumed = true) {
   SCOPED_TRACE(absl::StrCat("json: ", absl::CHexEscape(json)));
@@ -215,7 +215,7 @@ void Do(absl::string_view json,
   }
 }
 
-void BadInner(absl::string_view json, ParseOptions opts = {}) {
+void BadInner(std::string_view json, ParseOptions opts = {}) {
   Do(
       json,
       [=](io::ZeroCopyInputStream* stream) {
@@ -228,7 +228,7 @@ void BadInner(absl::string_view json, ParseOptions opts = {}) {
 // Like Do, but runs a legacy syntax test twice: once with legacy settings, once
 // without. For the latter, the test is expected to fail; for the former,
 // `test` is called so it can run expectations.
-void DoLegacy(absl::string_view json, std::function<void(const Value&)> test) {
+void DoLegacy(std::string_view json, std::function<void(const Value&)> test) {
   Do(json, [&](io::ZeroCopyInputStream* stream) {
     ParseOptions options;
     options.allow_legacy_syntax = true;
@@ -240,7 +240,7 @@ void DoLegacy(absl::string_view json, std::function<void(const Value&)> test) {
 }
 
 // Like Bad, but ensures json fails to parse in both modes.
-void Bad(absl::string_view json) {
+void Bad(std::string_view json) {
   ParseOptions options;
   options.allow_legacy_syntax = true;
   BadInner(json, options);
@@ -347,7 +347,7 @@ TEST(LexerTest, BrokenEscape) {
   Bad(R"json("\ud800\udcfg")json");
 }
 
-void GoodNumber(absl::string_view json, double value) {
+void GoodNumber(std::string_view json, double value) {
   Do(json, [value](io::ZeroCopyInputStream* stream) {
     EXPECT_THAT(Value::Parse(stream), IsOkAndHolds(ValueIs<double>(value)));
   });
@@ -417,7 +417,7 @@ TEST(LexerTest, EmptyArray) {
 }
 
 TEST(LexerTest, PrimitiveArray) {
-  absl::string_view json = R"json(
+  std::string_view json = R"json(
     [true, false, null, "string"]
   )json";
   Do(json, [](io::ZeroCopyInputStream* stream) {
@@ -440,7 +440,7 @@ TEST(LexerTest, BrokenArray) {
 TEST(LexerTest, BrokenStringInArray) { Bad(R"json(["Unterminated])json"); }
 
 TEST(LexerTest, NestedArray) {
-  absl::string_view json = R"json(
+  std::string_view json = R"json(
     [
       [22, -127, 45.3, -1056.4, 11779497823553162765],
       {"key": true}
@@ -545,7 +545,7 @@ TEST(LexerTest, BadKeys) {
 }
 
 TEST(LexerTest, NestedObject) {
-  absl::string_view json = R"json(
+  std::string_view json = R"json(
     {
       "t": true,
       "f": false,
@@ -581,14 +581,14 @@ TEST(LexerTest, NestedObject) {
 }
 
 TEST(LexerTest, RejectNonUtf8) {
-  absl::string_view json = R"json(
+  std::string_view json = R"json(
     { "address": x"施氏食獅史" }
   )json";
   Bad(absl::StrReplaceAll(json, {{"x", "\xff"}}));
 }
 
 TEST(LexerTest, RejectNonUtf8String) {
-  absl::string_view json = R"json(
+  std::string_view json = R"json(
     { "address": "施氏x食獅史" }
   )json";
   Bad(absl::StrReplaceAll(json, {{"x", "\xff"}}));
@@ -614,7 +614,7 @@ TEST(LexerTest, MixtureOfEscapesAndRawMultibyteCharacters) {
 }
 
 TEST(LexerTest, SurrogateEscape) {
-  absl::string_view json = R"json(
+  std::string_view json = R"json(
     [ "\ud83d\udc08\u200D\u2b1B\ud83d\uDdA4" ]
   )json";
   Do(json, [](io::ZeroCopyInputStream* stream) {
@@ -634,7 +634,7 @@ TEST(LexerTest, LonelyHighSurrogate) {
 }
 
 TEST(LexerTest, AsciiEscape) {
-  absl::string_view json = R"json(
+  std::string_view json = R"json(
     ["\b", "\ning", "test\f", "\r\t", "test\\\"\/ing"]
   )json";
   Do(json, [](io::ZeroCopyInputStream* stream) {

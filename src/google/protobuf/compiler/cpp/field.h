@@ -20,7 +20,7 @@
 
 #include "absl/container/flat_hash_map.h"
 #include "absl/log/absl_check.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/optional.h"
 #include "absl/types/span.h"
 #include "google/protobuf/compiler/cpp/helpers.h"
@@ -201,7 +201,7 @@ class FieldGeneratorBase {
   const FieldDescriptor* field_;
   const Options& options_;
   MessageSCCAnalyzer* scc_;
-  absl::flat_hash_map<absl::string_view, std::string> variables_;
+  absl::flat_hash_map<std::string_view, std::string> variables_;
 
   pb::CppFeatures::StringType GetDeclaredStringType() const;
 

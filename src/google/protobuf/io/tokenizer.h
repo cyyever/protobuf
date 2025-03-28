@@ -19,7 +19,7 @@
 
 #include "google/protobuf/stubs/common.h"
 #include "absl/log/absl_log.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/port.h"
 
 // Must be included last.
@@ -55,14 +55,14 @@ class PROTOBUF_EXPORT ErrorCollector {
   // column numbers.  The numbers are zero-based, so you may want to add
   // 1 to each before printing them.
   virtual void RecordError(int line, ColumnNumber column,
-                           absl::string_view message)
+                           std::string_view message)
       = 0;
 
   // Indicates that there was a warning in the input at the given line and
   // column numbers.  The numbers are zero-based, so you may want to add
   // 1 to each before printing them.
   virtual void RecordWarning(int line, ColumnNumber column,
-                             absl::string_view message) {
+                             std::string_view message) {
   }
 
 };

@@ -25,7 +25,7 @@
 
 #include "absl/log/absl_check.h"
 #include "absl/strings/cord.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arena.h"
 #include "google/protobuf/internal_visibility.h"
 #include "google/protobuf/io/coded_stream.h"
@@ -80,13 +80,13 @@ class PROTOBUF_EXPORT UnknownField {
   inline uint64_t varint() const;
   inline uint32_t fixed32() const;
   inline uint64_t fixed64() const;
-  inline absl::string_view length_delimited() const;
+  inline std::string_view length_delimited() const;
   inline const UnknownFieldSet& group() const;
 
   inline void set_varint(uint64_t value);
   inline void set_fixed32(uint32_t value);
   inline void set_fixed64(uint64_t value);
-  inline void set_length_delimited(absl::string_view value);
+  inline void set_length_delimited(std::string_view value);
   // template to avoid ambiguous overload resolution.
   template <int&...>
   inline void set_length_delimited(std::string&& value);
@@ -193,7 +193,7 @@ class PROTOBUF_EXPORT UnknownFieldSet {
   void AddVarint(int number, uint64_t value);
   void AddFixed32(int number, uint32_t value);
   void AddFixed64(int number, uint64_t value);
-  void AddLengthDelimited(int number, absl::string_view value);
+  void AddLengthDelimited(int number, std::string_view value);
   // template to avoid ambiguous overload resolution.
   template <int&...>
   void AddLengthDelimited(int number, std::string&& value);
@@ -220,7 +220,7 @@ class PROTOBUF_EXPORT UnknownFieldSet {
   bool ParseFromCodedStream(io::CodedInputStream* input);
   bool ParseFromZeroCopyStream(io::ZeroCopyInputStream* input);
   bool ParseFromArray(const void* data, int size);
-  inline bool ParseFromString(const absl::string_view data) {
+  inline bool ParseFromString(const std::string_view data) {
     return ParseFromArray(data.data(), static_cast<int>(data.size()));
   }
 
@@ -286,7 +286,7 @@ namespace internal {
 inline void WriteVarint(uint32_t num, uint64_t val, UnknownFieldSet* unknown) {
   unknown->AddVarint(num, val);
 }
-inline void WriteLengthDelimited(uint32_t num, absl::string_view val,
+inline void WriteLengthDelimited(uint32_t num, std::string_view val,
                                  UnknownFieldSet* unknown) {
   unknown->AddLengthDelimited(num, val);
 }
@@ -343,7 +343,7 @@ inline UnknownField* UnknownFieldSet::mutable_field(int index) {
 }
 
 inline void UnknownFieldSet::AddLengthDelimited(int number,
-                                                const absl::string_view value) {
+                                                const std::string_view value) {
   AddLengthDelimited(number)->assign(value.data(), value.size());
 }
 
@@ -364,7 +364,7 @@ inline uint64_t UnknownField::fixed64() const {
   assert(type() == TYPE_FIXED64);
   return data_.fixed64;
 }
-inline absl::string_view UnknownField::length_delimited() const {
+inline std::string_view UnknownField::length_delimited() const {
   assert(type() == TYPE_LENGTH_DELIMITED);
   return *data_.string_value;
 }
@@ -385,7 +385,7 @@ inline void UnknownField::set_fixed64(uint64_t value) {
   assert(type() == TYPE_FIXED64);
   data_.fixed64 = value;
 }
-inline void UnknownField::set_length_delimited(const absl::string_view value) {
+inline void UnknownField::set_length_delimited(const std::string_view value) {
   assert(type() == TYPE_LENGTH_DELIMITED);
   data_.string_value->assign(value.data(), value.size());
 }

@@ -11,7 +11,7 @@
 #include <atomic>
 
 #include "absl/status/statusor.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "upb/message/message.h"
 
 namespace hpb::internal {
@@ -30,7 +30,7 @@ using UpbExtensionLocker = UpbExtensionUnlocker (*)(const void*);
 // TODO: Expose as function instead of global.
 extern std::atomic<UpbExtensionLocker> upb_extension_locker_global;
 
-absl::StatusOr<absl::string_view> Serialize(const upb_Message* message,
+absl::StatusOr<std::string_view> Serialize(const upb_Message* message,
                                             const upb_MiniTable* mini_table,
                                             upb_Arena* arena, int options);
 

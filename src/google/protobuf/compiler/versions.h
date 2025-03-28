@@ -31,7 +31,7 @@
 #ifndef GOOGLE_PROTOBUF_VERSIONS_H__
 #define GOOGLE_PROTOBUF_VERSIONS_H__
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/plugin.pb.h"
 
 // Must be included last.
@@ -64,7 +64,7 @@ namespace protobuf {
 namespace compiler {
 namespace internal {
 // For internal use to parse the Protobuf language version strings.
-PROTOC_EXPORT Version ParseProtobufVersion(absl::string_view version);
+PROTOC_EXPORT Version ParseProtobufVersion(std::string_view version);
 }  // namespace internal
 
 // Gets the version message according to the version strings defined above.

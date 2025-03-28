@@ -12,7 +12,7 @@
 #include <utility>
 
 #include "absl/log/absl_check.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arenastring.h"
 #include "google/protobuf/explicitly_constructed.h"
 #include "google/protobuf/message_lite.h"
@@ -122,7 +122,7 @@ class PROTOBUF_EXPORT InlinedStringField {
   //   `donated == ((donating_states & ~mask) != 0)`
   //
   // This method never changes the `donating_states`.
-  void Set(absl::string_view value, Arena* arena, bool donated,
+  void Set(std::string_view value, Arena* arena, bool donated,
            uint32_t* donating_states, uint32_t mask, MessageLite* msg);
 
   // Rvalue Set. If this field is donated, this method will undonate this field
@@ -141,7 +141,7 @@ class PROTOBUF_EXPORT InlinedStringField {
            ::google::protobuf::Arena* arena, bool donated, uint32_t* donating_states,
            uint32_t mask, MessageLite* msg);
 
-  void SetBytes(absl::string_view value, Arena* arena, bool donated,
+  void SetBytes(std::string_view value, Arena* arena, bool donated,
                 uint32_t* donating_states, uint32_t mask, MessageLite* msg);
 
   void SetBytes(std::string&& value, Arena* arena, bool donated,
@@ -159,7 +159,7 @@ class PROTOBUF_EXPORT InlinedStringField {
                 ::google::protobuf::Arena* arena, bool donated, uint32_t* donating_states,
                 uint32_t mask, MessageLite* msg);
 
-  PROTOBUF_NDEBUG_INLINE void SetNoArena(absl::string_view value);
+  PROTOBUF_NDEBUG_INLINE void SetNoArena(std::string_view value);
   PROTOBUF_NDEBUG_INLINE void SetNoArena(std::string&& value);
 
   // Basic accessors.
@@ -220,7 +220,7 @@ class PROTOBUF_EXPORT InlinedStringField {
     return Release();
   }
 
-  void Set(const std::string*, absl::string_view value, Arena* arena,
+  void Set(const std::string*, std::string_view value, Arena* arena,
            bool donated, uint32_t* donating_states, uint32_t mask,
            MessageLite* msg) {
     Set(value, arena, donated, donating_states, mask, msg);
@@ -253,7 +253,7 @@ class PROTOBUF_EXPORT InlinedStringField {
     Set(const_string_ref, arena, donated, donating_states, mask, msg);
   }
 
-  void SetBytes(const std::string*, absl::string_view value, Arena* arena,
+  void SetBytes(const std::string*, std::string_view value, Arena* arena,
                 bool donated, uint32_t* donating_states, uint32_t mask,
                 MessageLite* msg) {
     Set(value, arena, donated, donating_states, mask, msg);
@@ -289,7 +289,7 @@ class PROTOBUF_EXPORT InlinedStringField {
              msg);
   }
 
-  void SetNoArena(const std::string*, absl::string_view value) {
+  void SetNoArena(const std::string*, std::string_view value) {
     SetNoArena(value);
   }
   void SetNoArena(const std::string*, std::string&& value) {
@@ -428,7 +428,7 @@ inline void InlinedStringField::DestroyNoArena(const std::string*) {
   this->~InlinedStringField();
 }
 
-inline void InlinedStringField::SetNoArena(absl::string_view value) {
+inline void InlinedStringField::SetNoArena(std::string_view value) {
   get_mutable()->assign(value.data(), value.length());
 }
 
@@ -458,7 +458,7 @@ PROTOBUF_NDEBUG_INLINE void InlinedStringField::InternalSwap(
 #endif
 }
 
-inline void InlinedStringField::Set(absl::string_view value, Arena* arena,
+inline void InlinedStringField::Set(std::string_view value, Arena* arena,
                                     bool donated, uint32_t* /*donating_states*/,
                                     uint32_t /*mask*/, MessageLite* /*msg*/) {
   (void)arena;
@@ -469,17 +469,17 @@ inline void InlinedStringField::Set(absl::string_view value, Arena* arena,
 inline void InlinedStringField::Set(const char* str, ::google::protobuf::Arena* arena,
                                     bool donated, uint32_t* donating_states,
                                     uint32_t mask, MessageLite* msg) {
-  Set(absl::string_view(str), arena, donated, donating_states, mask, msg);
+  Set(std::string_view(str), arena, donated, donating_states, mask, msg);
 }
 
 inline void InlinedStringField::Set(const char* str, size_t size,
                                     ::google::protobuf::Arena* arena, bool donated,
                                     uint32_t* donating_states, uint32_t mask,
                                     MessageLite* msg) {
-  Set(absl::string_view{str, size}, arena, donated, donating_states, mask, msg);
+  Set(std::string_view{str, size}, arena, donated, donating_states, mask, msg);
 }
 
-inline void InlinedStringField::SetBytes(absl::string_view value, Arena* arena,
+inline void InlinedStringField::SetBytes(std::string_view value, Arena* arena,
                                          bool donated,
                                          uint32_t* donating_states,
                                          uint32_t mask, MessageLite* msg) {

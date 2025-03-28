@@ -43,7 +43,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -146,7 +146,7 @@ inline const std::string& Field_Kind_Name(Field_Kind value) {
       static_cast<int>(value));
 }
 inline bool Field_Kind_Parse(
-    absl::string_view name, Field_Kind* PROTOBUF_NONNULL value) {
+    std::string_view name, Field_Kind* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<Field_Kind>(Field_Kind_descriptor(), name,
                                            value);
 }
@@ -184,7 +184,7 @@ inline const std::string& Field_Cardinality_Name(Field_Cardinality value) {
       static_cast<int>(value));
 }
 inline bool Field_Cardinality_Parse(
-    absl::string_view name, Field_Cardinality* PROTOBUF_NONNULL value) {
+    std::string_view name, Field_Cardinality* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<Field_Cardinality>(Field_Cardinality_descriptor(), name,
                                            value);
 }
@@ -221,7 +221,7 @@ inline const std::string& Syntax_Name(Syntax value) {
       static_cast<int>(value));
 }
 inline bool Syntax_Parse(
-    absl::string_view name, Syntax* PROTOBUF_NONNULL value) {
+    std::string_view name, Syntax* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<Syntax>(Syntax_descriptor(), name,
                                            value);
 }
@@ -349,8 +349,8 @@ class PROTOBUF_EXPORT Option final : public ::google::protobuf::Message
   void InternalSwap(Option* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Option"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Option"; }
 
  protected:
   explicit Option(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -562,8 +562,8 @@ class PROTOBUF_EXPORT Field final : public ::google::protobuf::Message
   void InternalSwap(Field* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Field"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Field"; }
 
  protected:
   explicit Field(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -618,7 +618,7 @@ class PROTOBUF_EXPORT Field final : public ::google::protobuf::Message
     return Field_Kind_Name(value);
   }
   static inline bool Kind_Parse(
-      absl::string_view name, Kind* PROTOBUF_NONNULL value) {
+      std::string_view name, Kind* PROTOBUF_NONNULL value) {
     return Field_Kind_Parse(name, value);
   }
   using Cardinality = Field_Cardinality;
@@ -640,7 +640,7 @@ class PROTOBUF_EXPORT Field final : public ::google::protobuf::Message
     return Field_Cardinality_Name(value);
   }
   static inline bool Cardinality_Parse(
-      absl::string_view name, Cardinality* PROTOBUF_NONNULL value) {
+      std::string_view name, Cardinality* PROTOBUF_NONNULL value) {
     return Field_Cardinality_Parse(name, value);
   }
 
@@ -947,8 +947,8 @@ class PROTOBUF_EXPORT EnumValue final : public ::google::protobuf::Message
   void InternalSwap(EnumValue* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.EnumValue"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.EnumValue"; }
 
  protected:
   explicit EnumValue(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1174,8 +1174,8 @@ class PROTOBUF_EXPORT Type final : public ::google::protobuf::Message
   void InternalSwap(Type* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Type"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Type"; }
 
  protected:
   explicit Type(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1478,8 +1478,8 @@ class PROTOBUF_EXPORT Enum final : public ::google::protobuf::Message
   void InternalSwap(Enum* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Enum"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Enum"; }
 
  protected:
   explicit Enum(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

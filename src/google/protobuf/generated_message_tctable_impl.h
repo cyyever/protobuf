@@ -17,7 +17,7 @@
 #include "absl/base/optimization.h"
 #include "absl/log/absl_log.h"
 #include "absl/strings/cord.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/extension_set.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/map.h"
@@ -875,7 +875,7 @@ class PROTOBUF_EXPORT TcParser final {
   struct UnknownFieldOps {
     void (*write_varint)(MessageLite* msg, int number, int value);
     void (*write_length_delimited)(MessageLite* msg, int number,
-                                   absl::string_view value);
+                                   std::string_view value);
   };
 
   static const UnknownFieldOps& GetUnknownFieldOps(
@@ -889,7 +889,7 @@ class PROTOBUF_EXPORT TcParser final {
   }
   template <typename UnknownFieldsT>
   static void WriteLengthDelimitedToUnknown(MessageLite* msg, int number,
-                                            absl::string_view value) {
+                                            std::string_view value) {
     internal::WriteLengthDelimited(
         number, value,
         msg->_internal_metadata_.mutable_unknown_fields<UnknownFieldsT>());
@@ -1010,8 +1010,8 @@ class PROTOBUF_EXPORT TcParser final {
   // Mini field lookup:
   static const TcParseTableBase::FieldEntry* FindFieldEntry(
       const TcParseTableBase* table, uint32_t field_num);
-  static absl::string_view MessageName(const TcParseTableBase* table);
-  static absl::string_view FieldName(const TcParseTableBase* table,
+  static std::string_view MessageName(const TcParseTableBase* table);
+  static std::string_view FieldName(const TcParseTableBase* table,
                                      const TcParseTableBase::FieldEntry*);
   static int FieldNumber(const TcParseTableBase* table,
                          const TcParseTableBase::FieldEntry*);
@@ -1023,7 +1023,7 @@ class PROTOBUF_EXPORT TcParser final {
   // UTF-8 validation:
   static void ReportFastUtf8Error(uint32_t decoded_tag,
                                   const TcParseTableBase* table);
-  static bool MpVerifyUtf8(absl::string_view wire_bytes,
+  static bool MpVerifyUtf8(std::string_view wire_bytes,
                            const TcParseTableBase* table,
                            const TcParseTableBase::FieldEntry& entry,
                            uint16_t xform_val);

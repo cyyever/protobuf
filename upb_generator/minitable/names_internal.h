@@ -10,14 +10,14 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace upb {
 namespace generator {
 
 // Like the public MiniTableHeaderFilename, but also handles the case where we
 // are generating a bootstrap header.
-std::string MiniTableHeaderFilename(absl::string_view proto_filename,
+std::string MiniTableHeaderFilename(std::string_view proto_filename,
                                     bool bootstrap);
 
 // Global static variables used in the generated .c file.
@@ -26,8 +26,8 @@ constexpr char kExtensionsInit[] = "extensions_layout";
 constexpr char kMessagesInit[] = "messages_layout";
 
 // Per-message static variables used in the generated .c file.
-std::string MiniTableFieldsVarName(absl::string_view msg_full_name);
-std::string MiniTableSubMessagesVarName(absl::string_view msg_full_name);
+std::string MiniTableFieldsVarName(std::string_view msg_full_name);
+std::string MiniTableSubMessagesVarName(std::string_view msg_full_name);
 
 }  // namespace generator
 }  // namespace upb

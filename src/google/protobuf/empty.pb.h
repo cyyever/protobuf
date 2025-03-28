@@ -41,7 +41,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -160,8 +160,8 @@ class PROTOBUF_EXPORT Empty final : public ::google::protobuf::internal::ZeroFie
   }
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Empty"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Empty"; }
 
  protected:
   explicit Empty(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

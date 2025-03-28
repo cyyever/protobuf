@@ -20,7 +20,7 @@
 #include <vector>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/cpp/enum.h"
 #include "google/protobuf/compiler/cpp/extension.h"
 #include "google/protobuf/compiler/cpp/field.h"
@@ -39,7 +39,7 @@ class MessageGenerator {
  public:
   MessageGenerator(
       const Descriptor* descriptor,
-      const absl::flat_hash_map<absl::string_view, std::string>& ignored,
+      const absl::flat_hash_map<std::string_view, std::string>& ignored,
       int index_in_file_messages, const Options& options,
       MessageSCCAnalyzer* scc_analyzer);
 
@@ -193,7 +193,7 @@ class MessageGenerator {
 
   size_t HasBitsSize() const;
   size_t InlinedStringDonatedSize() const;
-  absl::flat_hash_map<absl::string_view, std::string> HasBitVars(
+  absl::flat_hash_map<std::string_view, std::string> HasBitVars(
       const FieldDescriptor* field) const;
   int HasBitIndex(const FieldDescriptor* field) const;
   int HasByteIndex(const FieldDescriptor* field) const;
@@ -246,7 +246,7 @@ class MessageGenerator {
 
   MessageSCCAnalyzer* scc_analyzer_;
 
-  absl::flat_hash_map<absl::string_view, std::string> variables_;
+  absl::flat_hash_map<std::string_view, std::string> variables_;
 
 };
 

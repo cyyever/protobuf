@@ -17,7 +17,7 @@
 #include "absl/strings/numbers.h"
 #include "absl/strings/str_format.h"
 #include "absl/strings/str_split.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/variant.h"
 
 // Must be included last
@@ -49,8 +49,8 @@ void protobuf_assumption_failed(const char* pred, const char* file, int line) {
 
 static void PrintAllCounters();
 static auto& CounterMap() {
-  using Map = std::map<absl::string_view,
-                       std::map<absl::variant<int64_t, absl::string_view>,
+  using Map = std::map<std::string_view,
+                       std::map<absl::variant<int64_t, std::string_view>,
                                 const RealDebugCounter*>>;
   static auto* counter_map = new Map{};
   static bool dummy = std::atexit(PrintAllCounters);
@@ -83,7 +83,7 @@ static void PrintAllCounters() {
       } else {
         // For strings, left align
         absl::FPrintF(stderr, "    %-10s: %10zu",
-                      absl::get<absl::string_view>(count.first), value);
+                      absl::get<std::string_view>(count.first), value);
       }
       if (total != 0 && category.second.size() > 1) {
         absl::FPrintF(
@@ -98,8 +98,8 @@ static void PrintAllCounters() {
   }
 }
 
-void RealDebugCounter::Register(absl::string_view name) {
-  std::pair<absl::string_view, absl::string_view> parts =
+void RealDebugCounter::Register(std::string_view name) {
+  std::pair<std::string_view, std::string_view> parts =
       absl::StrSplit(name, '.');
   int64_t as_int;
   if (absl::SimpleAtoi(parts.second, &as_int)) {

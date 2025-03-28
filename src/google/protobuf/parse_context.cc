@@ -19,7 +19,7 @@
 #include "absl/base/prefetch.h"
 #include "absl/log/absl_check.h"
 #include "absl/strings/cord.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"
 #include "google/protobuf/wire_format_lite.h"
@@ -223,11 +223,11 @@ const char* EpsCopyInputStream::ReadCordFallback(const char* ptr, int size,
   if (zcis_ == nullptr) {
     int bytes_from_buffer = buffer_end_ - ptr + kSlopBytes;
     if (size <= bytes_from_buffer) {
-      *cord = absl::string_view(ptr, size);
+      *cord = std::string_view(ptr, size);
       return ptr + size;
     }
     return AppendSize(ptr, size, [cord](const char* p, int s) {
-      cord->Append(absl::string_view(p, s));
+      cord->Append(std::string_view(p, s));
     });
   }
   int new_limit = buffer_end_ - ptr + limit_;
@@ -250,7 +250,7 @@ const char* EpsCopyInputStream::ReadCordFallback(const char* ptr, int size,
   } else {
     size -= bytes_from_buffer;
     ABSL_DCHECK_GT(size, 0);
-    *cord = absl::string_view(ptr, bytes_from_buffer);
+    *cord = std::string_view(ptr, bytes_from_buffer);
     if (next_chunk_ == patch_buffer_) {
       // We have read to end of the last buffer returned by
       // ZeroCopyInputStream. So the stream is in the right position.
@@ -334,7 +334,7 @@ void WriteVarint(uint32_t num, uint64_t val, std::string* s) {
   WriteVarint(val, s);
 }
 
-void WriteLengthDelimited(uint32_t num, absl::string_view val, std::string* s) {
+void WriteLengthDelimited(uint32_t num, std::string_view val, std::string* s) {
   WriteVarint((num << 3) + 2, s);
   WriteVarint(val.size(), s);
   s->append(val.data(), val.size());
@@ -411,11 +411,11 @@ const char* StringParser(const char* begin, const char* end, void* object,
 }
 
 // Defined in wire_format_lite.cc
-void PrintUTF8ErrorLog(absl::string_view message_name,
-                       absl::string_view field_name, const char* operation_str,
+void PrintUTF8ErrorLog(std::string_view message_name,
+                       std::string_view field_name, const char* operation_str,
                        bool emit_stacktrace);
 
-bool VerifyUTF8(absl::string_view str, const char* field_name) {
+bool VerifyUTF8(std::string_view str, const char* field_name) {
   if (!utf8_range::IsStructurallyValid(str)) {
     PrintUTF8ErrorLog("", field_name, "parsing", false);
     return false;

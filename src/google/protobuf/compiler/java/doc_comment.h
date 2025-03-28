@@ -14,7 +14,7 @@
 
 #include <stdbool.h>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/java/options.h"
 #include "google/protobuf/descriptor.h"
 
@@ -76,7 +76,7 @@ void WriteMethodDocComment(io::Printer* printer, const MethodDescriptor* method,
 
 // Exposed for testing only.
 // Also called by proto1-Java code generator.
-PROTOC_EXPORT std::string EscapeJavadoc(absl::string_view input);
+PROTOC_EXPORT std::string EscapeJavadoc(std::string_view input);
 
 }  // namespace java
 }  // namespace compiler

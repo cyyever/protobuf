@@ -12,7 +12,7 @@
 
 #include <cstring>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/hpb/internal/internal.h"
 #include "google/protobuf/hpb/ptr.h"
 #include "upb/base/string_view.h"
@@ -109,11 +109,11 @@ typename T::Proxy CreateMessage(upb_Arena* arena) {
   return hpb::internal::PrivateAccess::CreateMessage<T>(arena);
 }
 
-inline absl::string_view FromUpbStringView(upb_StringView str) {
-  return absl::string_view(str.data, str.size);
+inline std::string_view FromUpbStringView(upb_StringView str) {
+  return std::string_view(str.data, str.size);
 }
 
-inline upb_StringView CopyToUpbStringView(absl::string_view str,
+inline upb_StringView CopyToUpbStringView(std::string_view str,
                                           upb_Arena* arena) {
   const size_t str_size = str.size();
   char* buffer = static_cast<char*>(upb_Arena_Malloc(arena, str_size));

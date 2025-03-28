@@ -23,7 +23,7 @@
 #include "absl/container/flat_hash_map.h"
 #include "absl/container/flat_hash_set.h"
 #include "absl/strings/cord.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
 #include "google/protobuf/message_lite.h"
@@ -159,7 +159,7 @@ class PROTOBUF_EXPORT TextFormat {
     // Print text to the output stream.
     virtual void Print(const char* text, size_t size) = 0;
 
-    void PrintString(absl::string_view str) { Print(str.data(), str.size()); }
+    void PrintString(std::string_view str) { Print(str.data(), str.size()); }
 
     template <size_t n>
     void PrintLiteral(const char (&text)[n]) {
@@ -167,13 +167,13 @@ class PROTOBUF_EXPORT TextFormat {
     }
 
     // Internal to Printer, access regulated by `MarkerToken`.
-    virtual void PrintMaybeWithMarker(MarkerToken, absl::string_view text) {
+    virtual void PrintMaybeWithMarker(MarkerToken, std::string_view text) {
       Print(text.data(), text.size());
     }
 
     // Internal to Printer, access regulated by `MarkerToken`.
-    virtual void PrintMaybeWithMarker(MarkerToken, absl::string_view text_head,
-                                      absl::string_view text_tail) {
+    virtual void PrintMaybeWithMarker(MarkerToken, std::string_view text_head,
+                                      std::string_view text_tail) {
       Print(text_head.data(), text_head.size());
       Print(text_tail.data(), text_tail.size());
     }
@@ -533,7 +533,7 @@ class PROTOBUF_EXPORT TextFormat {
     }
 
     friend class google::protobuf::python::cmessage::PythonFieldValuePrinter;
-    static void HardenedPrintString(absl::string_view src,
+    static void HardenedPrintString(std::string_view src,
                                     TextFormat::BaseTextGenerator* generator);
 
     int initial_indent_level_;
@@ -577,7 +577,7 @@ class PROTOBUF_EXPORT TextFormat {
   // google::protobuf::MessageLite::ParseFromString().
   static bool Parse(io::ZeroCopyInputStream* input, Message* output);
   // Like Parse(), but reads directly from a string.
-  static bool ParseFromString(absl::string_view input, Message* output);
+  static bool ParseFromString(std::string_view input, Message* output);
   // Like Parse(), but reads directly from a Cord.
   static bool ParseFromCord(const absl::Cord& input, Message* output);
 
@@ -585,12 +585,12 @@ class PROTOBUF_EXPORT TextFormat {
   // using Message::MergeFrom().
   static bool Merge(io::ZeroCopyInputStream* input, Message* output);
   // Like Merge(), but reads directly from a string.
-  static bool MergeFromString(absl::string_view input, Message* output);
+  static bool MergeFromString(std::string_view input, Message* output);
 
   // Parse the given text as a single field value and store it into the
   // given field of the given message. If the field is a repeated field,
   // the new value will be added to the end
-  static bool ParseFieldValueFromString(absl::string_view input,
+  static bool ParseFieldValueFromString(std::string_view input,
                                         const FieldDescriptor* field,
                                         Message* message);
 
@@ -681,13 +681,13 @@ class PROTOBUF_EXPORT TextFormat {
     // Like TextFormat::Parse().
     bool Parse(io::ZeroCopyInputStream* input, Message* output);
     // Like TextFormat::ParseFromString().
-    bool ParseFromString(absl::string_view input, Message* output);
+    bool ParseFromString(std::string_view input, Message* output);
     // Like TextFormat::ParseFromCord().
     bool ParseFromCord(const absl::Cord& input, Message* output);
     // Like TextFormat::Merge().
     bool Merge(io::ZeroCopyInputStream* input, Message* output);
     // Like TextFormat::MergeFromString().
-    bool MergeFromString(absl::string_view input, Message* output);
+    bool MergeFromString(std::string_view input, Message* output);
 
     // Set where to report parse errors.  If nullptr (the default), errors will
     // be printed to stderr.
@@ -718,7 +718,7 @@ class PROTOBUF_EXPORT TextFormat {
     }
 
     // Like TextFormat::ParseFieldValueFromString
-    bool ParseFieldValueFromString(absl::string_view input,
+    bool ParseFieldValueFromString(std::string_view input,
                                    const FieldDescriptor* field,
                                    Message* output);
 

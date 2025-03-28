@@ -12,7 +12,7 @@
 
 #include "absl/base/attributes.h"
 #include "absl/status/statusor.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/hpb/arena.h"
 #include "google/protobuf/hpb/backend/upb/interop.h"
 #include "google/protobuf/hpb/extension.h"
@@ -88,7 +88,7 @@ void ClearMessage(hpb::internal::PtrOrRawMutable<T> message) {
 
 template <typename T>
 ABSL_MUST_USE_RESULT bool Parse(
-    internal::PtrOrRaw<T> message, absl::string_view bytes,
+    internal::PtrOrRaw<T> message, std::string_view bytes,
     const ::hpb::ExtensionRegistry& extension_registry =
         hpb::ExtensionRegistry::EmptyRegistry()) {
   static_assert(!std::is_const_v<T>);
@@ -103,7 +103,7 @@ ABSL_MUST_USE_RESULT bool Parse(
 }
 
 template <typename T>
-absl::StatusOr<T> Parse(absl::string_view bytes,
+absl::StatusOr<T> Parse(std::string_view bytes,
                         const ::hpb::ExtensionRegistry& extension_registry =
                             hpb::ExtensionRegistry::EmptyRegistry()) {
   T message;
@@ -120,7 +120,7 @@ absl::StatusOr<T> Parse(absl::string_view bytes,
 }
 
 template <typename T>
-absl::StatusOr<absl::string_view> Serialize(internal::PtrOrRaw<T> message,
+absl::StatusOr<std::string_view> Serialize(internal::PtrOrRaw<T> message,
                                             hpb::Arena& arena) {
   return ::hpb::internal::Serialize(hpb::interop::upb::GetMessage(message),
                                     ::hpb::interop::upb::GetMiniTable(message),

@@ -9,7 +9,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/code_generator.h"
 #include "google/protobuf/compiler/hpb/context.h"
 #include "google/protobuf/compiler/hpb/keywords.h"
@@ -19,11 +19,11 @@ namespace protobuf = ::proto2;
 
 namespace {
 
-std::string DotsToColons(const absl::string_view name) {
+std::string DotsToColons(const std::string_view name) {
   return absl::StrReplaceAll(name, {{".", "::"}});
 }
 
-std::string Namespace(const absl::string_view package) {
+std::string Namespace(const std::string_view package) {
   if (package.empty()) return "";
   return "::" + DotsToColons(package);
 }
@@ -67,7 +67,7 @@ std::string CppTypeInternal(const protobuf::FieldDescriptor* field,
     case protobuf::FieldDescriptor::CPPTYPE_UINT64:
       return "uint64_t";
     case protobuf::FieldDescriptor::CPPTYPE_STRING:
-      return "absl::string_view";
+      return "std::string_view";
     default:
       ABSL_LOG(FATAL) << "Unexpected type: " << field->cpp_type();
   }

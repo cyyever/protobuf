@@ -36,7 +36,7 @@ MATCHER_P3(EqualsProtoSerialized, pool, type, textproto, "") {
 
 class ParseTextOrDie {
  public:
-  explicit ParseTextOrDie(absl::string_view text) : text_(text) {}
+  explicit ParseTextOrDie(std::string_view text) : text_(text) {}
   template <typename Proto>
   operator Proto() {  // NOLINT(google-explicit-constructor)
     Proto ret;
@@ -45,7 +45,7 @@ class ParseTextOrDie {
   }
 
  private:
-  absl::string_view text_;
+  std::string_view text_;
 };
 
 }  // namespace protobuf

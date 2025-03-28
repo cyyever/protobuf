@@ -14,9 +14,10 @@
 
 #include <cstdint>
 #include <string>
+#include <string_view>
 
+#include "absl/container/flat_hash_map.h"
 #include "absl/status/status.h"
-#include "absl/strings/string_view.h"
 #include "google/protobuf/compiler/java/names.h"
 #include "google/protobuf/compiler/java/options.h"
 #include "google/protobuf/descriptor.h"
@@ -36,7 +37,7 @@ namespace java {
 extern const char kThickSeparator[];
 extern const char kThinSeparator[];
 
-bool IsForbiddenKotlin(absl::string_view field_name);
+bool IsForbiddenKotlin(std::string_view field_name);
 
 // If annotation_file is non-empty, prints a javax.annotation.Generated
 // annotation to the given Printer. annotation_file will be referenced in the
@@ -47,25 +48,25 @@ bool IsForbiddenKotlin(absl::string_view field_name);
 // annotation_file should be generated from the filename of the source file
 // being annotated (which in turn must be a Java identifier plus ".java").
 void PrintGeneratedAnnotation(io::Printer* printer, char delimiter = '$',
-                              absl::string_view annotation_file = "",
+                              std::string_view annotation_file = "",
                               Options options = {});
 
 // If a GeneratedMessageLite contains non-lite enums, then its verifier
 // must be instantiated inline, rather than retrieved from the enum class.
 void PrintEnumVerifierLogic(
     io::Printer* printer, const FieldDescriptor* descriptor,
-    const absl::flat_hash_map<absl::string_view, std::string>& variables,
-    absl::string_view var_name, absl::string_view terminating_string,
+    const absl::flat_hash_map<std::string_view, std::string>& variables,
+    std::string_view var_name, std::string_view terminating_string,
     bool enforce_lite);
 
 // Prints the Protobuf Java Version validator checking that the runtime and
 // gencode versions are compatible.
 void PrintGencodeVersionValidator(io::Printer* printer, bool oss_runtime,
-                                  absl::string_view java_class_name);
+                                  std::string_view java_class_name);
 
 // Converts a name to camel-case. If cap_first_letter is true, capitalize the
 // first letter.
-std::string ToCamelCase(absl::string_view input, bool lower_first);
+std::string ToCamelCase(std::string_view input, bool lower_first);
 
 // Similar to UnderscoresToCamelCase, but guarantees that the result is a
 // complete Java identifier by adding a _ if needed.
@@ -172,7 +173,7 @@ inline bool IsOwnFile(const ServiceDescriptor* descriptor, bool immutable) {
 // (e.g.) be "OrBuilder" for some generated interfaces.
 template <typename Descriptor>
 std::string AnnotationFileName(const Descriptor* descriptor,
-                               absl::string_view suffix) {
+                               std::string_view suffix) {
   return absl::StrCat(descriptor->name(), suffix, ".java.pb.meta");
 }
 
@@ -199,21 +200,21 @@ enum JavaType {
 
 JavaType GetJavaType(const FieldDescriptor* field);
 
-absl::string_view PrimitiveTypeName(JavaType type);
+std::string_view PrimitiveTypeName(JavaType type);
 
 // Get the fully-qualified class name for a boxed primitive type, e.g.
 // "java.lang.Integer" for JAVATYPE_INT.  Returns NULL for enum and message
 // types.
-absl::string_view BoxedPrimitiveTypeName(JavaType type);
+std::string_view BoxedPrimitiveTypeName(JavaType type);
 
 // Kotlin source does not distinguish between primitives and non-primitives,
 // but does use Kotlin-specific qualified types for them.
-absl::string_view KotlinTypeName(JavaType type);
+std::string_view KotlinTypeName(JavaType type);
 
 // Get the name of the java enum constant representing this type. E.g.,
 // "INT32" for FieldDescriptor::TYPE_INT32. The enum constant's full
 // name is "com.google.protobuf.WireFormat.FieldType.INT32".
-absl::string_view FieldTypeName(const FieldDescriptor::Type field_type);
+std::string_view FieldTypeName(const FieldDescriptor::Type field_type);
 
 class ClassNameResolver;
 std::string DefaultValue(const FieldDescriptor* field, bool immutable,
@@ -301,7 +302,7 @@ bool IsReferenceType(JavaType type);
 
 // Returns the capitalized name for calling relative functions in
 // CodedInputStream
-absl::string_view GetCapitalizedType(const FieldDescriptor* field,
+std::string_view GetCapitalizedType(const FieldDescriptor* field,
                                      bool immutable, Options options);
 
 // For encodings with fixed sizes, returns that size in bytes.  Otherwise
@@ -396,7 +397,7 @@ struct JvmNameContext {
   bool lite = true;
 };
 
-inline void JvmName(absl::string_view name, const JvmNameContext& context) {
+inline void JvmName(std::string_view name, const JvmNameContext& context) {
   if (context.lite && !context.options.jvm_dsl) return;
   context.printer->Emit("@kotlin.jvm.JvmName(\"");
   // Note: `name` will likely have vars in it that we do want to interpolate.

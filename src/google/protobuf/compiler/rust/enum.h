@@ -13,7 +13,7 @@
 #include <utility>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/span.h"
 #include "google/protobuf/compiler/rust/context.h"
 #include "google/protobuf/descriptor.h"
@@ -38,8 +38,8 @@ struct RustEnumValue {
 // Performs name normalization, deduplication, and alias determination.
 // The `number` and `name` of every returned `RustEnumValue` is unique.
 std::vector<RustEnumValue> EnumValues(
-    absl::string_view enum_name,
-    absl::Span<const std::pair<absl::string_view, int32_t>> values);
+    std::string_view enum_name,
+    absl::Span<const std::pair<std::string_view, int32_t>> values);
 
 }  // namespace rust
 }  // namespace compiler

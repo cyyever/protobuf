@@ -13,7 +13,7 @@
 #include "absl/strings/ascii.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/str_replace.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/strings/substitute.h"
 #include "absl/types/source_location.h"
 #include "absl/types/span.h"
@@ -51,12 +51,12 @@ class Context final {
     BuildDefPool(file);
   }
 
-  void Emit(absl::Span<const io::Printer::Sub> vars, absl::string_view format,
+  void Emit(absl::Span<const io::Printer::Sub> vars, std::string_view format,
             absl::SourceLocation loc = absl::SourceLocation::current()) {
     printer_.Emit(vars, format, loc);
   }
 
-  void Emit(absl::string_view format,
+  void Emit(std::string_view format,
             absl::SourceLocation loc = absl::SourceLocation::current()) {
     printer_.Emit(format, loc);
   }
@@ -64,7 +64,7 @@ class Context final {
   // TODO: b/373438292 - Remove EmitLegacy in favor of Emit.
   // This is an interim solution while we migrate from Output to io::Printer
   template <class... Arg>
-  void EmitLegacy(absl::string_view format, const Arg&... arg) {
+  void EmitLegacy(std::string_view format, const Arg&... arg) {
     auto res = absl::Substitute(format, arg...);
     printer_.Emit(res, absl::SourceLocation::current());
   }
@@ -94,11 +94,11 @@ class Context final {
 };
 
 // TODO: b/373438292 - re-house these 4 legacy funcs post io::Printer move
-inline std::string ToCIdent(absl::string_view str) {
+inline std::string ToCIdent(std::string_view str) {
   return absl::StrReplaceAll(str, {{".", "_"}, {"/", "_"}, {"-", "_"}});
 }
 
-inline std::string ToPreproc(absl::string_view str) {
+inline std::string ToPreproc(std::string_view str) {
   return absl::AsciiStrToUpper(ToCIdent(str));
 }
 
@@ -119,7 +119,7 @@ inline void EmitFileWarning(const google::protobuf::FileDescriptor* file, Contex
 }
 
 // TODO: b/346865271 append ::hpb instead of ::protos after namespace swap
-inline std::string NamespaceFromPackageName(absl::string_view package_name) {
+inline std::string NamespaceFromPackageName(std::string_view package_name) {
   return absl::StrCat(absl::StrReplaceAll(package_name, {{".", "::"}}),
                       "::protos");
 }

@@ -24,7 +24,7 @@
 #include "absl/status/statusor.h"
 #include "absl/strings/match.h"
 #include "absl/strings/str_format.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/optional.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/dynamic_message.h"
@@ -55,8 +55,8 @@ enum class MessageType {
   kFieldMask,
 };
 
-inline MessageType ClassifyMessage(absl::string_view name) {
-  constexpr absl::string_view kWellKnownPkg = "google.protobuf.";
+inline MessageType ClassifyMessage(std::string_view name) {
+  constexpr std::string_view kWellKnownPkg = "google.protobuf.";
   if (!absl::StartsWith(name, kWellKnownPkg)) {
     return MessageType::kNotWellKnown;
   }
@@ -142,7 +142,7 @@ struct Proto2Descriptor {
 
   /// Functions for working with descriptors. ///
 
-  static absl::string_view TypeName(const Desc& d) { return d.full_name(); }
+  static std::string_view TypeName(const Desc& d) { return d.full_name(); }
 
   static absl::optional<Field> FieldByNumber(const Desc& d, int32_t number) {
     if (const auto* field = d.FindFieldByNumber(number)) {
@@ -167,7 +167,7 @@ struct Proto2Descriptor {
   }
 
   static absl::optional<Field> FieldByName(const Desc& d,
-                                           absl::string_view name) {
+                                           std::string_view name) {
     if (const auto* field = d.FindFieldByCamelcaseName(name)) {
       return field;
     }
@@ -195,7 +195,7 @@ struct Proto2Descriptor {
   static Field FieldByIndex(const Desc& d, size_t idx) { return d.field(idx); }
 
   static absl::optional<Field> ExtensionByName(const Desc& d,
-                                               absl::string_view name) {
+                                               std::string_view name) {
     auto* field = d.file()->pool()->FindExtensionByName(name);
     if (field == nullptr) {
       return absl::nullopt;
@@ -205,13 +205,13 @@ struct Proto2Descriptor {
 
   /// Functions for introspecting fields. ///
 
-  static absl::string_view FieldName(Field f) { return f->name(); }
-  static absl::string_view FieldJsonName(Field f) {
+  static std::string_view FieldName(Field f) { return f->name(); }
+  static std::string_view FieldJsonName(Field f) {
     return f->has_json_name() ? f->json_name() : f->camelcase_name();
   }
-  static absl::string_view FieldFullName(Field f) { return f->full_name(); }
+  static std::string_view FieldFullName(Field f) { return f->full_name(); }
 
-  static absl::string_view FieldTypeName(Field f) {
+  static std::string_view FieldTypeName(Field f) {
     if (f->type() == FieldDescriptor::TYPE_MESSAGE) {
       return f->message_type()->full_name();
     }
@@ -254,7 +254,7 @@ struct Proto2Descriptor {
   static bool IsOneof(Field f) { return f->containing_oneof() != nullptr; }
 
   static absl::StatusOr<int32_t> EnumNumberByName(Field f,
-                                                  absl::string_view name,
+                                                  std::string_view name,
                                                   bool case_insensitive) {
     if (case_insensitive) {
       for (int i = 0; i < f->enum_type()->value_count(); ++i) {
@@ -298,12 +298,12 @@ struct Proto2Descriptor {
   static absl::Status WithDynamicType(const Desc& desc,
                                       const std::string& type_url, F body) {
     size_t slash = type_url.rfind('/');
-    if (slash == absl::string_view::npos || slash == 0) {
+    if (slash == std::string_view::npos || slash == 0) {
       return absl::InvalidArgumentError(absl::StrCat(
           "@type must contain at least one / and a nonempty host; got: ",
           type_url));
     }
-    absl::string_view type_name(type_url);
+    std::string_view type_name(type_url);
     type_name = type_name.substr(slash + 1);
 
     const Descriptor* dyn_desc =
@@ -325,7 +325,7 @@ struct Proto3Type {
   using Field = const ResolverPool::Field*;
 
   /// Functions for working with descriptors. ///
-  static absl::string_view TypeName(const Desc& d) { return d.proto().name(); }
+  static std::string_view TypeName(const Desc& d) { return d.proto().name(); }
 
   static absl::optional<Field> FieldByNumber(const Desc& d, int32_t number) {
     const auto* f = d.FindField(number);
@@ -348,7 +348,7 @@ struct Proto3Type {
   }
 
   static absl::optional<Field> FieldByName(const Desc& d,
-                                           absl::string_view name) {
+                                           std::string_view name) {
     const auto* f = d.FindField(name);
     return f == nullptr ? absl::nullopt : absl::make_optional(f);
   }
@@ -364,7 +364,7 @@ struct Proto3Type {
   }
 
   static absl::optional<Field> ExtensionByName(const Desc& d,
-                                               absl::string_view name) {
+                                               std::string_view name) {
     // type.proto cannot represent extensions, so this function always
     // fails.
     return absl::nullopt;
@@ -372,14 +372,14 @@ struct Proto3Type {
 
   /// Functions for introspecting fields. ///
 
-  static absl::string_view FieldName(Field f) { return f->proto().name(); }
-  static absl::string_view FieldJsonName(Field f) {
+  static std::string_view FieldName(Field f) { return f->proto().name(); }
+  static std::string_view FieldJsonName(Field f) {
     return f->proto().json_name();
   }
-  static absl::string_view FieldFullName(Field f) { return f->proto().name(); }
+  static std::string_view FieldFullName(Field f) { return f->proto().name(); }
 
-  static absl::string_view FieldTypeName(Field f) {
-    absl::string_view url = f->proto().type_url();
+  static std::string_view FieldTypeName(Field f) {
+    std::string_view url = f->proto().type_url();
 
     // If there is no slash, `slash` is string_view::npos, which is guaranteed
     // to be -1.
@@ -457,7 +457,7 @@ struct Proto3Type {
   static bool IsOneof(Field f) { return f->proto().oneof_index() != 0; }
 
   static absl::StatusOr<int32_t> EnumNumberByName(Field f,
-                                                  absl::string_view name,
+                                                  std::string_view name,
                                                   bool case_insensitive) {
     auto e = f->EnumType();
     RETURN_IF_ERROR(e.status());

@@ -36,7 +36,7 @@
 #include "absl/log/absl_check.h"
 #include "absl/meta/type_traits.h"
 #include "absl/numeric/bits.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arena.h"
 #include "google/protobuf/generated_enum_util.h"
 #include "google/protobuf/internal_visibility.h"
@@ -132,15 +132,15 @@ struct TransparentSupport {
 };
 
 // We add transparent support for std::string keys. We use
-// absl::Hash<absl::string_view> as it supports the input types we care about.
+// absl::Hash<std::string_view> as it supports the input types we care about.
 // The lookup functions accept arbitrary `K`. This will include any key type
-// that is convertible to absl::string_view.
+// that is convertible to std::string_view.
 template <>
 struct TransparentSupport<std::string> {
   template <typename T>
-  static absl::string_view ImplicitConvert(T&& str) {
-    if constexpr (std::is_convertible<T, absl::string_view>::value) {
-      absl::string_view res = str;
+  static std::string_view ImplicitConvert(T&& str) {
+    if constexpr (std::is_convertible<T, std::string_view>::value) {
+      std::string_view res = str;
       return res;
     } else if constexpr (std::is_convertible<T, const std::string&>::value) {
       const std::string& ref = str;
@@ -153,7 +153,7 @@ struct TransparentSupport<std::string> {
   template <typename K>
   using key_arg = K;
 
-  using ViewType = absl::string_view;
+  using ViewType = std::string_view;
   template <typename T>
   static ViewType ToView(const T& v) {
     return ImplicitConvert(v);

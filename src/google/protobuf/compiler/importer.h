@@ -18,7 +18,7 @@
 #include <utility>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/parser.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor_database.h"
@@ -106,14 +106,14 @@ class PROTOBUF_EXPORT SourceTreeDescriptorDatabase : public DescriptorDatabase {
     ~ValidationErrorCollector() override;
 
     // implements ErrorCollector ---------------------------------------
-    void RecordError(absl::string_view filename, absl::string_view element_name,
+    void RecordError(std::string_view filename, std::string_view element_name,
                      const Message* descriptor, ErrorLocation location,
-                     absl::string_view message) override;
+                     std::string_view message) override;
 
-    void RecordWarning(absl::string_view filename,
-                       absl::string_view element_name,
+    void RecordWarning(std::string_view filename,
+                       std::string_view element_name,
                        const Message* descriptor, ErrorLocation location,
-                       absl::string_view message) override;
+                       std::string_view message) override;
 
    private:
     SourceTreeDescriptorDatabase* owner_;
@@ -159,13 +159,13 @@ class PROTOBUF_EXPORT Importer {
   // contents are stored.
   inline const DescriptorPool* pool() const { return &pool_; }
 
-  void AddDirectInputFile(absl::string_view file_name,
+  void AddDirectInputFile(std::string_view file_name,
                           bool unused_import_is_error = false);
   void ClearDirectInputFiles();
 
 #if !defined(PROTOBUF_FUTURE_RENAME_ADD_UNUSED_IMPORT) && !defined(SWIG)
   ABSL_DEPRECATED("Use AddDirectInputFile")
-  void AddUnusedImportTrackFile(absl::string_view file_name,
+  void AddUnusedImportTrackFile(std::string_view file_name,
                                 bool is_error = false) {
     AddDirectInputFile(file_name, is_error);
   }
@@ -190,11 +190,11 @@ class PROTOBUF_EXPORT MultiFileErrorCollector {
 
   // Line and column numbers are zero-based.  A line number of -1 indicates
   // an error with the entire file (e.g. "not found").
-  virtual void RecordError(absl::string_view filename, int line, int column,
-                           absl::string_view message)
+  virtual void RecordError(std::string_view filename, int line, int column,
+                           std::string_view message)
       = 0;
-  virtual void RecordWarning(absl::string_view filename, int line, int column,
-                             absl::string_view message) {
+  virtual void RecordWarning(std::string_view filename, int line, int column,
+                             std::string_view message) {
   }
 
 };
@@ -214,7 +214,7 @@ class PROTOBUF_EXPORT SourceTree {
   // found.  The caller takes ownership of the returned object.  The filename
   // must be a path relative to the root of the source tree and must not
   // contain "." or ".." components.
-  virtual io::ZeroCopyInputStream* Open(absl::string_view filename) = 0;
+  virtual io::ZeroCopyInputStream* Open(std::string_view filename) = 0;
 
   // If Open() returns NULL, calling this method immediately will return an
   // description of the error.
@@ -250,7 +250,7 @@ class PROTOBUF_EXPORT DiskSourceTree : public SourceTree {
   //
   // disk_path may be an absolute path or relative to the current directory,
   // just like a path you'd pass to open().
-  void MapPath(absl::string_view virtual_path, absl::string_view disk_path);
+  void MapPath(std::string_view virtual_path, std::string_view disk_path);
 
   // Return type for DiskFileToVirtualFile().
   enum DiskFileToVirtualFileResult {
@@ -281,17 +281,17 @@ class PROTOBUF_EXPORT DiskSourceTree : public SourceTree {
   // * NO_MAPPING: Indicates that no mapping was found which contains this
   //   file.
   DiskFileToVirtualFileResult DiskFileToVirtualFile(
-      absl::string_view disk_file, std::string* virtual_file,
+      std::string_view disk_file, std::string* virtual_file,
       std::string* shadowing_disk_file);
 
   // Given a virtual path, find the path to the file on disk.
   // Return true and update disk_file with the on-disk path if the file exists.
   // Return false and leave disk_file untouched if the file doesn't exist.
-  bool VirtualFileToDiskFile(absl::string_view virtual_file,
+  bool VirtualFileToDiskFile(std::string_view virtual_file,
                              std::string* disk_file);
 
   // implements SourceTree -------------------------------------------
-  io::ZeroCopyInputStream* Open(absl::string_view filename) override;
+  io::ZeroCopyInputStream* Open(std::string_view filename) override;
 
   std::string GetLastErrorMessage() override;
 
@@ -309,11 +309,11 @@ class PROTOBUF_EXPORT DiskSourceTree : public SourceTree {
 
   // Like Open(), but returns the on-disk path in disk_file if disk_file is
   // non-NULL and the file could be successfully opened.
-  io::ZeroCopyInputStream* OpenVirtualFile(absl::string_view virtual_file,
+  io::ZeroCopyInputStream* OpenVirtualFile(std::string_view virtual_file,
                                            std::string* disk_file);
 
   // Like Open() but given the actual on-disk path.
-  io::ZeroCopyInputStream* OpenDiskFile(absl::string_view filename);
+  io::ZeroCopyInputStream* OpenDiskFile(std::string_view filename);
 };
 
 }  // namespace compiler

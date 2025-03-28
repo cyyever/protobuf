@@ -32,7 +32,7 @@
 #include "absl/base/call_once.h"
 #include "absl/base/casts.h"
 #include "absl/base/optimization.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/optional.h"
 #include "google/protobuf/any.h"
 #include "google/protobuf/has_bits.h"
@@ -359,7 +359,7 @@ inline void AssignToString(std::string& dest, const void* value,
                            std::size_t size, BytesTag tag) {
   dest.assign(reinterpret_cast<const char*>(value), size);
 }
-inline void AssignToString(std::string& dest, absl::string_view value,
+inline void AssignToString(std::string& dest, std::string_view value,
                            BytesTag tag = BytesTag{}) {
   dest.assign(value.data(), value.size());
 }

@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <vector>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/types/span.h"
 #include "google/protobuf/explicitly_constructed.h"
 #include "google/protobuf/message_lite.h"
@@ -40,13 +40,13 @@ namespace internal {
 // protos. This struct and the following related functions should only be used
 // by protobuf generated code.
 struct EnumEntry {
-  absl::string_view name;
+  std::string_view name;
   int value;
 };
 
 // Looks up a numeric enum value given the string name.
 PROTOBUF_EXPORT bool LookUpEnumValue(const EnumEntry* enums, size_t size,
-                                     absl::string_view name, int* value);
+                                     std::string_view name, int* value);
 
 // Looks up an enum name given the numeric value.
 PROTOBUF_EXPORT int LookUpEnumName(const EnumEntry* enums,

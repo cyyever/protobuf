@@ -10,7 +10,7 @@
 
 #include <optional>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/map_field.h"
 #include "google/protobuf/message.h"
 
@@ -41,16 +41,16 @@ class MapReflectionTester {
   void ExpectClearViaReflection(const Message& message);
   void ExpectClearViaReflectionIterator(Message* message);
   void GetMapValueViaMapReflection(Message* message,
-                                   absl::string_view field_name,
+                                   std::string_view field_name,
                                    const MapKey& map_key, MapValueRef* map_val);
   void DeleteMapValueViaMapReflection(Message* message,
-                                      absl::string_view field_name,
+                                      std::string_view field_name,
                                       const MapKey& map_key);
   Message* GetMapEntryViaReflection(Message* message,
-                                    absl::string_view field_name, int index);
-  MapIterator MapBegin(Message* message, absl::string_view field_name);
-  MapIterator MapEnd(Message* message, absl::string_view field_name);
-  int MapSize(const Message& message, absl::string_view field_name);
+                                    std::string_view field_name, int index);
+  MapIterator MapBegin(Message* message, std::string_view field_name);
+  MapIterator MapEnd(Message* message, std::string_view field_name);
+  int MapSize(const Message& message, std::string_view field_name);
 
   static std::optional<MapValueConstRef> LookupMapValue(
       const Reflection& reflection, const Message& message,
@@ -71,7 +71,7 @@ class MapReflectionTester {
   }
 
  private:
-  const FieldDescriptor* F(absl::string_view name);
+  const FieldDescriptor* F(std::string_view name);
 
   const Descriptor* base_descriptor_;
 

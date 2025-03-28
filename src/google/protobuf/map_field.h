@@ -21,7 +21,7 @@
 #include "absl/hash/hash.h"
 #include "absl/log/absl_check.h"
 #include "absl/log/absl_log.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "absl/synchronization/mutex.h"
 #include "absl/types/variant.h"
 #include "google/protobuf/arena.h"
@@ -106,7 +106,7 @@ class PROTOBUF_EXPORT MapKey {
     SetType(FieldDescriptor::CPPTYPE_BOOL);
     val_.bool_value = value;
   }
-  void SetStringValue(absl::string_view val) {
+  void SetStringValue(std::string_view val) {
     SetType(FieldDescriptor::CPPTYPE_STRING);
     val_.string_value = val;
   }
@@ -131,7 +131,7 @@ class PROTOBUF_EXPORT MapKey {
     TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL, "MapKey::GetBoolValue");
     return val_.bool_value;
   }
-  absl::string_view GetStringValue() const {
+  std::string_view GetStringValue() const {
     TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING, "MapKey::GetStringValue");
     return val_.string_value;
   }
@@ -252,7 +252,7 @@ class PROTOBUF_EXPORT MapKey {
 
   union KeyValue {
     KeyValue() {}
-    absl::string_view string_value;
+    std::string_view string_value;
     int64_t int64_value;
     int32_t int32_value;
     uint64_t uint64_value;
@@ -663,10 +663,10 @@ class PROTOBUF_EXPORT MapValueConstRef {
     TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM, "MapValueConstRef::GetEnumValue");
     return *reinterpret_cast<int*>(data_);
   }
-  absl::string_view GetStringValue() const {
+  std::string_view GetStringValue() const {
     TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING,
                "MapValueConstRef::GetStringValue");
-    return absl::string_view(*reinterpret_cast<std::string*>(data_));
+    return std::string_view(*reinterpret_cast<std::string*>(data_));
   }
   float GetFloatValue() const {
     TYPE_CHECK(FieldDescriptor::CPPTYPE_FLOAT,
@@ -755,7 +755,7 @@ class PROTOBUF_EXPORT MapValueRef final : public MapValueConstRef {
     TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM, "MapValueRef::SetEnumValue");
     *reinterpret_cast<int*>(data_) = value;
   }
-  void SetStringValue(absl::string_view value) {
+  void SetStringValue(std::string_view value) {
     TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING, "MapValueRef::SetStringValue");
     reinterpret_cast<std::string*>(data_)->assign(value.data(), value.size());
   }

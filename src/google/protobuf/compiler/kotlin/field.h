@@ -4,7 +4,7 @@
 #include <string>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/java/context.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/io/printer.h"
@@ -26,7 +26,7 @@ class FieldGenerator {
 
  private:
   const FieldDescriptor* descriptor_;
-  absl::flat_hash_map<absl::string_view, std::string> variables_;
+  absl::flat_hash_map<std::string_view, std::string> variables_;
   java::Context* context_;
   bool lite_;
 

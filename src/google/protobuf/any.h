@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/port.h"
 #include "absl/strings/cord.h"
 #include "google/protobuf/message_lite.h"
@@ -33,11 +33,11 @@ PROTOBUF_EXPORT extern const char kTypeGoogleApisComPrefix[];
 // "type.googleprod.com/".
 PROTOBUF_EXPORT extern const char kTypeGoogleProdComPrefix[];
 
-std::string GetTypeUrl(absl::string_view message_name,
-                       absl::string_view type_url_prefix);
+std::string GetTypeUrl(std::string_view message_name,
+                       std::string_view type_url_prefix);
 
 template <typename T>
-absl::string_view GetAnyMessageName() {
+std::string_view GetAnyMessageName() {
   return T::FullMessageName();
 }
 
@@ -47,14 +47,14 @@ absl::string_view GetAnyMessageName() {
 
 // Helper functions that only require 'lite' messages to work.
 PROTOBUF_EXPORT bool InternalPackFromLite(
-    const MessageLite& message, absl::string_view type_url_prefix,
-    absl::string_view type_name, URL_TYPE* PROTOBUF_NONNULL dst_url,
+    const MessageLite& message, std::string_view type_url_prefix,
+    std::string_view type_name, URL_TYPE* PROTOBUF_NONNULL dst_url,
     VALUE_TYPE* PROTOBUF_NONNULL dst_value);
 PROTOBUF_EXPORT bool InternalUnpackToLite(
-    absl::string_view type_name, absl::string_view type_url,
+    std::string_view type_name, std::string_view type_url,
     const VALUE_TYPE& value, MessageLite* PROTOBUF_NONNULL dst_message);
-PROTOBUF_EXPORT bool InternalIsLite(absl::string_view type_name,
-                                    absl::string_view type_url);
+PROTOBUF_EXPORT bool InternalIsLite(std::string_view type_name,
+                                    std::string_view type_url);
 
 // Packs a message using the default type URL prefix: "type.googleapis.com".
 // The resulted type URL will be "type.googleapis.com/<message_full_name>".
@@ -77,14 +77,14 @@ PROTOBUF_EXPORT bool InternalPackFrom(const Message& message,
 // URL: "type.googleapis.com/<message_full_name>".
 // Returns false if serializing the message failed.
 template <typename T>
-bool InternalPackFrom(const T& message, absl::string_view type_url_prefix,
+bool InternalPackFrom(const T& message, std::string_view type_url_prefix,
                       URL_TYPE* PROTOBUF_NONNULL dst_url,
                       VALUE_TYPE* PROTOBUF_NONNULL dst_value) {
   return InternalPackFromLite(message, type_url_prefix, GetAnyMessageName<T>(),
                               dst_url, dst_value);
 }
 PROTOBUF_EXPORT bool InternalPackFrom(const Message& message,
-                                      absl::string_view type_url_prefix,
+                                      std::string_view type_url_prefix,
                                       URL_TYPE* PROTOBUF_NONNULL dst_url,
                                       VALUE_TYPE* PROTOBUF_NONNULL dst_value);
 
@@ -93,11 +93,11 @@ PROTOBUF_EXPORT bool InternalPackFrom(const Message& message,
 // name after the last "/" of the type URL doesn't match the message's actual
 // full name) or parsing the payload has failed.
 template <typename T>
-bool InternalUnpackTo(absl::string_view type_url, const VALUE_TYPE& value,
+bool InternalUnpackTo(std::string_view type_url, const VALUE_TYPE& value,
                       T* PROTOBUF_NONNULL message) {
   return InternalUnpackToLite(GetAnyMessageName<T>(), type_url, value, message);
 }
-PROTOBUF_EXPORT bool InternalUnpackTo(absl::string_view type_url,
+PROTOBUF_EXPORT bool InternalUnpackTo(std::string_view type_url,
                                       const VALUE_TYPE& value,
                                       Message* PROTOBUF_NONNULL message);
 
@@ -105,7 +105,7 @@ PROTOBUF_EXPORT bool InternalUnpackTo(absl::string_view type_url,
 // A type is considered matching if its full name matches the full name after
 // the last "/" in the type URL.
 template <typename T>
-bool InternalIs(absl::string_view type_url) {
+bool InternalIs(std::string_view type_url) {
   return InternalIsLite(GetAnyMessageName<T>(), type_url);
 }
 
@@ -119,7 +119,7 @@ bool InternalIs(absl::string_view type_url) {
 //
 // NOTE: this function is available publicly as a static method on the
 // generated message type: google::protobuf::Any::ParseAnyTypeUrl()
-bool ParseAnyTypeUrl(absl::string_view type_url,
+bool ParseAnyTypeUrl(std::string_view type_url,
                      std::string* PROTOBUF_NONNULL full_type_name);
 
 // Get the proto type name and prefix from Any::type_url value. For example,
@@ -127,7 +127,7 @@ bool ParseAnyTypeUrl(absl::string_view type_url,
 // "type.googleapis.com/" in *url_prefix and "rpc.QueryOrigin" in
 // *full_type_name. Returns false if the type_url does not have a "/" in the
 // type url separating the full type name.
-bool ParseAnyTypeUrl(absl::string_view type_url,
+bool ParseAnyTypeUrl(std::string_view type_url,
                      std::string* PROTOBUF_NULLABLE url_prefix,
                      std::string* PROTOBUF_NONNULL full_type_name);
 

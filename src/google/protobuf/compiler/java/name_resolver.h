@@ -55,7 +55,7 @@ class PROTOC_EXPORT ClassNameResolver {
   // Check whether there is any type defined in the proto file that has
   // the given class name.
   bool HasConflictingClassName(const FileDescriptor* file,
-                               absl::string_view classname,
+                               std::string_view classname,
                                NameEquality equality_mode);
 
   // Gets the name of the outer class that holds descriptor information.
@@ -112,10 +112,10 @@ class PROTOC_EXPORT ClassNameResolver {
 
   // Get the full name of a Java class by prepending the Java package name
   // or outer class name.
-  std::string GetClassFullName(absl::string_view name_without_package,
+  std::string GetClassFullName(std::string_view name_without_package,
                                const FileDescriptor* file, bool immutable,
                                bool is_own_file);
-  std::string GetClassFullName(absl::string_view name_without_package,
+  std::string GetClassFullName(std::string_view name_without_package,
                                const FileDescriptor* file, bool immutable,
                                bool is_own_file, bool kotlin);
 
@@ -124,11 +124,11 @@ class PROTOC_EXPORT ClassNameResolver {
  private:
   // Get the Java Class style full name of a message.
   template <typename Descriptor>
-  std::string GetJavaClassFullName(absl::string_view name_without_package,
+  std::string GetJavaClassFullName(std::string_view name_without_package,
                                    const Descriptor& descriptor,
                                    bool immutable);
   template <typename Descriptor>
-  std::string GetJavaClassFullName(absl::string_view name_without_package,
+  std::string GetJavaClassFullName(std::string_view name_without_package,
                                    const Descriptor& descriptor, bool immutable,
                                    bool kotlin);
   // Caches the result to provide better performance.

@@ -27,7 +27,7 @@
 #include "absl/base/casts.h"
 #include "absl/base/optimization.h"
 #include "absl/log/absl_check.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arenastring.h"
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/message_lite.h"
@@ -286,7 +286,7 @@ class PROTOBUF_EXPORT WireFormatLite {
 
   // Returns true if the data is valid UTF-8.
   static bool VerifyUtf8String(const char* data, int size, Operation op,
-                               absl::string_view field_name);
+                               std::string_view field_name);
 
   template <typename MessageType>
   static inline bool ReadGroup(int field_number, io::CodedInputStream* input,
@@ -611,8 +611,8 @@ class PROTOBUF_EXPORT WireFormatLite {
   static inline size_t StringSize(const absl::Cord& value);
   static inline size_t BytesSize(const std::string& value);
   static inline size_t BytesSize(const absl::Cord& value);
-  static inline size_t StringSize(absl::string_view value);
-  static inline size_t BytesSize(absl::string_view value);
+  static inline size_t StringSize(std::string_view value);
+  static inline size_t BytesSize(std::string_view value);
 
   template <typename MessageType>
   static inline size_t GroupSize(const MessageType& value);
@@ -1542,13 +1542,13 @@ inline size_t WireFormatLite::StringSize(const absl::Cord& value) {
   return LengthDelimitedSize(value.size());
 }
 
-inline size_t WireFormatLite::StringSize(const absl::string_view value) {
+inline size_t WireFormatLite::StringSize(const std::string_view value) {
   // WARNING:  In wire_format.cc, both strings and bytes are handled by
   //   StringSize() to avoid code duplication.  If the implementations become
   //   different, you will need to update that usage.
   return LengthDelimitedSize(value.size());
 }
-inline size_t WireFormatLite::BytesSize(const absl::string_view value) {
+inline size_t WireFormatLite::BytesSize(const std::string_view value) {
   return LengthDelimitedSize(value.size());
 }
 

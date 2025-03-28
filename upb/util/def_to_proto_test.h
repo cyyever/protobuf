@@ -46,12 +46,12 @@ MATCHER_P(EqualsProtoTreatNansAsEqual, proto,
 }
 
 class NullErrorCollector : public google::protobuf::DescriptorPool::ErrorCollector {
-  void RecordError(absl::string_view filename, absl::string_view element_name,
+  void RecordError(std::string_view filename, std::string_view element_name,
                    const google::protobuf::Message* descriptor, ErrorLocation location,
-                   absl::string_view message) override {}
-  void RecordWarning(absl::string_view filename, absl::string_view element_name,
+                   std::string_view message) override {}
+  void RecordWarning(std::string_view filename, std::string_view element_name,
                      const google::protobuf::Message* descriptor, ErrorLocation location,
-                     absl::string_view message) override {}
+                     std::string_view message) override {}
 };
 
 static void AddFile(google::protobuf::FileDescriptorProto& file, upb::DefPool* pool,

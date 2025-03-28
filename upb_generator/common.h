@@ -24,18 +24,18 @@ namespace generator {
 class Output {
  public:
   template <class... Arg>
-  void operator()(absl::string_view format, const Arg&... arg) {
+  void operator()(std::string_view format, const Arg&... arg) {
     Write(absl::Substitute(format, arg...));
   }
 
-  absl::string_view output() const { return output_; }
+  std::string_view output() const { return output_; }
 
  private:
-  void Write(absl::string_view data) {
+  void Write(std::string_view data) {
     std::string stripped;
     if (absl::StartsWith(data, "\n ")) {
       size_t indent = data.substr(1).find_first_not_of(' ');
-      if (indent != absl::string_view::npos) {
+      if (indent != std::string_view::npos) {
         // Remove indentation from all lines.
         auto line_prefix = data.substr(0, indent + 1);
         // The final line has an extra newline and is indented two less, eg.

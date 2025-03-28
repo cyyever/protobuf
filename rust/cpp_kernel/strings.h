@@ -12,7 +12,7 @@
 #include <cstring>
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 namespace google {
 namespace protobuf {
@@ -36,7 +36,7 @@ struct PtrAndLen {
   size_t len;
 
   std::string CopyToString() const;
-  absl::string_view AsStringView() const;
+  std::string_view AsStringView() const;
   void PlacementNewString(void* location);
 };
 

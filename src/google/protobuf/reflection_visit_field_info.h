@@ -10,7 +10,7 @@
 
 #include "absl/log/absl_check.h"
 #include "absl/strings/cord.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arenastring.h"
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor.pb.h"
@@ -114,7 +114,7 @@ struct DynamicFieldInfoHelper {
     }
   }
 
-  static absl::string_view GetStringView(const Reflection* reflection,
+  static std::string_view GetStringView(const Reflection* reflection,
                                          const Message& message,
                                          const FieldDescriptor* field) {
     auto string_type = field->cpp_string_type();
@@ -189,10 +189,10 @@ struct DynamicExtensionInfoHelper {
 
 #undef PROTOBUF_REPEATED_PTR_FIELD_METHODS
 
-  static absl::string_view GetStringView(const Extension& ext) {
+  static std::string_view GetStringView(const Extension& ext) {
     return *ext.ptr.string_value;
   }
-  static void SetStringView(Extension& ext, absl::string_view value) {
+  static void SetStringView(Extension& ext, std::string_view value) {
     ext.ptr.string_value->assign(value.data(), value.size());
   }
   static void ClearStringView(Extension& ext) {
@@ -458,7 +458,7 @@ struct StringDynamicFieldInfo {
   int number() const { return field->number(); }
   FieldDescriptor::Type type() const { return field->type(); }
 
-  absl::string_view Get() const {
+  std::string_view Get() const {
     return DynamicFieldInfoHelper<is_oneof>::GetStringView(reflection, message,
                                                            field);
   }
@@ -496,10 +496,10 @@ struct StringDynamicExtensionInfo {
     return static_cast<FieldDescriptor::Type>(ext.type);
   }
 
-  absl::string_view Get() const {
+  std::string_view Get() const {
     return DynamicExtensionInfoHelper::GetStringView(ext);
   }
-  void Set(absl::string_view value) {
+  void Set(std::string_view value) {
     DynamicExtensionInfoHelper::SetStringView(ext, value);
   }
   void Clear() { DynamicExtensionInfoHelper::ClearStringView(ext); }
@@ -1227,7 +1227,7 @@ PROTOBUF_MAP_KEY_INFO(Int64, int64_t, INT64);
 PROTOBUF_MAP_KEY_INFO(UInt32, uint32_t, UINT32);
 PROTOBUF_MAP_KEY_INFO(UInt64, uint64_t, UINT64);
 PROTOBUF_MAP_KEY_INFO(Bool, bool, BOOL);
-PROTOBUF_MAP_KEY_INFO(String, absl::string_view, STRING);
+PROTOBUF_MAP_KEY_INFO(String, std::string_view, STRING);
 
 #undef PROTOBUF_MAP_KEY_INFO
 
@@ -1255,7 +1255,7 @@ PROTOBUF_MAP_VALUE_INFO(Bool, bool, BOOL);
 PROTOBUF_MAP_VALUE_INFO(Enum, int, ENUM);
 PROTOBUF_MAP_VALUE_INFO(Float, float, FLOAT);
 PROTOBUF_MAP_VALUE_INFO(Double, double, DOUBLE);
-PROTOBUF_MAP_VALUE_INFO(String, absl::string_view, STRING);
+PROTOBUF_MAP_VALUE_INFO(String, std::string_view, STRING);
 
 #undef PROTOBUF_MAP_VALUE_INFO
 

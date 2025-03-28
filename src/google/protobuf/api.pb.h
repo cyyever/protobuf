@@ -42,7 +42,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -197,8 +197,8 @@ class PROTOBUF_EXPORT Mixin final : public ::google::protobuf::Message
   void InternalSwap(Mixin* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Mixin"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Mixin"; }
 
  protected:
   explicit Mixin(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -410,8 +410,8 @@ class PROTOBUF_EXPORT Method final : public ::google::protobuf::Message
   void InternalSwap(Method* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Method"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Method"; }
 
  protected:
   explicit Method(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -695,8 +695,8 @@ class PROTOBUF_EXPORT Api final : public ::google::protobuf::Message
   void InternalSwap(Api* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Api"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Api"; }
 
  protected:
   explicit Api(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

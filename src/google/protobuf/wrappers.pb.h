@@ -40,7 +40,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -219,8 +219,8 @@ class PROTOBUF_EXPORT UInt64Value final : public ::google::protobuf::Message
   void InternalSwap(UInt64Value* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.UInt64Value"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.UInt64Value"; }
 
  protected:
   explicit UInt64Value(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -410,8 +410,8 @@ class PROTOBUF_EXPORT UInt32Value final : public ::google::protobuf::Message
   void InternalSwap(UInt32Value* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.UInt32Value"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.UInt32Value"; }
 
  protected:
   explicit UInt32Value(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -601,8 +601,8 @@ class PROTOBUF_EXPORT StringValue final : public ::google::protobuf::Message
   void InternalSwap(StringValue* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.StringValue"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.StringValue"; }
 
  protected:
   explicit StringValue(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -797,8 +797,8 @@ class PROTOBUF_EXPORT Int64Value final : public ::google::protobuf::Message
   void InternalSwap(Int64Value* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Int64Value"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Int64Value"; }
 
  protected:
   explicit Int64Value(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -988,8 +988,8 @@ class PROTOBUF_EXPORT Int32Value final : public ::google::protobuf::Message
   void InternalSwap(Int32Value* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Int32Value"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Int32Value"; }
 
  protected:
   explicit Int32Value(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1179,8 +1179,8 @@ class PROTOBUF_EXPORT FloatValue final : public ::google::protobuf::Message
   void InternalSwap(FloatValue* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.FloatValue"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.FloatValue"; }
 
  protected:
   explicit FloatValue(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1370,8 +1370,8 @@ class PROTOBUF_EXPORT DoubleValue final : public ::google::protobuf::Message
   void InternalSwap(DoubleValue* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.DoubleValue"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.DoubleValue"; }
 
  protected:
   explicit DoubleValue(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1561,8 +1561,8 @@ class PROTOBUF_EXPORT BytesValue final : public ::google::protobuf::Message
   void InternalSwap(BytesValue* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.BytesValue"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.BytesValue"; }
 
  protected:
   explicit BytesValue(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -1757,8 +1757,8 @@ class PROTOBUF_EXPORT BoolValue final : public ::google::protobuf::Message
   void InternalSwap(BoolValue* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.BoolValue"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.BoolValue"; }
 
  protected:
   explicit BoolValue(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

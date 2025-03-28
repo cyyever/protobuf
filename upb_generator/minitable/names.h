@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 
 // Must be last.
 #include "upb/port/def.inc"
@@ -19,7 +19,7 @@ namespace upb {
 namespace generator {
 
 // Maps: foo/bar/baz.proto -> foo/bar/baz.upb_minitable.h
-UPBC_API std::string MiniTableHeaderFilename(absl::string_view proto_filename);
+UPBC_API std::string MiniTableHeaderFilename(std::string_view proto_filename);
 
 // These are the publicly visible symbols defined in foo.upb_minitable.h.
 //   extern const upb_MiniTable <Message>;             // One for each message.
@@ -29,16 +29,16 @@ UPBC_API std::string MiniTableHeaderFilename(absl::string_view proto_filename);
 //
 //   extern const upb_MiniTable* <MessagePtr>;
 
-UPBC_API std::string MiniTableMessageVarName(absl::string_view full_name);
-UPBC_API std::string MiniTableEnumVarName(absl::string_view full_name);
-UPBC_API std::string MiniTableExtensionVarName(absl::string_view full_name);
-UPBC_API std::string MiniTableFileVarName(absl::string_view proto_filename);
+UPBC_API std::string MiniTableMessageVarName(std::string_view full_name);
+UPBC_API std::string MiniTableEnumVarName(std::string_view full_name);
+UPBC_API std::string MiniTableExtensionVarName(std::string_view full_name);
+UPBC_API std::string MiniTableFileVarName(std::string_view proto_filename);
 
 // This is used for weak linking and tree shaking. Other translation units may
 // define weak versions of this symbol that point to a dummy message, to
 // gracefully degrade the behavior of the generated code when the message is not
 // linked into the current binary.
-UPBC_API std::string MiniTableMessagePtrVarName(absl::string_view full_name);
+UPBC_API std::string MiniTableMessagePtrVarName(std::string_view full_name);
 
 }  // namespace generator
 }  // namespace upb

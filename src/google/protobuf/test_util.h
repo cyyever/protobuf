@@ -12,7 +12,7 @@
 #ifndef GOOGLE_PROTOBUF_TEST_UTIL_H__
 #define GOOGLE_PROTOBUF_TEST_UTIL_H__
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/unittest.pb.h"
 
 #define UNITTEST ::proto2_unittest
@@ -106,10 +106,10 @@ inline TestUtil::ReflectionTester::ReflectionTester(
     const Descriptor* base_descriptor)
     : base_descriptor_(base_descriptor) {
   const DescriptorPool* pool = base_descriptor->file()->pool();
-  const absl::string_view package = base_descriptor->file()->package();
+  const std::string_view package = base_descriptor->file()->package();
   const FieldDescriptor* import_descriptor = pool->FindFieldByName(
       absl::StrCat(package, ".TestAllTypes.optional_import_message"));
-  const absl::string_view import_package =
+  const std::string_view import_package =
       import_descriptor->message_type()->file()->package();
 
   nested_b_ = pool->FindFieldByName(

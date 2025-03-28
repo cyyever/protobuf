@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/java/context.h"
 #include "google/protobuf/compiler/java/lite/field_generator.h"
 #include "google/protobuf/descriptor.h"
@@ -43,7 +43,7 @@ class ImmutableMapFieldLiteGenerator : public ImmutableFieldLiteGenerator {
 
  private:
   const FieldDescriptor* descriptor_;
-  absl::flat_hash_map<absl::string_view, std::string> variables_;
+  absl::flat_hash_map<std::string_view, std::string> variables_;
   Context* context_;
   ClassNameResolver* name_resolver_;
 };

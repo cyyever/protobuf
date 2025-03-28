@@ -24,7 +24,7 @@
 #include "absl/log/absl_log.h"
 #include "absl/strings/cord.h"
 #include "absl/strings/internal/resize_uninitialized.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
 #include "google/protobuf/endian.h"
@@ -54,11 +54,11 @@ namespace internal {
 
 // Template code below needs to know about the existence of these functions.
 PROTOBUF_EXPORT void WriteVarint(uint32_t num, uint64_t val, std::string* s);
-PROTOBUF_EXPORT void WriteLengthDelimited(uint32_t num, absl::string_view val,
+PROTOBUF_EXPORT void WriteLengthDelimited(uint32_t num, std::string_view val,
                                           std::string* s);
 // Inline because it is just forwarding to s->WriteVarint
 inline void WriteVarint(uint32_t num, uint64_t val, UnknownFieldSet* unknown);
-inline void WriteLengthDelimited(uint32_t num, absl::string_view val,
+inline void WriteLengthDelimited(uint32_t num, std::string_view val,
                                  UnknownFieldSet* unknown);
 
 
@@ -210,7 +210,7 @@ class PROTOBUF_EXPORT EpsCopyInputStream {
   [[nodiscard]] const char* ReadCord(const char* ptr, int size,
                                      ::absl::Cord* cord) {
     if (size <= std::min<int>(BytesAvailable(ptr), kMaxCordBytesToCopy)) {
-      *cord = absl::string_view(ptr, size);
+      *cord = std::string_view(ptr, size);
       return ptr + size;
     }
     return ReadCordFallback(ptr, size, cord);
@@ -279,7 +279,7 @@ class PROTOBUF_EXPORT EpsCopyInputStream {
     return res.second;
   }
 
-  const char* InitFrom(absl::string_view flat) {
+  const char* InitFrom(std::string_view flat) {
     overall_limit_ = 0;
     if (flat.size() > kSlopBytes) {
       limit_ = kSlopBytes;
@@ -1263,7 +1263,7 @@ const char* EpsCopyInputStream::ReadPackedVarint(const char* ptr, Add add,
 
 // Helper for verification of utf8
 PROTOBUF_EXPORT
-bool VerifyUTF8(absl::string_view s, const char* field_name);
+bool VerifyUTF8(std::string_view s, const char* field_name);
 
 inline bool VerifyUTF8(const std::string* s, const char* field_name) {
   return VerifyUTF8(*s, field_name);

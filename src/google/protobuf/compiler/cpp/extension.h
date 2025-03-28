@@ -15,7 +15,7 @@
 #include <string>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/compiler/cpp/helpers.h"
 #include "google/protobuf/compiler/cpp/options.h"
 #include "google/protobuf/port.h"
@@ -81,7 +81,7 @@ class PROTOC_EXPORT ExtensionGenerator {
   Options options_;
   MessageSCCAnalyzer* scc_analyzer_;
 
-  absl::flat_hash_map<absl::string_view, std::string> variables_;
+  absl::flat_hash_map<std::string_view, std::string> variables_;
 };
 
 }  // namespace cpp

@@ -20,7 +20,7 @@
 #include <utility>
 
 #include "absl/container/flat_hash_map.h"
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor.pb.h"
 #include "google/protobuf/io/tokenizer.h"
@@ -79,7 +79,7 @@ class PROTOBUF_EXPORT Parser final {
 
   // Returns the identifier used in the "syntax = " declaration, if one was
   // seen during the last call to Parse(), or the empty string otherwise.
-  absl::string_view GetSyntaxIdentifier() { return syntax_identifier_; }
+  std::string_view GetSyntaxIdentifier() { return syntax_identifier_; }
 
   // If set true, input files will be required to begin with a syntax
   // identifier.  Otherwise, files may omit this.  If a syntax identifier
@@ -132,13 +132,13 @@ class PROTOBUF_EXPORT Parser final {
   inline bool AtEnd();
 
   // True if the next token matches the given text.
-  inline bool LookingAt(absl::string_view text);
+  inline bool LookingAt(std::string_view text);
   // True if the next token is of the given type.
   inline bool LookingAtType(io::Tokenizer::TokenType token_type);
 
   // If the next token exactly matches the text given, consume it and return
   // true.  Otherwise, return false without logging an error.
-  bool TryConsume(absl::string_view text);
+  bool TryConsume(std::string_view text);
 
   // In the following functions the error is passed as a lazily evaluated
   // callable to reduce stack usage and delay the actual execution of the error
@@ -178,10 +178,10 @@ class PROTOBUF_EXPORT Parser final {
   // to the error list.
 
   // Consume a token with the exact text given.
-  bool Consume(absl::string_view text, ErrorMaker error);
+  bool Consume(std::string_view text, ErrorMaker error);
   // Same as above, but automatically generates the error "Expected \"text\".",
   // where "text" is the expected token text.
-  bool Consume(absl::string_view text);
+  bool Consume(std::string_view text);
   // Consume a token of type IDENTIFIER and store its text in "output".
   bool ConsumeIdentifier(std::string* output, ErrorMaker error);
   // Consume an integer and store its value in "output".
@@ -209,12 +209,12 @@ class PROTOBUF_EXPORT Parser final {
   //   have been passed around by const reference, for no particularly good
   //   reason.  We should probably go through and change them all to mutable
   //   pointer to make this more intuitive.
-  bool TryConsumeEndOfDeclaration(absl::string_view text,
+  bool TryConsumeEndOfDeclaration(std::string_view text,
                                   const LocationRecorder* location);
-  bool TryConsumeEndOfDeclarationFinishScope(absl::string_view text,
+  bool TryConsumeEndOfDeclarationFinishScope(std::string_view text,
                                              const LocationRecorder* location);
 
-  bool ConsumeEndOfDeclaration(absl::string_view text,
+  bool ConsumeEndOfDeclaration(std::string_view text,
                                const LocationRecorder* location);
 
   // -----------------------------------------------------------------
@@ -598,7 +598,7 @@ class PROTOBUF_EXPORT SourceLocationTable {
   bool Find(const Message* descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location, int* line,
             int* column) const;
-  bool FindImport(const Message* descriptor, absl::string_view name, int* line,
+  bool FindImport(const Message* descriptor, std::string_view name, int* line,
                   int* column) const;
 
   // Adds a location to the table.

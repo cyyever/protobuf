@@ -40,7 +40,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 template <typename T>
-::absl::string_view GetAnyMessageName();
+::std::string_view GetAnyMessageName();
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
@@ -187,8 +187,8 @@ class PROTOBUF_EXPORT Duration final : public ::google::protobuf::Message
   void InternalSwap(Duration* PROTOBUF_NONNULL other);
  private:
   template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "google.protobuf.Duration"; }
+  friend ::std::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::std::string_view FullMessageName() { return "google.protobuf.Duration"; }
 
  protected:
   explicit Duration(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);

@@ -13,7 +13,7 @@
 #include <iterator>
 #include <type_traits>
 
-#include "absl/strings/string_view.h"
+#include <string_view>
 #include "google/protobuf/hpb/backend/upb/interop.h"
 #include "google/protobuf/hpb/hpb.h"
 #include "upb/base/string_view.h"
@@ -81,7 +81,7 @@ class NoInjectedRelationalsImpl {};
 template <typename PolicyT>
 using InjectedRelationals = std::conditional_t<
     std::is_same_v<std::remove_const_t<typename PolicyT::value_type>,
-                   absl::string_view>,
+                   std::string_view>,
     InjectedRelationalsImpl<PolicyT>, NoInjectedRelationalsImpl>;
 
 template <typename PolicyT>
@@ -309,12 +309,12 @@ struct StringIteratorPolicy {
     size_t index;
 
     void AddOffset(ptrdiff_t offset) { index += offset; }
-    absl::string_view Get() const {
+    std::string_view Get() const {
       upb_MessageValue message_value = upb_Array_Get(arr, index);
-      return absl::string_view(message_value.str_val.data,
+      return std::string_view(message_value.str_val.data,
                                message_value.str_val.size);
     }
-    void Set(absl::string_view new_value) const {
+    void Set(std::string_view new_value) const {
       char* data =
           static_cast<char*>(upb_Arena_Malloc(arena, new_value.size()));
       memcpy(data, new_value.data(), new_value.size());
