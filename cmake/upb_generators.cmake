@@ -21,5 +21,6 @@ foreach(generator upb upbdefs)
     ${protobuf_ABSL_USED_TARGETS}
   )
   set_target_properties(protoc-gen-${generator} PROPERTIES VERSION ${protobuf_VERSION})
+  target_compile_features(protoc-gen-${generator} PRIVATE cxx_std_17)
   add_executable(protobuf::protoc-gen-${generator} ALIAS protoc-gen-${generator})
 endforeach()
