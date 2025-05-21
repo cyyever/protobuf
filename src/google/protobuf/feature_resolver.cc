@@ -467,9 +467,9 @@ absl::StatusOr<FeatureSetDefaults> FeatureResolver::CompileDefaults(
   auto message_factory = std::make_unique<DynamicMessageFactory>();
   for (const auto& edition : editions) {
     auto fixed_defaults_dynamic =
-        absl::WrapUnique(message_factory->GetPrototype(feature_set)->New());
+        std::unique_ptr<Message>(message_factory->GetPrototype(feature_set)->New());
     auto overridable_defaults_dynamic =
-        absl::WrapUnique(message_factory->GetPrototype(feature_set)->New());
+        std::unique_ptr<Message>(message_factory->GetPrototype(feature_set)->New());
     RETURN_IF_ERROR(FillDefaults(edition, *fixed_defaults_dynamic,
                                  *overridable_defaults_dynamic));
     for (const auto* extension : extensions) {
@@ -558,7 +558,7 @@ FeatureResolver::ValidationResults FeatureResolver::ValidateFeatureLifetimes(
     // Move the features back to the current pool so that we can reflect on any
     // extensions.
     features_storage =
-        absl::WrapUnique(factory.GetPrototype(pool_descriptor)->New());
+        std::unique_ptr<Message>(factory.GetPrototype(pool_descriptor)->New());
     features_storage->ParseFromString(features.SerializeAsString());
     pool_features = features_storage.get();
   }

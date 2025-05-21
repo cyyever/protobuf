@@ -135,7 +135,7 @@ absl::StatusOr<const ResolverPool::Message*> ResolverPool::FindMessage(
     return it->second.get();
   }
 
-  auto msg = absl::WrapUnique(new Message(this));
+  auto msg = std::unique_ptr<Message>(new Message(this));
   std::string url_buf(url);
   RETURN_IF_ERROR(resolver_->ResolveMessageType(url_buf, &msg->raw_));
 
@@ -150,7 +150,7 @@ absl::StatusOr<const ResolverPool::Enum*> ResolverPool::FindEnum(
     return it->second.get();
   }
 
-  auto enoom = absl::WrapUnique(new Enum(this));
+  auto enoom = std::unique_ptr<Enum>(new Enum(this));
   std::string url_buf(url);
   RETURN_IF_ERROR(resolver_->ResolveEnumType(url_buf, &enoom->raw_));
 

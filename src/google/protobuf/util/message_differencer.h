@@ -507,7 +507,7 @@ class PROTOBUF_EXPORT MessageDifferencer {
 #ifndef PROTOBUF_FUTURE_REMOVE_ADD_IGNORE_CRITERIA
   ABSL_DEPRECATE_AND_INLINE()
   void AddIgnoreCriteria(IgnoreCriteria* ignore_criteria) {
-    AddIgnoreCriteria(absl::WrapUnique(ignore_criteria));
+    AddIgnoreCriteria(ignore_criteria);
   }
 #endif  // !PROTOBUF_FUTURE_REMOVE_ADD_IGNORE_CRITERIA
 

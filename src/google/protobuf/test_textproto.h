@@ -20,7 +20,7 @@ namespace google {
 namespace protobuf {
 
 MATCHER_P(EqualsProto, textproto, "") {
-  auto msg = absl::WrapUnique(arg.New());
+  auto msg = std::unique_ptr<Message>(arg.New());
   return TextFormat::ParseFromString(textproto, msg.get()) &&
          msg->DebugString() == arg.DebugString();
 }
@@ -28,7 +28,7 @@ MATCHER_P(EqualsProto, textproto, "") {
 MATCHER_P3(EqualsProtoSerialized, pool, type, textproto, "") {
   const Descriptor* desc = pool->FindMessageTypeByName(type);
   DynamicMessageFactory factory(pool);
-  auto msg = absl::WrapUnique(factory.GetPrototype(desc)->New());
+  auto msg = std::unique_ptr<Message>(factory.GetPrototype(desc)->New());
   return TextFormat::ParseFromString(textproto, msg.get()) &&
          arg.SerializeAsString() == msg->SerializeAsString();
 }

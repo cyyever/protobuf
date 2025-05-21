@@ -2505,8 +2505,7 @@ MapEntries MapFieldPrinterHelper::SortMap(const Message& message,
              reflection->MapBegin(const_cast<Message*>(&message), field);
          iter != reflection->MapEnd(const_cast<Message*>(&message), field);
          ++iter) {
-      std::unique_ptr<Message> map_entry_message =
-          absl::WrapUnique(prototype->New());
+      std::unique_ptr<Message> map_entry_message(prototype->New());
       CopyKey(iter.GetKey(), map_entry_message.get(), map_entry_desc->field(0));
       CopyValue(iter.GetValueRef(), map_entry_message.get(),
                 map_entry_desc->field(1));

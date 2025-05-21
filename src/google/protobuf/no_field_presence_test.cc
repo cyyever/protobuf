@@ -1187,7 +1187,7 @@ TYPED_TEST(NoFieldPresenceSerializeTest, SetAllocatedAndReleaseTest) {
   // empty string not serialized.
   EXPECT_EQ(former_output_size, this->GetOutput().size());
 
-  auto bytes_ptr = absl::WrapUnique(message.release_optional_bytes());
+  auto bytes_ptr = std::unique_ptr<Message>(message.release_optional_bytes());
   ASSERT_TRUE(TestSerialize(message, &output_sink));
   EXPECT_TRUE(
       this->GetOutput().empty());  // released fields are not serialized.
