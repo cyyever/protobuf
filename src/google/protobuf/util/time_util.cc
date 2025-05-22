@@ -171,7 +171,6 @@ int64_t RoundTowardZero(int64_t value, int64_t divider) {
 
 // Actually define these static const integers. Required by C++ standard (but
 // some compilers don't like it).
-#ifndef _MSC_VER
 constexpr int64_t TimeUtil::kTimestampMinSeconds;
 constexpr int64_t TimeUtil::kTimestampMaxSeconds;
 constexpr int32_t TimeUtil::kTimestampMinNanoseconds;
@@ -180,7 +179,6 @@ constexpr int64_t TimeUtil::kDurationMaxSeconds;
 constexpr int64_t TimeUtil::kDurationMinSeconds;
 constexpr int32_t TimeUtil::kDurationMaxNanoseconds;
 constexpr int32_t TimeUtil::kDurationMinNanoseconds;
-#endif  // !_MSC_VER
 
 std::string TimeUtil::ToString(const Timestamp& timestamp) {
   return FormatTime(timestamp.seconds(), timestamp.nanos());

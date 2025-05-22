@@ -10,6 +10,7 @@
 #include <sys/types.h>
 
 #include <algorithm>
+#include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <functional>
@@ -43,8 +44,6 @@
 #include "absl/strings/string_view.h"
 #include "absl/strings/strip.h"
 #include "absl/synchronization/mutex.h"
-#include "absl/time/clock.h"
-#include "absl/time/time.h"
 #include "google/protobuf/compiler/cpp/cpp_access_info_parse_helper.h"
 #include "google/protobuf/compiler/cpp/helpers.h"
 #include "google/protobuf/compiler/cpp/options.h"
@@ -566,9 +565,9 @@ ParallelRunResults RunInParallel(
         // Asynchronous section.
         const auto run_id = get_run_id(i);
         ABSL_LOG(INFO) << "STARTING: " << run_id << " ...";
-        const absl::Time start = absl::Now();
+        const auto start = std::chrono::steady_clock::now();
         const auto status = do_work(i);
-        const absl::Duration duration = absl::Now() - start;
+        const auto duration = std::chrono::steady_clock::now() - start;
 
         // Synchronous section.
         absl::MutexLock lock(&mu);
